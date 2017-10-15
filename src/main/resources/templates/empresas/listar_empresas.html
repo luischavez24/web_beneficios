@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Buscar Empresas</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-flatly.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-select.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/css/styles.css}"/>
+	<script type="text/javascript" src="#" th:src="@{/jquery/jquery.js}"></script>
+	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap-select.min.js}"></script>
+</head>
+<body>
+
+	<header layout:include="/fragments/navbar :: barra-navegacion"></header>
+	<div class="container">
+		<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+			<header>
+				<h1>Buscar empresas</h1>
+			</header>
+			<br></br>
+			<form action="#" th:action="@{/empresas/search}" method="get">			
+				<div class="input-group input-group-responsive">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-search"></span>
+					</span>
+					<input class="form-control" type="search" name="busq" id="busq" placeholder="Busca en empresas"/>
+					<div class="input-group-btn">
+						<select class="selectpicker" name="campo" id="campo" title="Eliga un filtro" data-style="btn-info" style="text-align: center;">
+								<option value="ruc">RUC</option>
+								<option value="nc" >Nombre comercial</option>
+								<option value="rs" >Razón Social</option>
+						</select>
+					</div>
+					<div class="input-group-btn">
+						<input type="submit" value="Buscar" id="buscar" class="btn btn-success btn-block"/>
+					</div>
+				</div>
+			</form>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover" style="background-color:#fff;">
+					<thead class="bg-success">
+						<tr style="color:#fff;">
+							<th>RUC</th>
+							<th>Nombre comercial</th>
+							<th>Razón Social</th>
+							<th>Teléfono</th>
+							<th colspan="3">Operaciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="empresa : ${empresas}">
+							<td><span th:text="${empresa.rucEmpresa}"></span></td>
+							<td><span th:text="${empresa.nombreComercial}"></span></td>
+							<td><span th:text="${empresa.rsEmpresa}"></span></td>
+							<td><span th:text="${empresa.telfEmpresa}"></span></td>
+							<td class="btn-container">
+								<a href="#" class="btn btn-info btn-circle">
+									<i class="glyphicon glyphicon-list"></i>
+								</a>
+							</td>
+							<td class="btn-container">
+								<a href="#" class="btn btn-warning btn-circle">
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+							</td>
+							<td class="btn-container">
+								<form th:action="@{/empresas/delete}" method="post">
+									<input type="hidden" name="ruc" th:value="${empresa.rucEmpresa}"/>
+									<button type="submit" class="btn btn-danger btn-circle" value="">
+										<i class="glyphicon glyphicon-remove"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

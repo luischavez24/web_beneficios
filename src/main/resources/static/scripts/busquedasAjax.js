@@ -1,0 +1,3 @@
+function cargarFragment(url, div) {
+	
+}
