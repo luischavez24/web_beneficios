@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.roche.beneficios.entity.Distrito;
 @Repository("distritoRepository")
 public interface DistritoRepository extends JpaRepository<Distrito, Serializable> {
-
+	
+	public Distrito findByIdDistrito(int id);
 }

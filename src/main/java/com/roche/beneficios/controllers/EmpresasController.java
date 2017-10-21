@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roche.beneficios.constants.ViewConstants;
-import com.roche.beneficios.entity.Distrito;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.services.DistritoService;
 import com.roche.beneficios.services.EmpresaService;
@@ -80,14 +79,9 @@ public class EmpresasController {
 	}
 	
 	@PostMapping("/register")
-	public String newEmpresa(@ModelAttribute(name="empresa_reg") EmpresaModel empresa, 
-			@RequestParam(name="dist") int distrito) {
-		Distrito miDistrito = new Distrito();
-		miDistrito.setIdDistrito(distrito);
-		empresa.setDistrito(miDistrito);
+	public String newEmpresa(@ModelAttribute(name="empresa_reg") EmpresaModel empresa) {
 		LOG.info("Recibiendo objeto empresa=" + empresa);
 		empresaService.addEmpresa(empresa);
-		
 		return "redirect:/empresas/new?msj";
 	}
 	

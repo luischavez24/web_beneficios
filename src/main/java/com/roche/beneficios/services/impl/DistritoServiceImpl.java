@@ -17,6 +17,9 @@ public class DistritoServiceImpl implements DistritoService{
 	@Qualifier("distritoRepository")
 	private DistritoRepository distritoRepository;
 	
+	public Distrito findOne(int id) {
+		return distritoRepository.findByIdDistrito(id);
+	}
 	public List<Distrito> listarDistrito() {
 		return distritoRepository.findAll();
 	}

@@ -84,7 +84,7 @@ public class EmpresaModel {
 	public String toString() {
 		return "EmpresaModel [direccion=" + direccion + ", rsEmpresa=" + rsEmpresa + ", nombreComercial="
 				+ nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa + ", contactos="
-				+ contactos + "]";
+				+ distrito + "]";
 	}
 	
 	
