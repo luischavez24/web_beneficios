@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Detalles de la Empresa</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+	<!-- Bootstrap Core CSS -->
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-flatly.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-select.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/css/styles.css}"/>
+	<!-- Bootstap Core JS-->
+	<script type="text/javascript" src="#" th:src="@{/jquery/jquery.js}"></script>
+	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap-select.min.js}"></script>
+</head>
+<body>
+	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
+	<div class="container">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px;">
+			<!-- Header -->
+			<header>
+				<h1><span th:text="${empresa.nombreComercial}"></span></h1>
+			</header>
+		</div>
+		<!-- Datos generales -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">Datos generales</h3>
+				</div>
+			 	<div class="panel-body">
+			 		<ul>
+			 			<li>
+			 				<strong>Nombre Comercial: </strong><span th:text="${empresa.nombreComercial}"></span>
+			 			</li>
+			 			<br></br>
+			 			<li>
+			 				<strong>Razon Social: </strong><span th:text="${empresa.rsEmpresa}"></span>
+			 			</li>
+			 			<br></br>
+			 			<li>
+			 				<strong>RUC: </strong><span th:text="${empresa.rucEmpresa}"></span>
+			 			</li>
+			 			<br></br>
+			 			<li>
+							<strong>Telefono: </strong><span th:text="${empresa.telfEmpresa}"></span>
+			 			</li>
+			 			<br></br>
+			 			<li>
+			 				<strong>Dirección: </strong><span th:text="${empresa.direccion}"></span>
+			 			</li>
+			 			<br></br>
+			 			<li>
+							<strong>Distrito: </strong><span th:text="${empresa.distrito.nomDistrito}"></span>
+			 			</li>
+			 		</ul>
+	
+				</div>
+			</div>
+		</div>
+		<!-- Lista de contactos -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">Contactos</h3>
+				</div>
+				
+			 	<div class="panel-body">
+			 		<div th:if="${not #lists.isEmpty(empresa.contactos)}">
+				 		<ul>
+				 			<li th:each="contacto : ${empresa.contactos}">
+				 				<span th:text="${contacto.nomContacto}"></span>&nbsp;
+				 				<span th:text="${contacto.apContacto}"></span>&nbsp;
+				 				<span th:text="${contacto.amContacto}"></span>
+				 			</li>
+				 		</ul>
+			 		</div>
+			 		<div th:if="${#lists.isEmpty(empresa.contactos)}">
+			 			<img class="img-responsive" alt="contactos" th:src="@{/images/contacts.png}" width="100" height="100" style="margin:auto;"/>
+				 		<h3 class="text-center">No hay contactos para mostrar</h3>
+			 		</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>

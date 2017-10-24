@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,10 +36,12 @@ public class EmpresasController {
 	private DistritoService distritoService;
 	
 	// Mapeo de la página principal del módulo empresas
-	@GetMapping("/")
+	@GetMapping("")
 	public String index () {
+		
 		// Redireccion al controlador de busquedas con los campos vacios
 		return "redirect:/empresas/search?campo&busq";
+		
 	}
 	
 	// Controlador de busquedas
@@ -46,6 +49,7 @@ public class EmpresasController {
 	public String search(Model model,
 			@RequestParam(name="busq", required = false) String busq, 
 			@RequestParam(name="campo", required=false) String campo) {
+		
 		// Crea una lista para llenar los datos buscados
 		List<EmpresaModel> listaModel = null;
 		
@@ -60,34 +64,91 @@ public class EmpresasController {
 			case "RUC": default:
 				listaModel = empresaService.findByRuc(busq);	
 		}
+		
 		LOG.info("Enviando lista=" + listaModel);
+		
 		// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
 		model.addAttribute("empresas", listaModel);
+		
 		return ViewConstants.LISTAR_EMPRESAS;
+		
 	}
 	
 	@GetMapping("/new")
 	public String showFormRegistroEmpresa(Model model,
 			@RequestParam(name="msj", required=false) String mensaje) {
+		
 		EmpresaModel empresa_reg = new EmpresaModel();
+		
 		model.addAttribute("msj", mensaje);
+		
 		model.addAttribute("empresa_reg", empresa_reg);
+		
 		model.addAttribute("distritos", distritoService.listarDistrito());
 		
 		LOG.info("Enviando objeto empresa_reg=" + empresa_reg);
+		
 		return ViewConstants.FORM_REGISTRO_EMPRESAS;
+	}
+	
+	@GetMapping("/detalles/{codEmpresa}")
+	public String details(@PathVariable int codEmpresa, Model model) {
+		EmpresaModel empresa = empresaService.findByCodEmpresa(codEmpresa);
+		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
+		model.addAttribute("empresa", empresa);
+		
+		return ViewConstants.DETALLE_EMPRESA;
+	
 	}
 	
 	@PostMapping("/register")
 	public String newEmpresa(@ModelAttribute(name="empresa_reg") EmpresaModel empresa) {
+		
 		LOG.info("Recibiendo objeto empresa=" + empresa);
+		
 		empresaService.addEmpresa(empresa);
+		
 		return "redirect:/empresas/new?msj";
+		
 	}
 	
 	@PostMapping("/delete")
 	public String deleteEmpresa(@RequestParam String ruc) {
+		
+		LOG.info("Empresa a remover con RUC=" + ruc);
+		
 		empresaService.removeEmpresa(ruc);
+		
+		LOG.info("Empresa removida");
+		
 		return "redirect:/empresas/search?campo&busq";
+		
+	}
+	
+	@GetMapping("/actualizar/{rucEmpresa}")
+	public String actualizarEmpresa(@PathVariable String rucEmpresa, Model model) {
+		
+		EmpresaModel empresa = empresaService.findOneByRuc(rucEmpresa);
+		
+		LOG.info("Enviando empresa a modificar " + empresa);
+		
+		model.addAttribute("empresa_mod", empresa);
+		
+		LOG.info("Cargando distritos");
+		
+		model.addAttribute("distritos", distritoService.listarDistrito());
+		
+		return ViewConstants.FORM_ACTUALIZAR_EMPRESAS;
+		
+	}
+	@PostMapping("/modify")
+	public String modifyEmpresa(@ModelAttribute(name="empresa_mod") EmpresaModel empresa) {
+		
+		LOG.info("Actualizando objeto" + empresa);
+		
+		empresaService.updateEmpresa(empresa);
+		
+		return "redirect:/empresas/search?campo&busq";
+		
 	}
 }

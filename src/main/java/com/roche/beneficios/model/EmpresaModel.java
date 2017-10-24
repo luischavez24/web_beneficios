@@ -6,7 +6,9 @@ import com.roche.beneficios.entity.Contacto;
 import com.roche.beneficios.entity.Distrito;
 
 public class EmpresaModel {
-
+	
+	private int codEmpresa;
+	
 	private String direccion;
 
 	private String rsEmpresa;
@@ -22,6 +24,14 @@ public class EmpresaModel {
 	private List<Contacto> contactos;
 
 	public EmpresaModel() {
+	}
+	
+	public int getCodEmpresa() {
+		return codEmpresa;
+	}
+
+	public void setCodEmpresa(int codEmpresa) {
+		this.codEmpresa = codEmpresa;
 	}
 
 	public String getDireccion() {
@@ -82,9 +92,9 @@ public class EmpresaModel {
 	
 	@Override
 	public String toString() {
-		return "EmpresaModel [direccion=" + direccion + ", rsEmpresa=" + rsEmpresa + ", nombreComercial="
-				+ nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa + ", contactos="
-				+ distrito + "]";
+		return "EmpresaModel [codEmpresa=" + codEmpresa + ", direccion=" + direccion + ", rsEmpresa=" + rsEmpresa
+				+ ", nombreComercial=" + nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa
+				+ ", distrito=" + distrito + ", contactos=" + contactos + "]";
 	}
 	
 	

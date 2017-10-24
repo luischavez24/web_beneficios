@@ -18,7 +18,7 @@ public class EmpresaConverter {
 					}
 				);
 		}
-		
+		empresa.setCodEmpresa(empresaModel.getCodEmpresa());
 		empresa.setContactos(empresaModel.getContactos());
 		empresa.setDireccion(empresaModel.getDireccion());
 		empresa.setRsEmpresa(empresaModel.getRsEmpresa());
@@ -39,6 +39,7 @@ public class EmpresaConverter {
 				}
 			);
 		}
+		empresaModel.setCodEmpresa(empresa.getCodEmpresa());
 		empresaModel.setContactos(empresa.getContactos());
 		empresaModel.setDireccion(empresa.getDireccion());
 		empresaModel.setRsEmpresa(empresa.getRsEmpresa());

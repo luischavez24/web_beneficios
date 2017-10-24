@@ -19,4 +19,8 @@ public interface EmpresaService {
 	public abstract List<EmpresaModel> findByNomComercial(String nomComercial);
 	
 	public abstract List<EmpresaModel> findByRSocial (String rSocial);
+	
+	public abstract EmpresaModel findOneByRuc(String ruc);
+	
+	public abstract EmpresaModel findByCodEmpresa(int codEmpresa);
 }

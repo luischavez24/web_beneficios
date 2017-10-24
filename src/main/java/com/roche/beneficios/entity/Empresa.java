@@ -35,7 +35,7 @@ public class Empresa implements Serializable {
 	private String telfEmpresa;
 	
 	@ManyToOne
-	@JoinColumn(name="id_distrito", referencedColumnName="id_distrito", insertable=false, updatable=false)
+	@JoinColumn(name="id_distrito", referencedColumnName="id_distrito", insertable=true, updatable=true)
 	private Distrito distrito;
 	
 	//bi-directional many-to-one association to Contacto
@@ -122,6 +122,14 @@ public class Empresa implements Serializable {
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
 	}
+
+	@Override
+	public String toString() {
+		return "Empresa [codEmpresa=" + codEmpresa + ", direccion=" + direccion + ", rsEmpresa=" + rsEmpresa
+				+ ", nombreComercial=" + nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa
+				+ ", distrito=" + distrito + ", contactos=" + contactos + "]";
+	}
+	
 	
 	
 

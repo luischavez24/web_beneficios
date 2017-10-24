@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Registro de empresa</title>
+	<title>Actualizar Empresa</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 	<!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-flatly.css}"/>
@@ -16,66 +16,65 @@
 <body>
 	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
 	<div class="container">
+
 		<header>
-			<h1>Registro de empresas</h1>
+			<h1>Actualizar Empresa: <strong><span th:text="${empresa_mod.nombreComercial}"></span></strong></h1>
 		</header>
-		<div th:if="${msj != null}" class="alert alert-success alert-dismissible" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		  <strong>Felicitaciones!</strong> Ha registrado una empresa con exito
-		</div>
+
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<img class="img-responsive imagen" th:src="@{/images/build.png}" alt="imagen empresa"/>
 		</div>
+
 		<br></br>
+
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
-			<!-- Formulario de registro de la empresa -->
-			<form class="form-horizontal" th:action="@{/empresas/register}" th:object="${empresa_reg}" method="post">
+			<!-- Formulario de Actualizacion de la empresa -->
+			<form class="form-horizontal" th:action="@{/empresas/modify}" th:object="${empresa_mod}" method="post">
+				<input type="hidden" th:value="*{codEmpresa}" th:field="*{codEmpresa}"/>
 				<!-- Razon Social -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-briefcase"></span>
 					</span>	
-					<input class="form-control" type="text" id="rs_empresa" placeholder="Razón Social" th:field="*{rsEmpresa}"/>            
+					<input class="form-control" type="text" id="rs_empresa" placeholder="Razón Social" th:value="*{rsEmpresa}" th:field="*{rsEmpresa}" readonly="readonly"/>            
 				</div>
 				<!-- Nombre Comercial -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-copyright-mark"></span>
 					</span>
-					<input class="form-control" type="text" id="nm_comercial" placeholder="Nombre Comercial" th:field="*{nombreComercial}"/>
+					<input class="form-control" type="text" id="nm_comercial" placeholder="Nombre Comercial" th:value="*{nombreComercial}" th:field="*{nombreComercial}"/>
 				</div>
 				<!-- RUC  -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-heart-empty"></span>
 					</span>
-					<input class="form-control" type="text" id="ruc_empresa" placeholder="RUC" th:field="*{rucEmpresa}"/>
+					<input class="form-control" type="text" id="ruc_empresa" placeholder="RUC" th:value="*{rucEmpresa}" th:field="*{rucEmpresa}" readonly="readonly"/>
 				</div>
 				<!-- Teléfono -->                
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-phone-alt"></span>
 					</span>
-					<input class="form-control" type="text" id="telfEmpresa" placeholder="Teléfono" th:field="*{telfEmpresa}" />
+					<input class="form-control" type="text" id="telfEmpresa" placeholder="Teléfono" th:value="*{telfEmpresa}" th:field="*{telfEmpresa}" />
 				</div>
 				<!-- Direccion -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-home"></span>
 					</span>
-					<input class="form-control" type="text" id="direccion" placeholder="Direccion" th:field="*{direccion}"/>
+					<input class="form-control" type="text" id="direccion" placeholder="Direccion" th:value="*{direccion}" th:field="*{direccion}"/>
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-home"></span>
 					</span>
 					<select class="selectpicker form-control" id="dist" data-style="btn-default" data-live-search="true" th:field="*{distrito}" >
-						<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.nomDistrito}"></option>
+						<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.nomDistrito}" th:selected="${empresa_mod.distrito.nomDistrito == d.nomDistrito}"></option>
 					</select>
 				</div>                          
-				<input class="btn btn-primary btn-block" type="submit" name="registar" value="Registrar Empresa" />
+				<input class="btn btn-warning btn-block" type="submit" name="actualizar" value="Actualizar Empresa" />
 			</form>
 		</div>
 

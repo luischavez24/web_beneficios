@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.roche.beneficios.converter.EmpresaConverter;
+import com.roche.beneficios.entity.Empresa;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.repository.EmpresaRepository;
 import com.roche.beneficios.services.EmpresaService;
@@ -31,13 +32,17 @@ public class EmpresaServiceImpl implements EmpresaService{
 
 	@Override
 	public EmpresaModel addEmpresa(EmpresaModel empresa) {
-		return empresaConverter.empresaToModel(empresaRepository.save(empresaConverter.modelToEmpresa(empresa)));
+		Empresa empresaRe = empresaConverter.modelToEmpresa(empresa);
+		empresaRepository.save(empresaRe);
+		return empresaConverter.empresaToModel(empresaRe);
 	}
 
 	@Override
 	public int removeEmpresa(String ruc) {
-		
-		empresaRepository.delete(empresaRepository.findByRucEmpresa(ruc).getCodEmpresa());
+		Empresa empresa = empresaRepository.findByRucEmpresa(ruc);
+		if(empresa != null) {
+			empresaRepository.delete(empresa);
+		}
 		return 0;
 	}
 
@@ -71,6 +76,18 @@ public class EmpresaServiceImpl implements EmpresaService{
 				(empresa) -> lista.add(empresaConverter.empresaToModel(empresa))
 				);
 		return lista;
+	}
+
+	@Override
+	public EmpresaModel findOneByRuc(String rucEmpresa) {
+		Empresa empresa = empresaRepository.findByRucEmpresa(rucEmpresa);
+		return empresaConverter.empresaToModel(empresa);
+	}
+
+	@Override
+	public EmpresaModel findByCodEmpresa(int codEmpresa) {
+		Empresa empresa =  empresaRepository.findOne(codEmpresa);
+		return empresaConverter.empresaToModel(empresa);
 	}
 
 }
