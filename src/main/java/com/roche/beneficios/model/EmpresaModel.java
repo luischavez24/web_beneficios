@@ -2,11 +2,14 @@ package com.roche.beneficios.model;
 
 import java.util.List;
 
-import com.roche.beneficios.entity.Contacto;
-import com.roche.beneficios.entity.Distrito;
+import javax.validation.constraints.*;
+
+import com.roche.beneficios.entity.*;
 
 public class EmpresaModel {
 	
+	@NotNull
+	@Size(min=0, max=1200)
 	private int codEmpresa;
 	
 	private String direccion;

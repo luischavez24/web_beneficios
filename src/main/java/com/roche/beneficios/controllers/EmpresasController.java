@@ -6,14 +6,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.roche.beneficios.constants.ViewConstants;
 import com.roche.beneficios.model.EmpresaModel;
@@ -141,6 +144,7 @@ public class EmpresasController {
 		return ViewConstants.FORM_ACTUALIZAR_EMPRESAS;
 		
 	}
+	
 	@PostMapping("/modify")
 	public String modifyEmpresa(@ModelAttribute(name="empresa_mod") EmpresaModel empresa) {
 		
@@ -150,5 +154,17 @@ public class EmpresasController {
 		
 		return "redirect:/empresas/search?campo&busq";
 		
+	}
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ModelAndView sqlIntegrityException(final DataIntegrityViolationException e) {
+		
+		LOG.error("Integrity Exception");
+		
+		ModelAndView model = new ModelAndView(ViewConstants.INTEGRITY_EXCEPTION);
+		
+		model.addObject("exception", e.getMessage());
+		
+		return model;
 	}
 }

@@ -1,28 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8"/>
-	<title>Buscar Empresas</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-	<!-- Bootstrap Core CSS -->
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-flatly.css}"/>
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-select.min.css}"/>
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{/css/styles.css}"/>
-	<!-- Bootstap Core JS-->
-	<script type="text/javascript" src="#" th:src="@{/jquery/jquery.js}"></script>
-	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap-select.min.js}"></script>
-	<!-- Funciones propias-->
-	<script type="text/javascript">
-		$(function () {
-			$(".btn_borrar").click(function(event) {
-				$("#fila_eliminada").val($(this).val());
-			});
-
-			$("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
-		});
-			
-	</script>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Buscar Empresas')">
+	<meta charset="UTF-8" />
 </head>
 <body>
 	<!-- Barra de navegación -->
@@ -94,7 +73,7 @@
 				<!-- Ventana de confirmacion de eliminacion -->
 				<div id="myModal" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
-				
+
 				    <!-- Contenido -->
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -117,5 +96,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$(function () {
+			$(".btn_borrar").click(function(event) {
+				$("#fila_eliminada").val($(this).val());
+			});
+
+			$("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+		});
+	</script>
 </body>
 </html>

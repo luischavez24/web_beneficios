@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Hay duplicado')">
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<div class="container centrado-porcentual">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<figure>
+				<img th:src="@{/images/favicon.png}" alt="logo-beneficios" class="img-responsive"/>
+			</figure>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+			<header>
+				<h1>Ups! a ocurrido un problema</h1>
+			</header>
+			<p>
+				<br></br>
+				Al parecer a ingresado una empresa con el el mismo RUC. 
+				Pulse el botón inferior para regresar a la página anterior.
+				<br></br>
+				<h5>Detalle: <span th:text="${exception}"></span></h5>
+				<a href="#" th:href="@{/empresas/new}" class="btn btn-danger btn-block" style="margin-top: 30px;">Volver</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
