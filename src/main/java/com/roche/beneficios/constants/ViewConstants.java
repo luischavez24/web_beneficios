@@ -10,5 +10,7 @@ public interface ViewConstants {
 	
 	public final static String DETALLE_EMPRESA = "/empresas/detalle_empresa";
 	
+	public final static String LISTAR_CONTACTOS = "/contactos/listar_contactos";
+	
 	public final static String INTEGRITY_EXCEPTION = "/error/integrityException";
 }

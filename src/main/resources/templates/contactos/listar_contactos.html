@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Buscar Contactos')">
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<!-- Barra de navegación -->
+	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
+	<div class="container">
+		<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+			<!-- Titulo de la pagina -->
+			<header>
+				<h1>Buscar contactos</h1>
+			</header>
+			<br></br>
+			<!-- Formulario de busquedas -->
+			<form action="#" th:action="@{/contactos/search}" method="get">			
+				<div class="input-group input-group-responsive">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-search"></span>
+					</span>
+					<input class="form-control" type="search" name="busq" id="busq" placeholder="Busca en contactos"/>
+					<div class="input-group-btn">
+						<input type="submit" value="Buscar" id="buscar" class="btn btn-success btn-block"/>
+					</div>
+				</div>
+			</form>
+			<!-- Tabla de datos -->
+			<div class="table-responsive">
+				<table class="table table-striped table-hover" style="background-color:#fff;">
+					<thead class="bg-success">
+						<tr style="color:#fff;">
+							<th>Nombres</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
+							<th>Teléfono</th>
+							<th>Empresa</th>
+							<th colspan="3">Operaciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="contacto : ${contactos}">
+							<td><span th:text="${contacto.nomContacto}"></span></td>
+							<td><span th:text="${contacto.apContacto}"></span></td>
+							<td><span th:text="${contacto.amContacto}"></span></td>
+							<td><span th:text="${contacto.telfContacto}"></span></td>
+							<td><span th:text="${contacto.telfContacto}"></span></td>
+							<td><span th:text="${contacto.empresa.nombreComercial}"></span></td>
+							<td class="btn-container">
+								<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-info btn-circle">
+									<i class="glyphicon glyphicon-list"></i>
+								</a>
+							</td>
+							<td class="btn-container">
+								<a th:href="@{'/contactos/actualizar?id_contacto=' + ${contacto.idContacto} + '&cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-warning btn-circle">
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+							</td>
+							<td class="btn-container">
+								<button class="btn btn-danger btn-circle btn_borrar" th:value="" data-toggle="modal" data-target="#myModal">
+									<i class="glyphicon glyphicon-trash"></i>
+								</button>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<!-- Ventana de confirmacion de eliminacion -->
+				<div id="myModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+
+				    <!-- Contenido -->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Confirmar Eliminacion</h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>¿Esta seguro/a que desea eliminar el contacto?</p>
+				      </div>
+				      <div class="modal-footer">
+				      	<form class="form-inline" th:action="@{/contactos/delete}" method="post">
+							<input type="hidden" id="fila_eliminada" name="ruc"/>
+							<button type="submit" class="btn btn-success" id="btn_confirmar">Confirmar</button>
+					        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_cancelar">Cancelar</button>
+						</form>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$(function () {
+			$(".btn_borrar").click(function(event) {
+				$("#fila_eliminada").val($(this).val());
+			});
+
+			$("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+		});
+	</script>
+</body>
+</html>
