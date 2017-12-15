@@ -93,26 +93,12 @@ public class Empresa implements Serializable {
 		this.contactos = contactos;
 	}
 
-	public Contacto addContacto(Contacto contacto) {
-		getContactos().add(contacto);
-		contacto.setEmpresa(this);
-
-		return contacto;
-	}
-
 	public String getNombreComercial() {
 		return nombreComercial;
 	}
 
 	public void setNombreComercial(String nombreComercial) {
 		this.nombreComercial = nombreComercial;
-	}
-
-	public Contacto removeContacto(Contacto contacto) {
-		getContactos().remove(contacto);
-		contacto.setEmpresa(null);
-
-		return contacto;
 	}
 
 	public Distrito getDistrito() {

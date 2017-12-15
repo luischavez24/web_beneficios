@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Contacto.findAll", query="SELECT c FROM Contacto c")
 public class Contacto implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -28,15 +29,14 @@ public class Contacto implements Serializable {
 
 	@Column(name="telf_contacto")
 	private String telfContacto;
-
-	//bi-directional many-to-one association to Beneficio
-	@OneToMany(mappedBy="contacto")
-	private List<Beneficio> beneficios;
-
-	//bi-directional many-to-one association to Empresa
+	
 	@ManyToOne
 	@JoinColumn(name="cod_empresa", referencedColumnName="cod_empresa", insertable=false, updatable=false)
 	private Empresa empresa;
+	
+	//bi-directional many-to-one association to Beneficio
+	@OneToMany(mappedBy="contacto")
+	private List<Beneficio> beneficios;
 		
 	public Contacto() {
 	}
@@ -104,11 +104,18 @@ public class Contacto implements Serializable {
 	}
 
 	public Empresa getEmpresa() {
-		return this.empresa;
+		return empresa;
 	}
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+
+	@Override
+	public String toString() {
+		return "Contacto [id=" + id + ", amContacto=" + amContacto + ", apContacto=" + apContacto + ", nomContacto="
+				+ nomContacto + ", telfContacto=" + telfContacto + ", beneficios=" + beneficios + "]";
+	}
+	
 
 }

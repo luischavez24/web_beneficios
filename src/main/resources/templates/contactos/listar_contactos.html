@@ -21,6 +21,11 @@
 					</span>
 					<input class="form-control" type="search" name="busq" id="busq" placeholder="Busca en contactos"/>
 					<div class="input-group-btn">
+						<select class="selectpicker" name="filtro" id="filtro" style="text-align: center;">
+							<option th:each="empresa : ${empresas}" th:value="${empresa.codEmpresa}" th:text="${empresa.nombreComercial}"></option>	
+						</select>
+					</div>
+					<div class="input-group-btn">
 						<input type="submit" value="Buscar" id="buscar" class="btn btn-success btn-block"/>
 					</div>
 				</div>
@@ -44,20 +49,19 @@
 							<td><span th:text="${contacto.apContacto}"></span></td>
 							<td><span th:text="${contacto.amContacto}"></span></td>
 							<td><span th:text="${contacto.telfContacto}"></span></td>
-							<td><span th:text="${contacto.telfContacto}"></span></td>
 							<td><span th:text="${contacto.empresa.nombreComercial}"></span></td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-info btn-circle">
+								<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-info btn-circle">
 									<i class="glyphicon glyphicon-list"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/actualizar?id_contacto=' + ${contacto.idContacto} + '&cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-warning btn-circle">
+								<a th:href="@{'/contactos/actualizar?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-warning btn-circle">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<button class="btn btn-danger btn-circle btn_borrar" th:value="" data-toggle="modal" data-target="#myModal">
+								<button class="btn btn-danger btn-circle btn_borrar"  data-toggle="modal" data-target="#myModal">
 									<i class="glyphicon glyphicon-trash"></i>
 								</button>
 
