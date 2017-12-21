@@ -114,8 +114,8 @@ public class Contacto implements Serializable {
 	@Override
 	public String toString() {
 		return "Contacto [id=" + id + ", amContacto=" + amContacto + ", apContacto=" + apContacto + ", nomContacto="
-				+ nomContacto + ", telfContacto=" + telfContacto + ", beneficios=" + beneficios + "]";
+				+ nomContacto + ", telfContacto=" + telfContacto + ", empresa=" + empresa.getNombreComercial()
+				+ "]";
 	}
-	
 
 }

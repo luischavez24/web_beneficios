@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Registro de Contactos')">
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
+	<div class="container">
+		<header>
+			<h1>Registro de Contactos</h1>
+		</header>
+		<div th:if="${msj != null}" class="alert alert-success alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		  <strong>Felicitaciones!</strong> Ha registrado un contacto con exito
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<img class="img-responsive imagen" th:src="@{/images/build.png}" alt="imagen empresa"/>
+		</div>
+		<br></br>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
+			<!-- Formulario de registro de la contactos -->
+			<form class="form-horizontal" th:action="@{/contactos/register}" th:object="${contacto_reg}" method="post">
+				<!-- Nombres -->
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-briefcase"></span>
+					</span>	
+					<input class="form-control" type="text" id="nom_contacto" placeholder="Nombres" th:field="*{nomContacto}"/>            
+				</div>
+				<!-- Apellido Paterno -->
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-copyright-mark"></span>
+					</span>
+					<input class="form-control" type="text" id="ap_contacto" placeholder="Apellido Paterno" th:field="*{apContacto}"/>
+				</div>
+				<!-- Apellido Materno  -->
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</span>
+					<input class="form-control" type="text" id="am_contacto" placeholder="Apellido Materno" th:field="*{amContacto}"/>
+				</div>
+				<!-- Teléfono -->                
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-phone-alt"></span>
+					</span>
+					<input class="form-control" type="text" id="telfContacto" placeholder="Teléfono" th:field="*{telfContacto}" />
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-home"></span>
+					</span>
+					<select class="selectpicker form-control" id="empresas" data-style="btn-default" data-live-search="true" th:field="*{empresa}" >
+						<option th:each=" e : ${empresas}" th:value="${e.codEmpresa}" th:text="${e.nombreComercial}"></option>
+					</select>
+				</div>                          
+				<input class="btn btn-primary btn-block" type="submit" name="registar" value="Registrar Contacto" />
+			</form>
+		</div>
+
+	</div>
+</body>
+</html>

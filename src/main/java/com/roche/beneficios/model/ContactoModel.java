@@ -3,30 +3,30 @@ package com.roche.beneficios.model;
 import java.util.List;
 
 import com.roche.beneficios.entity.Beneficio;
-import com.roche.beneficios.entity.Empresa;
 
 public class ContactoModel {
-	
+
 	private int idContacto;
-	
+
 	private int codEmpresa;
 
 	private String amContacto;
-	
+
 	private String apContacto;
-	
+
 	private String nomContacto;
-	
+
 	private String telfContacto;
 
 	private List<Beneficio> beneficios;
 
-	private Empresa empresa;
+	private EmpresaModel empresa;
 
-	public ContactoModel() {}
+	public ContactoModel() {
+	}
 
 	public ContactoModel(int idContacto, int codEmpresa, String amContacto, String apContacto, String nomContacto,
-			String telfContacto, List<Beneficio> beneficios, Empresa empresa) {
+			String telfContacto, List<Beneficio> beneficios, EmpresaModel empresa) {
 		this.idContacto = idContacto;
 		this.codEmpresa = codEmpresa;
 		this.amContacto = amContacto;
@@ -93,13 +93,17 @@ public class ContactoModel {
 		this.beneficios = beneficios;
 	}
 
-	public Empresa getEmpresa() {
+	public EmpresaModel getEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(EmpresaModel empresa) {
 		this.empresa = empresa;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return String.format("%s %s %s", nomContacto, apContacto, amContacto);
+	}
+
 }

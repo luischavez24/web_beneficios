@@ -10,8 +10,10 @@ import javax.persistence.*;
 @Embeddable
 public class ContactoPK implements Serializable {
 	// default serial version id, required for serializable classes.
+	
 	private static final long serialVersionUID = 1L;
-
+	
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id_contacto")
 	private int idContacto;
 
@@ -56,4 +58,10 @@ public class ContactoPK implements Serializable {
 
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "ContactoPK [idContacto=" + idContacto + ", codEmpresa=" + codEmpresa + "]";
+	}
+	
 }

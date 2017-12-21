@@ -19,27 +19,25 @@
 					<h3 class="panel-title">Datos generales</h3>
 				</div>
 			 	<div class="panel-body">
-			 		<ul>
+			 		<ul class="details-list">
 			 			<li>
 			 				<strong>Nombre Comercial: </strong><span th:text="${empresa.nombreComercial}"></span>
 			 			</li>
-			 			<br></br>
 			 			<li>
 			 				<strong>Razon Social: </strong><span th:text="${empresa.rsEmpresa}"></span>
 			 			</li>
-			 			<br></br>
 			 			<li>
 			 				<strong>RUC: </strong><span th:text="${empresa.rucEmpresa}"></span>
 			 			</li>
-			 			<br></br>
+
 			 			<li>
 							<strong>Telefono: </strong><span th:text="${empresa.telfEmpresa}"></span>
 			 			</li>
-			 			<br></br>
+
 			 			<li>
 			 				<strong>Dirección: </strong><span th:text="${empresa.direccion}"></span>
 			 			</li>
-			 			<br></br>
+
 			 			<li>
 							<strong>Distrito: </strong><span th:text="${empresa.distrito.nomDistrito}"></span>
 			 			</li>
@@ -58,9 +56,11 @@
 			 		<div th:if="${not #lists.isEmpty(empresa.contactos)}">
 				 		<ul>
 				 			<li th:each="contacto : ${empresa.contactos}">
-				 				<span th:text="${contacto.nomContacto}"></span>&nbsp;
-				 				<span th:text="${contacto.apContacto}"></span>&nbsp;
-				 				<span th:text="${contacto.amContacto}"></span>
+				 				<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}">
+					 				<span th:text="${contacto.nomContacto}"></span>&nbsp;
+					 				<span th:text="${contacto.apContacto}"></span>&nbsp;
+					 				<span th:text="${contacto.amContacto}"></span>
+				 				</a>
 				 			</li>
 				 		</ul>
 			 		</div>

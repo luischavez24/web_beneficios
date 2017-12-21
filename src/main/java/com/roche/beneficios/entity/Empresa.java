@@ -113,7 +113,7 @@ public class Empresa implements Serializable {
 	public String toString() {
 		return "Empresa [codEmpresa=" + codEmpresa + ", direccion=" + direccion + ", rsEmpresa=" + rsEmpresa
 				+ ", nombreComercial=" + nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa
-				+ ", distrito=" + distrito + ", contactos=" + contactos + "]";
+				+ ", distrito=" + distrito + ", nro_contactos=" + contactos.size() + "]";
 	}
 	
 	

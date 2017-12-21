@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8"/>
 	<title>Administrador de beneficios</title>
@@ -20,12 +20,12 @@
 					<div id="caja_alerta_1"></div>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="user" id="user" class="form-control" placeholder="Usuario" required="true"/>
+						<input type="text" name="user" id="user" class="form-control" placeholder="Usuario" required/>
 					</div>
 					<div id="caja_alerta_2"></div>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" name="pass" id="pass" class="form-control" placeholder="Constraseña" required="true"/>
+						<input type="password" name="pass" id="pass" class="form-control" placeholder="Constraseña" required/>
 					</div>
 					<input type="submit" id = "enviar" class="btn btn-primary btn-block" value="Iniciar Sesión"/>
 				</form>

@@ -2,14 +2,10 @@ package com.roche.beneficios.model;
 
 import java.util.List;
 
-import javax.validation.constraints.*;
-
 import com.roche.beneficios.entity.*;
 
 public class EmpresaModel {
 	
-	@NotNull
-	@Size(min=0, max=1200)
 	private int codEmpresa;
 	
 	private String direccion;
@@ -24,7 +20,7 @@ public class EmpresaModel {
 	
 	private Distrito distrito;
 	
-	private List<Contacto> contactos;
+	private List<ContactoModel> contactos;
 
 	public EmpresaModel() {
 	}
@@ -69,11 +65,11 @@ public class EmpresaModel {
 		this.telfEmpresa = telfEmpresa;
 	}
 
-	public List<Contacto> getContactos() {
+	public List<ContactoModel> getContactos() {
 		return this.contactos;
 	}
 
-	public void setContactos(List<Contacto> contactos) {
+	public void setContactos(List<ContactoModel> contactos) {
 		this.contactos = contactos;
 	}
 
@@ -93,11 +89,18 @@ public class EmpresaModel {
 		this.distrito = distrito;
 	}
 	
+	public boolean equals(Object other) {
+		if(other instanceof EmpresaModel) {
+			return ((EmpresaModel) other).codEmpresa == this.codEmpresa;
+		} else {
+			return false;
+		}
+	}
 	@Override
 	public String toString() {
 		return "EmpresaModel [codEmpresa=" + codEmpresa + ", direccion=" + direccion + ", rsEmpresa=" + rsEmpresa
 				+ ", nombreComercial=" + nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa
-				+ ", distrito=" + distrito + ", contactos=" + contactos + "]";
+				+ ", distrito=" + distrito + "]";
 	}
 	
 	

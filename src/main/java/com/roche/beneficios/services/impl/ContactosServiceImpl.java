@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.roche.beneficios.converter.ContactoConverter;
 import com.roche.beneficios.converter.EmpresaConverter;
 import com.roche.beneficios.entity.Contacto;
+import com.roche.beneficios.entity.ContactoPK;
 import com.roche.beneficios.entity.Empresa;
 import com.roche.beneficios.model.ContactoModel;
 import com.roche.beneficios.model.EmpresaModel;
@@ -53,13 +54,20 @@ public class ContactosServiceImpl implements ContactosService {
 
 	@Override
 	public ContactoModel addContacto(ContactoModel contacto) {
-		Contacto contact = contactosRepository.save(contactoConverter.modelToContacto(contacto));
+		
+		Contacto insertContact = contactoConverter.modelToContacto(contacto);
+		LOG.info("Contacto=" + insertContact);
+		Contacto contact = contactosRepository.save(insertContact);
+		LOG.info("Contacto=" + contact);
 		return contactoConverter.contactoToModel(contact);
 	}
 
 	@Override
-	public int removeContacto(int idContacto) {
-		Contacto contacto = contactosRepository.findOne(idContacto);
+	public int removeContacto(int idContacto, int codEmpresa) {
+		ContactoPK pkContacto = new ContactoPK();
+		pkContacto.setIdContacto(idContacto);
+		pkContacto.setCodEmpresa(codEmpresa);
+		Contacto contacto = contactosRepository.findOne(pkContacto);
 
 		if (contacto != null) {
 
@@ -73,7 +81,10 @@ public class ContactosServiceImpl implements ContactosService {
 
 	@Override
 	public ContactoModel updateContacto(ContactoModel contacto) {
-		Contacto contact = contactosRepository.save(contactoConverter.modelToContacto(contacto));
+		
+		Contacto contactoConvert = contactoConverter.modelToContacto(contacto);
+		LOG.info("Contacto para actualizar=" + contactoConvert);
+		Contacto contact = contactosRepository.save(contactoConvert);
 		return contactoConverter.contactoToModel(contact);
 	}
 
@@ -107,6 +118,28 @@ public class ContactosServiceImpl implements ContactosService {
 		LOG.info("Listando por fullName=" + listContactos);
 
 		return listContactos;
+	}
+
+	@Override
+	public List<ContactoModel> listAllByFullNameAndEmpresa(String busq, EmpresaModel empresa) {
+		List<ContactoModel> listContactos = new ArrayList<>();
+		Empresa empr = empresaConverter.modelToEmpresa(empresa);
+		contactosRepository.findAllByFullNameAndEmpresa(busq, empr).forEach((contacto) -> {
+			listContactos.add(contactoConverter.contactoToModel(contacto));
+		});
+
+		LOG.info("Listando por fullNameAndEmpresa=" + listContactos);
+
+		return listContactos;
+	}
+	
+	public ContactoModel findContacto(int idContacto, int codEmpresa) {
+		ContactoPK pkContacto = new ContactoPK();
+		pkContacto.setIdContacto(idContacto);
+		pkContacto.setCodEmpresa(codEmpresa);
+		Contacto contacto = contactosRepository.findOne(pkContacto);
+		LOG.info("Contacto=" + contacto);
+		return contactoConverter.contactoToModel(contacto);
 	}
 
 }

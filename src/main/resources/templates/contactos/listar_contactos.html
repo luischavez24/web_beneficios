@@ -21,7 +21,8 @@
 					</span>
 					<input class="form-control" type="search" name="busq" id="busq" placeholder="Busca en contactos"/>
 					<div class="input-group-btn">
-						<select class="selectpicker" name="filtro" id="filtro" style="text-align: center;">
+						<select class="selectpicker" name="filtro" id="filtro" style="text-align: center;" title="Seleccione una empresa">
+							<option label="Cualquier Empresa" value="">Cualquier Empresa</option>
 							<option th:each="empresa : ${empresas}" th:value="${empresa.codEmpresa}" th:text="${empresa.nombreComercial}"></option>	
 						</select>
 					</div>
@@ -61,10 +62,9 @@
 								</a>
 							</td>
 							<td class="btn-container">
-								<button class="btn btn-danger btn-circle btn_borrar"  data-toggle="modal" data-target="#myModal">
+								<button class="btn btn-danger btn-circle btn_borrar" data-toggle="modal" data-target="#myModal" th:value="@{${contacto.idContacto} + ',' + ${contacto.codEmpresa}}">
 									<i class="glyphicon glyphicon-trash"></i>
 								</button>
-
 							</td>
 						</tr>
 					</tbody>
@@ -73,7 +73,6 @@
 				<!-- Ventana de confirmacion de eliminacion -->
 				<div id="myModal" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
-
 				    <!-- Contenido -->
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -85,7 +84,8 @@
 				      </div>
 				      <div class="modal-footer">
 				      	<form class="form-inline" th:action="@{/contactos/delete}" method="post">
-							<input type="hidden" id="fila_eliminada" name="ruc"/>
+							<input type="hidden" id="fila_eliminada_1" name="id_contacto"/>
+							<input type="hidden" id="fila_eliminada_2" name="cod_empresa"/>
 							<button type="submit" class="btn btn-success" id="btn_confirmar">Confirmar</button>
 					        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_cancelar">Cancelar</button>
 						</form>
@@ -100,10 +100,15 @@
 	<script type="text/javascript">
 		$(function () {
 			$(".btn_borrar").click(function(event) {
-				$("#fila_eliminada").val($(this).val());
+			    var pk = $(this).val().split(",");
+				$("#fila_eliminada_1").val(pk[0]);
+				$("#fila_eliminada_2").val(pk[1]);
 			});
 
-			$("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+			$("#btn_cancelar").click(function () { 
+				$("#fila_eliminada_1").val("");
+				$("#fila_eliminada_2").val("");
+			});
 		});
 	</script>
 </body>

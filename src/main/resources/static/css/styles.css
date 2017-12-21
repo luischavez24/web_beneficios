@@ -115,3 +115,7 @@ body{
   margin-top: 5%;
   padding-bottom: 20px;
 }
+
+.details-list > li {
+	padding: 15px;
+}

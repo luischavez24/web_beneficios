@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Detalles del Contacto')">
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
+	<div class="container">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px;">
+			<!-- Header -->
+			<header>
+				<h1><span th:text="${contacto}"></span></h1>
+			</header>
+		</div>
+		<!-- Datos generales -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">Datos generales</h3>
+				</div>
+			 	<div class="panel-body">
+			 		<ul class="details-list">
+			 			<li>
+			 				<strong>Nombre: </strong><span th:text="${contacto.nomContacto}"></span>
+			 			</li>
+			 			<li>
+			 				<strong>Apellido Paterno: </strong><span th:text="${contacto.apContacto}"></span>
+			 			</li>
+			 			<li>
+			 				<strong>Apellido Materno: </strong><span th:text="${contacto.amContacto}"></span>
+			 			</li>
+			 			<li>
+							<strong>Telefono: </strong><span th:text="${contacto.telfContacto}"></span>
+			 			</li>
+			 			<li>
+			 				<strong>Empresa: </strong><a th:href="@{'/empresas/detalles/' + ${contacto.codEmpresa}}"><span th:text="${contacto.empresa.nombreComercial}"></span></a>
+			 			</li>
+			 		</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Lista de Beneficios -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">Beneficios</h3>
+				</div>
+			 	<div class="panel-body">
+			 		<div th:if="${not #lists.isEmpty(contacto.beneficios)}">
+				 		<ul>
+				 			<li th:each="beneficio : ${contacto.beneficios}">
+				 				<span th:text="${beneficio.descripcion}"></span>
+				 			</li>
+				 		</ul>
+			 		</div>
+			 		<div th:if="${#lists.isEmpty(contacto.beneficios)}">
+			 			<img class="img-responsive" alt="contactos" th:src="@{/images/favicon.png}" width="100" height="100" style="margin:auto;"/>
+				 		<h3 class="text-center">No hay beneficios para mostrar</h3>
+			 		</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>

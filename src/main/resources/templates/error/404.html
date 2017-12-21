@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8"/>
 	<title>Página no encontrada</title>
@@ -20,16 +20,19 @@
 			<header>
 				<h1>Página no encontrada</h1>
 			</header>
-			<p>
-				<br></br>
-				<h3>HTTP Error 404</h3>
-				<br></br>
-				La página que esta buscando no se encuentra en el servidor, 
-				por favor introduzca una dirección correcta o presione el
-				boton inferior para regresar a la pagina de inicio.
-				<br></br>
-				<a href="#" th:href="@{/adm/}" class="btn btn-primary btn-block" style="margin-top: 30px;">Volver al inicio</a>
-			</p>
+			<section>
+				<p>
+					<br></br>
+					<h3>HTTP Error 404</h3>
+					<br></br>
+					La página que esta buscando no se encuentra en el servidor, 
+					por favor introduzca una dirección correcta o presione el
+					boton inferior para regresar a la pagina de inicio.
+					<br></br>
+					<a href="#" th:href="@{/adm/}" class="btn btn-primary btn-block" style="margin-top: 30px;"> Volver al inicio</a>
+				</p>
+			</section>
+				
 		</div>
 	</div>
 </body>
