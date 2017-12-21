@@ -21,6 +21,8 @@ public class EmpresaModel {
 	private Distrito distrito;
 	
 	private List<ContactoModel> contactos;
+	
+	private byte[] imagen;
 
 	public EmpresaModel() {
 	}
@@ -89,6 +91,14 @@ public class EmpresaModel {
 		this.distrito = distrito;
 	}
 	
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
 	public boolean equals(Object other) {
 		if(other instanceof EmpresaModel) {
 			return ((EmpresaModel) other).codEmpresa == this.codEmpresa;
@@ -96,12 +106,14 @@ public class EmpresaModel {
 			return false;
 		}
 	}
+
 	@Override
 	public String toString() {
 		return "EmpresaModel [codEmpresa=" + codEmpresa + ", direccion=" + direccion + ", rsEmpresa=" + rsEmpresa
 				+ ", nombreComercial=" + nombreComercial + ", rucEmpresa=" + rucEmpresa + ", telfEmpresa=" + telfEmpresa
-				+ ", distrito=" + distrito + "]";
+				+ ", distrito=" + distrito + ", contactos=" + contactos + ", imagen=" + imagen + "]";
 	}
+	
 	
 	
 }

@@ -9,7 +9,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px;">
 			<!-- Header -->
 			<header>
-				<h1><span th:text="${empresa.nombreComercial}"></span></h1>
+				<h1><span th:text="${empresa.nombreComercial}"><img class="img-logo" th:src="@{'data:image/png;base64,' + ${imagen_empresa}}" alt="..." height="50"/></span></h1>
 			</header>
 		</div>
 		<!-- Datos generales -->
@@ -19,6 +19,7 @@
 					<h3 class="panel-title">Datos generales</h3>
 				</div>
 			 	<div class="panel-body">
+			 		
 			 		<ul class="details-list">
 			 			<li>
 			 				<strong>Nombre Comercial: </strong><span th:text="${empresa.nombreComercial}"></span>
@@ -41,6 +42,7 @@
 			 			<li>
 							<strong>Distrito: </strong><span th:text="${empresa.distrito.nomDistrito}"></span>
 			 			</li>
+			 			
 			 		</ul>
 	
 				</div>

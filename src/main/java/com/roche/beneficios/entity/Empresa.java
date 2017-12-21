@@ -1,6 +1,7 @@
 package com.roche.beneficios.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -41,7 +42,11 @@ public class Empresa implements Serializable {
 	//bi-directional many-to-one association to Contacto
 	@OneToMany(mappedBy="empresa")
 	private List<Contacto> contactos;
-
+	
+	@Column(name="imagen")
+	@Lob
+	private byte[] imagen;
+	
 	public Empresa() {
 	}
 
@@ -107,6 +112,15 @@ public class Empresa implements Serializable {
 
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
+	}
+	
+	
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override

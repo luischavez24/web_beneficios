@@ -19,10 +19,12 @@ public class ContactoConverter {
 		if (contactoModel == null) {
 			return null;
 		}
+		
 		Contacto contacto = new Contacto();
 		ContactoPK contactoPK = new ContactoPK();
 		contactoPK.setIdContacto(contactoModel.getIdContacto());
-		contactoPK.setCodEmpresa(contactoModel.getEmpresa().getCodEmpresa());
+		int codEmpresa = (contactoModel.getCodEmpresa() == 0) ? contactoModel.getEmpresa().getCodEmpresa() : contactoModel.getCodEmpresa();
+		contactoPK.setCodEmpresa(codEmpresa);
 		contacto.setId(contactoPK);
 		contacto.setNomContacto(contactoModel.getNomContacto());
 		contacto.setApContacto(contactoModel.getApContacto());

@@ -1,5 +1,6 @@
 package com.roche.beneficios.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.roche.beneficios.constants.ViewConstants;
@@ -96,7 +98,16 @@ public class EmpresasController {
 	
 	@GetMapping("/detalles/{codEmpresa}")
 	public String details(@PathVariable int codEmpresa, Model model) {
+		
 		EmpresaModel empresa = empresaService.findByCodEmpresa(codEmpresa);
+		
+		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
+	    byte[] encoded=org.apache.commons.codec.binary.Base64
+	            .encodeBase64(empresa.getImagen());
+	    String encodedString = new String(encoded);
+
+	    model.addAttribute("imagen_empresa",encodedString);
+	    
 		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
 		model.addAttribute("empresa", empresa);
 		
@@ -105,8 +116,15 @@ public class EmpresasController {
 	}
 	
 	@PostMapping("/register")
-	public String newEmpresa(@ModelAttribute(name="empresa_reg") EmpresaModel empresa) {
+	public String newEmpresa(@ModelAttribute(name="empresa_reg") EmpresaModel empresa, 
+			@RequestParam(name = "imagen_empresa") MultipartFile imagenEmpresa) {
 		
+		try {
+			empresa.setImagen(imagenEmpresa.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		LOG.info("Recibiendo objeto empresa=" + empresa);
 		
 		empresaService.addEmpresa(empresa);

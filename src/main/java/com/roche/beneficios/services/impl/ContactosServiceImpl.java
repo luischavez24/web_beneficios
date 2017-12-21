@@ -54,7 +54,7 @@ public class ContactosServiceImpl implements ContactosService {
 
 	@Override
 	public ContactoModel addContacto(ContactoModel contacto) {
-		
+
 		Contacto insertContact = contactoConverter.modelToContacto(contacto);
 		LOG.info("Contacto=" + insertContact);
 		Contacto contact = contactosRepository.save(insertContact);
@@ -81,7 +81,7 @@ public class ContactosServiceImpl implements ContactosService {
 
 	@Override
 	public ContactoModel updateContacto(ContactoModel contacto) {
-		
+
 		Contacto contactoConvert = contactoConverter.modelToContacto(contacto);
 		LOG.info("Contacto para actualizar=" + contactoConvert);
 		Contacto contact = contactosRepository.save(contactoConvert);
@@ -109,7 +109,7 @@ public class ContactosServiceImpl implements ContactosService {
 
 	@Override
 	public List<ContactoModel> listAllByFullName(String busq) {
-		
+
 		List<ContactoModel> listContactos = new ArrayList<>();
 		contactosRepository.findAllByFullName(busq).forEach((contacto) -> {
 			listContactos.add(contactoConverter.contactoToModel(contacto));
@@ -124,7 +124,13 @@ public class ContactosServiceImpl implements ContactosService {
 	public List<ContactoModel> listAllByFullNameAndEmpresa(String busq, EmpresaModel empresa) {
 		List<ContactoModel> listContactos = new ArrayList<>();
 		Empresa empr = empresaConverter.modelToEmpresa(empresa);
-		contactosRepository.findAllByFullNameAndEmpresa(busq, empr).forEach((contacto) -> {
+
+		LOG.info("Buscando por la empresa = " + empr);
+
+		List<Contacto> contacts = contactosRepository.findAllByFullNameAndEmpresa(busq, empr);
+		LOG.info("Contatos = " + contacts);
+		contacts.forEach((contacto) -> {
+			contacto.setEmpresa(empr);
 			listContactos.add(contactoConverter.contactoToModel(contacto));
 		});
 
@@ -132,7 +138,7 @@ public class ContactosServiceImpl implements ContactosService {
 
 		return listContactos;
 	}
-	
+
 	public ContactoModel findContacto(int idContacto, int codEmpresa) {
 		ContactoPK pkContacto = new ContactoPK();
 		pkContacto.setIdContacto(idContacto);

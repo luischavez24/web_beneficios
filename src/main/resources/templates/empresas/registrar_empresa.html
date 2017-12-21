@@ -21,7 +21,7 @@
 		<br></br>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
 			<!-- Formulario de registro de la empresa -->
-			<form class="form-horizontal" th:action="@{/empresas/register}" th:object="${empresa_reg}" method="post">
+			<form class="form-horizontal" th:action="@{/empresas/register}" th:object="${empresa_reg}" method="post" enctype="multipart/form-data">
 				<!-- Razon Social -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
@@ -64,7 +64,13 @@
 					<select class="selectpicker form-control" id="dist" data-style="btn-default" data-live-search="true" th:field="*{distrito}" >
 						<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.nomDistrito}"></option>
 					</select>
-				</div>                          
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-home"></span>
+					</span>
+					<input class="btn btn-primary" type="file" id="imagen_empresa" name="imagen_empresa"/>
+				</div>                      
 				<input class="btn btn-primary btn-block" type="submit" name="registar" value="Registrar Empresa" />
 			</form>
 		</div>

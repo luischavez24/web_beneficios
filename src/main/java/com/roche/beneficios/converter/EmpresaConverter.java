@@ -14,26 +14,29 @@ import com.roche.beneficios.model.EmpresaModel;
 
 @Component("empresaConverter")
 public class EmpresaConverter {
+
 	@Autowired
-	@Qualifier("contactoConverter") 
+	@Qualifier("contactoConverter")
 	private ContactoConverter contactoConverter;
-	
+
 	public Empresa modelToEmpresa(EmpresaModel empresaModel) {
-		
-		if(empresaModel == null) {
+
+		if (empresaModel == null) {
 			return null;
 		}
-		
-		List<Contacto> contactos = new ArrayList<>();
-		
-		empresaModel.getContactos().forEach((item) -> {
-			item.setEmpresa(null);
-			contactos.add(contactoConverter.modelToContacto(item));
-		});
-		
+
 		Empresa empresa = new Empresa();
 		empresa.setCodEmpresa(empresaModel.getCodEmpresa());
-		empresa.setContactos(contactos);
+		
+		if (empresaModel.getContactos() != null) {
+			List<Contacto> contactos = new ArrayList<>();
+			empresaModel.getContactos().forEach((item) -> {
+					item.setEmpresa(null);
+					contactos.add(contactoConverter.modelToContacto(item));
+			});
+			empresa.setContactos(contactos);
+		}
+
 		empresa.setDireccion(empresaModel.getDireccion());
 		empresa.setRsEmpresa(empresaModel.getRsEmpresa());
 		empresa.setNombreComercial(empresaModel.getNombreComercial());
@@ -41,31 +44,43 @@ public class EmpresaConverter {
 		empresa.setTelfEmpresa(empresaModel.getTelfEmpresa());
 		empresa.setDistrito(empresaModel.getDistrito());
 		
-		return empresa;
-	}
-	
-	public EmpresaModel empresaToModel(Empresa empresa) {
-		
-		if(empresa == null) {
-			return null;
+		if(empresaModel.getImagen() != null) {
+			empresa.setImagen(empresaModel.getImagen());
 		}
 		
-		List<ContactoModel> contactos = new ArrayList<>();
-		
-		empresa.getContactos().forEach((item) -> {
-			item.setEmpresa(null);
-			contactos.add(contactoConverter.contactoToModel(item));
-		});
-		
+		return empresa;
+
+	}
+
+	public EmpresaModel empresaToModel(Empresa empresa) {
+
+		if (empresa == null) {
+			return null;
+		}
+
 		EmpresaModel empresaModel = new EmpresaModel();
 		empresaModel.setCodEmpresa(empresa.getCodEmpresa());
-		empresaModel.setContactos(contactos);
+
+		List<ContactoModel> contactos = new ArrayList<>();
+		if (empresa.getContactos() != null) {
+			empresa.getContactos().forEach((item) -> {
+				item.setEmpresa(null);
+				contactos.add(contactoConverter.contactoToModel(item));
+			});
+			empresaModel.setContactos(contactos);
+		}
+
 		empresaModel.setDireccion(empresa.getDireccion());
 		empresaModel.setRsEmpresa(empresa.getRsEmpresa());
 		empresaModel.setNombreComercial(empresa.getNombreComercial());
 		empresaModel.setRucEmpresa(empresa.getRucEmpresa());
 		empresaModel.setTelfEmpresa(empresa.getTelfEmpresa());
 		empresaModel.setDistrito(empresa.getDistrito());
+		
+		if(empresa.getImagen() != null) {
+			empresaModel.setImagen(empresa.getImagen());
+		}
+		
 		return empresaModel;
 	}
 }
