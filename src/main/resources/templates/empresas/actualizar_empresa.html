@@ -10,16 +10,10 @@
 		<header>
 			<h1>Actualizar Empresa: <strong><span th:text="${empresa_mod.nombreComercial}"></span></strong></h1>
 		</header>
-
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			<img class="img-responsive imagen" th:src="@{/images/build.png}" alt="imagen empresa"/>
-		</div>
-
 		<br></br>
-
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
-			<!-- Formulario de Actualizacion de la empresa -->
-			<form class="form-horizontal" th:action="@{/empresas/modify}" th:object="${empresa_mod}" method="post">
+		<!-- Formulario de Actualizacion de la empresa -->
+		<form class="form-horizontal" th:action="@{/empresas/modify}" th:object="${empresa_mod}" method="post">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
 				<input type="hidden" th:value="*{codEmpresa}" th:field="*{codEmpresa}"/>
 				<!-- Razon Social -->
 				<div class="input-group">
@@ -65,9 +59,53 @@
 					</select>
 				</div>                          
 				<input class="btn btn-warning btn-block" type="submit" name="actualizar" value="Actualizar Empresa" />
-			</form>
-		</div>
-
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<img class="img-responsive imagen" th:src="@{'data:' + ${tipo_imagen} + ';base64,' + ${imagen_empresa}}" alt="logo_empresa" id="img_defecto"/>
+				<output id="list"></output>
+				<!-- Imagen -->
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-floppy-open"></span>
+					</span>
+					<span class="btn btn-danger btn-block btn-file">
+						Buscar <input type="file" id="imagen_empresa" name="imagen_empresa"/>
+					</span>
+				</div>     
+			</div>
+		</form>
 	</div>
+	<script>
+		function archivo(evt) {
+	      	var files = evt.target.files; // FileList object
+		       
+		     //Obtenemos la imagen del campo "file". 
+			for (var i = 0, f; f = files[i]; i++) {         
+				//Solo admitimos imágenes.
+				if (!f.type.match('image.*')) {
+					continue;
+				}
+
+				var reader = new FileReader();
+
+				reader.onload = (function(theFile) {
+					return function(e) {
+						// Creamos la imagen.
+						document.getElementById("list").innerHTML = ['<img class="img-responsive imagen" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+						imagen = document.getElementById('img_defecto');
+						if(imagen){
+							padre = imagen.parentNode;
+							padre.removeChild(imagen);
+						}
+					};
+				})(f);
+
+				reader.readAsDataURL(f);
+			}
+		}
+	             
+	    document.getElementById('imagen_empresa').addEventListener('change', archivo, false);
+	   
+	</script>
 </body>
 </html>

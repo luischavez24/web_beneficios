@@ -17,7 +17,9 @@ import com.roche.beneficios.entity.Empresa;
 import com.roche.beneficios.model.ContactoModel;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.repository.ContactosRepository;
+import com.roche.beneficios.repository.EmpresaRepository;
 import com.roche.beneficios.services.ContactosService;
+
 
 @Service("contactosService")
 public class ContactosServiceImpl implements ContactosService {
@@ -27,6 +29,10 @@ public class ContactosServiceImpl implements ContactosService {
 	@Autowired
 	@Qualifier("contactosRepository")
 	private ContactosRepository contactosRepository;
+	
+	@Autowired
+	@Qualifier("empresaRepository")
+	private EmpresaRepository empresaRepository;
 
 	@Autowired
 	@Qualifier("contactoConverter")
@@ -44,7 +50,9 @@ public class ContactosServiceImpl implements ContactosService {
 		List<Contacto> entityList = contactosRepository.findAll();
 		LOG.info("EntityList=" + entityList);
 		entityList.forEach((contacto) -> {
+			contacto.setEmpresa(empresaRepository.findOne(contacto.getId().getCodEmpresa()));
 			listContactos.add(contactoConverter.contactoToModel(contacto));
+			LOG.info("Empresa=" + contacto.getEmpresa());
 		});
 
 		LOG.info(listContactos);
@@ -98,7 +106,9 @@ public class ContactosServiceImpl implements ContactosService {
 		LOG.info("EntityList=" + entityList);
 		if (entityList != null) {
 			entityList.forEach((contacto) -> {
+				contacto.setEmpresa(empresaRepository.findOne(contacto.getId().getCodEmpresa()));
 				listContactos.add(contactoConverter.contactoToModel(contacto));
+				
 			});
 		}
 
@@ -112,6 +122,7 @@ public class ContactosServiceImpl implements ContactosService {
 
 		List<ContactoModel> listContactos = new ArrayList<>();
 		contactosRepository.findAllByFullName(busq).forEach((contacto) -> {
+			contacto.setEmpresa(empresaRepository.findOne(contacto.getId().getCodEmpresa()));
 			listContactos.add(contactoConverter.contactoToModel(contacto));
 		});
 

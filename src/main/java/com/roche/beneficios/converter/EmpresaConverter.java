@@ -46,6 +46,7 @@ public class EmpresaConverter {
 		
 		if(empresaModel.getImagen() != null) {
 			empresa.setImagen(empresaModel.getImagen());
+			empresa.setTipoImagen(empresaModel.getTipoImagen());
 		}
 		
 		return empresa;
@@ -79,6 +80,7 @@ public class EmpresaConverter {
 		
 		if(empresa.getImagen() != null) {
 			empresaModel.setImagen(empresa.getImagen());
+			empresaModel.setTipoImagen(empresa.getTipoImagen());
 		}
 		
 		return empresaModel;

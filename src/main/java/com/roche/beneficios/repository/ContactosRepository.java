@@ -15,6 +15,7 @@ public interface ContactosRepository extends JpaRepository<Contacto, Serializabl
 	
 	public List<Contacto> findAllByEmpresa(Empresa empresa);
 	
+	
 	@Query("SELECT c FROM Contacto c WHERE "
 			+ "LOWER(c.nomContacto) like CONCAT('%',LOWER(:fullName),'%') "
 			+ "or LOWER(c.apContacto) like CONCAT('%',LOWER(:fullName),'%') "
@@ -23,7 +24,7 @@ public interface ContactosRepository extends JpaRepository<Contacto, Serializabl
 			+ "like CONCAT('%',LOWER(:fullName),'%')")
 	public List<Contacto> findAllByFullName(@Param("fullName") String fullName);
 	
-	@Query("SELECT c FROM Contacto c WHERE c.empresa = :empresa AND "
+	@Query("SELECT c FROM Contacto c  WHERE c.empresa = :empresa AND "
 			+ "(LOWER(c.nomContacto) LIKE CONCAT('%',LOWER(:fullName),'%') "
 			+ "OR LOWER(c.apContacto) LIKE CONCAT('%',LOWER(:fullName),'%') "
 			+ "OR LOWER(c.amContacto) LIKE CONCAT('%',LOWER(:fullName),'%') "

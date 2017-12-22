@@ -23,6 +23,8 @@ public class EmpresaModel {
 	private List<ContactoModel> contactos;
 	
 	private byte[] imagen;
+	
+	private String tipoImagen;
 
 	public EmpresaModel() {
 	}
@@ -97,6 +99,14 @@ public class EmpresaModel {
 
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getTipoImagen() {
+		return tipoImagen;
+	}
+
+	public void setTipoImagen(String tipoImagen) {
+		this.tipoImagen = tipoImagen;
 	}
 
 	public boolean equals(Object other) {

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.roche.beneficios.constants.ViewConstants;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.services.DistritoService;
@@ -102,14 +104,15 @@ public class EmpresasController {
 		EmpresaModel empresa = empresaService.findByCodEmpresa(codEmpresa);
 		
 		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
-	    byte[] encoded=org.apache.commons.codec.binary.Base64
-	            .encodeBase64(empresa.getImagen());
+	    byte[] encoded= Base64.encodeBase64(empresa.getImagen());
+	    
 	    String encodedString = new String(encoded);
 
 	    model.addAttribute("imagen_empresa",encodedString);
-	    
+	    model.addAttribute("tipo_imagen", empresa.getTipoImagen());
 		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
 		model.addAttribute("empresa", empresa);
+		
 		
 		return ViewConstants.DETALLE_EMPRESA;
 	
@@ -121,6 +124,8 @@ public class EmpresasController {
 		
 		try {
 			empresa.setImagen(imagenEmpresa.getBytes());
+			empresa.setTipoImagen(imagenEmpresa.getContentType());
+			LOG.info("Nombre de imagen=" + imagenEmpresa.getOriginalFilename());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,6 +163,16 @@ public class EmpresasController {
 		LOG.info("Cargando distritos");
 		
 		model.addAttribute("distritos", distritoService.listarDistrito());
+		
+		
+		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
+	    byte[] encoded= Base64.encodeBase64(empresa.getImagen());
+	    
+	    String encodedString = new String(encoded);
+
+	    model.addAttribute("imagen_empresa",encodedString);
+	    model.addAttribute("tipo_imagen", empresa.getTipoImagen());
+		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
 		
 		return ViewConstants.FORM_ACTUALIZAR_EMPRESAS;
 		

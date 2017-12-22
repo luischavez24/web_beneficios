@@ -42,7 +42,7 @@ public class ContactosController {
 	public String index() {
 		LOG.info("Redirigiendo a la página principal");
 		// Redireccion al controlador de busquedas con los campos vacios
-		return "redirect:/contactos/search?busq&filtro";
+		return "redirect:/contactos/search";
 	}
 
 	@GetMapping("/search")

@@ -39,13 +39,16 @@ public class Empresa implements Serializable {
 	@JoinColumn(name="id_distrito", referencedColumnName="id_distrito", insertable=true, updatable=true)
 	private Distrito distrito;
 	
-	//bi-directional many-to-one association to Contacto
-	@OneToMany(mappedBy="empresa")
-	private List<Contacto> contactos;
-	
 	@Column(name="imagen")
 	@Lob
 	private byte[] imagen;
+	
+	@Column(name="tipo_imagen")
+	private String tipoImagen;
+	
+	//bi-directional many-to-one association to Contacto
+	@OneToMany(mappedBy="empresa")
+	private List<Contacto> contactos;
 	
 	public Empresa() {
 	}
@@ -121,6 +124,15 @@ public class Empresa implements Serializable {
 
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
+	}
+
+	
+	public String getTipoImagen() {
+		return tipoImagen;
+	}
+
+	public void setTipoImagen(String tipoImagen) {
+		this.tipoImagen = tipoImagen;
 	}
 
 	@Override
