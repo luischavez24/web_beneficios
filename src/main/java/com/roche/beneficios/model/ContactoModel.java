@@ -22,6 +22,8 @@ public class ContactoModel {
 
 	private EmpresaModel empresa;
 
+	private String correoElec;
+	
 	public ContactoModel() {
 	}
 
@@ -99,6 +101,14 @@ public class ContactoModel {
 
 	public void setEmpresa(EmpresaModel empresa) {
 		this.empresa = empresa;
+	}
+
+	public String getCorreoElec() {
+		return correoElec;
+	}
+
+	public void setCorreoElec(String correoElec) {
+		this.correoElec = correoElec;
 	}
 
 	@Override

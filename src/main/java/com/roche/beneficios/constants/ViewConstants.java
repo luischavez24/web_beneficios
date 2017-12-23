@@ -19,4 +19,6 @@ public interface ViewConstants {
 	public final static String DETALLE_CONTACTO = "/contactos/detalle_contacto";
 
 	public final static String INTEGRITY_EXCEPTION = "/error/integrityException";
+	
+	public final static String BUSQUEDA_NULA_EXCEPTION = "/error/busquedaNulaException";
 }

@@ -52,12 +52,12 @@
 							<td><span th:text="${contacto.telfContacto}"></span></td>
 							<td><span th:text="${contacto.empresa.nombreComercial}"></span></td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-info btn-circle">
+								<a th:href="@{'/contactos/detalles/' + ${contacto.codEmpresa} + '/' + ${contacto.idContacto}}" class="btn btn-info btn-circle">
 									<i class="glyphicon glyphicon-list"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/actualizar?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}" class="btn btn-warning btn-circle">
+								<a th:href="@{'/contactos/actualizar/' + ${contacto.codEmpresa} + '/' + ${contacto.idContacto}}" class="btn btn-warning btn-circle">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</a>
 							</td>

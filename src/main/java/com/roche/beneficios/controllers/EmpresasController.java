@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.apache.commons.codec.binary.Base64;
 
 import com.roche.beneficios.constants.ViewConstants;
+import com.roche.beneficios.exceptions.BusquedaNulaException;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.services.DistritoService;
 import com.roche.beneficios.services.EmpresaService;
@@ -99,10 +100,12 @@ public class EmpresasController {
 	}
 	
 	@GetMapping("/detalles/{codEmpresa}")
-	public String details(@PathVariable int codEmpresa, Model model) {
+	public String details(@PathVariable int codEmpresa, Model model) throws BusquedaNulaException {
 		
 		EmpresaModel empresa = empresaService.findByCodEmpresa(codEmpresa);
-		
+		if(empresa == null) {
+			throw new BusquedaNulaException();
+		}
 		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
 	    byte[] encoded= Base64.encodeBase64(empresa.getImagen());
 	    
@@ -152,9 +155,13 @@ public class EmpresasController {
 	}
 	
 	@GetMapping("/actualizar/{rucEmpresa}")
-	public String actualizarEmpresa(@PathVariable String rucEmpresa, Model model) {
+	public String actualizarEmpresa(@PathVariable String rucEmpresa, Model model) throws BusquedaNulaException {
 		
 		EmpresaModel empresa = empresaService.findOneByRuc(rucEmpresa);
+		
+		if(empresa == null) {
+			throw new BusquedaNulaException();
+		}
 		
 		LOG.info("Enviando empresa a modificar " + empresa);
 		
@@ -179,7 +186,18 @@ public class EmpresasController {
 	}
 	
 	@PostMapping("/modify")
-	public String modifyEmpresa(@ModelAttribute(name="empresa_mod") EmpresaModel empresa) {
+	public String modifyEmpresa(@ModelAttribute(name="empresa_mod") EmpresaModel empresa,
+			@RequestParam(name = "imagen_empresa") MultipartFile imagenEmpresa) {
+		
+		try {
+			if(imagenEmpresa.getBytes() != null) {
+				empresa.setImagen(imagenEmpresa.getBytes());
+				empresa.setTipoImagen(imagenEmpresa.getContentType());
+				LOG.info("Nombre de imagen=" + imagenEmpresa.getOriginalFilename());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		LOG.info("Actualizando objeto" + empresa);
 		
@@ -197,6 +215,22 @@ public class EmpresasController {
 		ModelAndView model = new ModelAndView(ViewConstants.INTEGRITY_EXCEPTION);
 		
 		model.addObject("exception", e.getMessage());
+		
+		model.addObject("direccion_retorno", "/empresas/new");
+		
+		return model;
+	}
+	
+	@ExceptionHandler(BusquedaNulaException.class)
+	public ModelAndView sqlIntegrityException(final BusquedaNulaException e) {
+		
+		LOG.error("Not match exception");
+		
+		ModelAndView model = new ModelAndView(ViewConstants.BUSQUEDA_NULA_EXCEPTION);
+		
+		model.addObject("exception", e.getMessage());
+		
+		model.addObject("direccion_retorno", "/empresas");
 		
 		return model;
 	}

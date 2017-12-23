@@ -30,6 +30,7 @@ public class ContactoConverter {
 		contacto.setApContacto(contactoModel.getApContacto());
 		contacto.setAmContacto(contactoModel.getAmContacto());
 		contacto.setTelfContacto(contactoModel.getTelfContacto());
+		contacto.setCorreoElec(contactoModel.getCorreoElec());
 		contacto.setEmpresa(empresaConverter.modelToEmpresa(contactoModel.getEmpresa()));
 		if (contacto.getEmpresa() != null) {
 			contacto.getEmpresa().setContactos(null);
@@ -52,6 +53,7 @@ public class ContactoConverter {
 		contactoModel.setApContacto(contacto.getApContacto());
 		contactoModel.setAmContacto(contacto.getAmContacto());
 		contactoModel.setTelfContacto(contacto.getTelfContacto());
+		contactoModel.setCorreoElec(contacto.getCorreoElec());
 		contactoModel.setEmpresa(empresaConverter.empresaToModel(contacto.getEmpresa()));
 		if (contactoModel.getEmpresa() != null) {
 			contactoModel.getEmpresa().setContactos(null);

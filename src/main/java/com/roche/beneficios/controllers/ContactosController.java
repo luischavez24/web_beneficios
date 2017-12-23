@@ -12,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.roche.beneficios.constants.ViewConstants;
+import com.roche.beneficios.exceptions.BusquedaNulaException;
 import com.roche.beneficios.model.ContactoModel;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.services.ContactosService;
@@ -95,11 +97,16 @@ public class ContactosController {
 		return ViewConstants.FORM_REGISTRO_CONTACTOS;
 	}
 	
-	@GetMapping("/detalles")
-	public String details(@RequestParam(name="cod_empresa", required = true) int codEmpresa, 
-			@RequestParam(name="id_contacto", required = true) int idContacto, Model model) {
+	@GetMapping("/detalles/{cod_empresa}/{id_contacto}")
+	public String details(@PathVariable(name="cod_empresa", required = true) int codEmpresa, 
+			@PathVariable(name="id_contacto", required = true) int idContacto, Model model) 
+					throws BusquedaNulaException {
 		
 		ContactoModel contacto = contactosService.findContacto(idContacto, codEmpresa);
+		
+		if(contacto == null) {
+			throw new BusquedaNulaException();
+		}
 		
 		LOG.info("Contacto Selecccionado = " + contacto.getBeneficios().size());
 		
@@ -122,15 +129,19 @@ public class ContactosController {
 
 	}
 	
-	@GetMapping("/actualizar")
-	public String actualizarContacto(@RequestParam(name="cod_empresa", required = true) int codEmpresa, 
-			@RequestParam(name="id_contacto", required = true) int idContacto, Model model) {
+	@GetMapping("/actualizar/{cod_empresa}/{id_contacto}")
+	public String actualizarContacto(@PathVariable(name="cod_empresa", required = true) int codEmpresa, 
+			@PathVariable(name="id_contacto", required = true) int idContacto, Model model) 
+					throws BusquedaNulaException {
 		
-		ContactoModel contactoModel = contactosService.findContacto(idContacto, codEmpresa);
+		ContactoModel contacto = contactosService.findContacto(idContacto, codEmpresa);
 		
-		LOG.info("Enviando contacto a modificar " + contactoModel + " " + contactoModel.getIdContacto() + "," + contactoModel.getCodEmpresa());
+		if(contacto == null) {
+			throw new BusquedaNulaException();
+		}
+		LOG.info("Enviando contacto a modificar " + contacto + " " + contacto.getIdContacto() + "," + contacto.getCodEmpresa());
 		
-		model.addAttribute("contacto_mod", contactoModel);
+		model.addAttribute("contacto_mod", contacto);
 		
 		LOG.info("Cargando empresas");
 		
@@ -175,6 +186,22 @@ public class ContactosController {
 		ModelAndView model = new ModelAndView(ViewConstants.INTEGRITY_EXCEPTION);
 		
 		model.addObject("exception", e.getMessage());
+		
+		model.addObject("direccion_retorno", "/contactos/new");
+		
+		return model;
+	}
+	
+	@ExceptionHandler(BusquedaNulaException.class)
+	public ModelAndView sqlIntegrityException(final BusquedaNulaException e) {
+		
+		LOG.error("Not match exception");
+		
+		ModelAndView model = new ModelAndView(ViewConstants.BUSQUEDA_NULA_EXCEPTION);
+		
+		model.addObject("exception", e.getMessage());
+		
+		model.addObject("direccion_retorno", "/contactos");
 		
 		return model;
 	}

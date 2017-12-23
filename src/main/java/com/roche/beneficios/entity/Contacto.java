@@ -31,6 +31,9 @@ public class Contacto implements Serializable {
 	@Column(name="telf_contacto")
 	private String telfContacto;
 	
+	@Column(name="correo_elec")
+	private String correoElec;
+	
 	@ManyToOne
 	@JoinColumn(name="cod_empresa", referencedColumnName="cod_empresa", insertable=false, updatable=false)
 	private Empresa empresa;
@@ -110,6 +113,15 @@ public class Contacto implements Serializable {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	
+	public String getCorreoElec() {
+		return correoElec;
+	}
+
+	public void setCorreoElec(String correoElec) {
+		this.correoElec = correoElec;
 	}
 
 	@Override

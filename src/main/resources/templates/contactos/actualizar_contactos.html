@@ -24,21 +24,21 @@
 				<!-- Nombres -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-briefcase"></span>
+						<span class="glyphicon glyphicon-user"></span>
 					</span>	
 					<input class="form-control" type="text" id="nom_contacto" placeholder="Nombres" th:field="*{nomContacto}" readonly="readonly"/>            
 				</div>
 				<!-- Apellido Paterno -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-copyright-mark"></span>
+						<span class="glyphicon glyphicon-user"></span>
 					</span>
 					<input class="form-control" type="text" id="ap_contacto" placeholder="Apellido Paterno" th:field="*{apContacto}" readonly="readonly"/>
 				</div>
 				<!-- Apellido Materno  -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-heart-empty"></span>
+						<span class="glyphicon glyphicon-user"></span>
 					</span>
 					<input class="form-control" type="text" id="am_contacto" placeholder="Apellido Materno" th:field="*{amContacto}" readonly="readonly"/>
 				</div>
@@ -49,10 +49,19 @@
 					</span>
 					<input class="form-control" type="text" id="telfContacto" placeholder="Teléfono" th:field="*{telfContacto}" />
 				</div>
+				
+				<!-- Correo Electrónico -->                
+				<div class="input-group">
+					<span class="input-group-addon" id="icon-search">
+						<span class="glyphicon glyphicon-envelope"></span>
+					</span>
+					<input class="form-control" type="text" id="correo_elec" placeholder="Correo Electrónico" th:field="*{correoElec}" />
+				</div>
+				
 				<!-- Empresa -->
 				<div class="input-group">
 					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-home"></span>
+						<span class="glyphicon glyphicon-briefcase"></span>
 					</span>
 					<select class="selectpicker form-control" id="empresas" data-style="btn-default" data-live-search="true" th:field="*{empresa}">
 						<option th:each=" e : ${empresas}" th:value="${e.codEmpresa}" th:text="${e.nombreComercial}" th:selected="${contacto_mod.empresa.nombreComercial == e.nombreComercial}"></option>
