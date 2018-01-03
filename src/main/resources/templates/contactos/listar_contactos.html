@@ -13,8 +13,8 @@
 				<h1>Buscar contactos</h1>
 			</header>
 			<br></br>
-			<!-- Formulario de busquedas -->
-			<form action="#" th:action="@{/contactos/search}" method="get">			
+			<!-- Formulario de búsquedas -->
+			<form action="#" th:action="@{/contactos/search}" method="get">
 				<div class="input-group input-group-responsive">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-search"></span>
@@ -23,7 +23,7 @@
 					<div class="input-group-btn">
 						<select class="selectpicker" name="filtro" id="filtro" style="text-align: center;" title="Seleccione una empresa">
 							<option label="Cualquier Empresa" value="">Cualquier Empresa</option>
-							<option th:each="empresa : ${empresas}" th:value="${empresa.codEmpresa}" th:text="${empresa.nombreComercial}"></option>	
+							<option th:each="empresa : ${empresas}" th:value="${empresa.codEmpresa}" th:text="${empresa.nombreComercial}"></option>
 						</select>
 					</div>
 					<div class="input-group-btn">
@@ -69,7 +69,7 @@
 						</tr>
 					</tbody>
 				</table>
-				
+
 				<!-- Ventana de confirmacion de eliminacion -->
 				<div id="myModal" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
@@ -96,7 +96,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script type="text/javascript">
 		$(function () {
 			$(".btn_borrar").click(function(event) {
@@ -105,7 +105,7 @@
 				$("#fila_eliminada_2").val(pk[1]);
 			});
 
-			$("#btn_cancelar").click(function () { 
+			$("#btn_cancelar").click(function () {
 				$("#fila_eliminada_1").val("");
 				$("#fila_eliminada_2").val("");
 			});
