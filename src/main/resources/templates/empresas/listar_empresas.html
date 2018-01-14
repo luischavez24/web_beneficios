@@ -12,9 +12,15 @@
 			<header>
 				<h1>Buscar empresas</h1>
 			</header>
+			<div th:if="${msj == 1}" class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  Se ha eliminado la empresa con exito
+			</div>
 			<br></br>
 			<!-- Formulario de busquedas -->
-			<form action="#" th:action="@{/empresas/search}" method="get">			
+			<form action="#" th:action="@{/empresas/search}" method="get" id="busq_empresas">			
 				<div class="input-group input-group-responsive">
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-search"></span>
@@ -44,8 +50,8 @@
 							<th colspan="3">Operaciones</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr th:each="empresa : ${empresas}">
+					<tbody id="empresas">
+						<tr th:fragment="empresas" th:each="empresa : ${empresas}" >
 							<td><span th:text="${empresa.rucEmpresa}"></span></td>
 							<td><span th:text="${empresa.nombreComercial}"></span></td>
 							<td><span th:text="${empresa.rsEmpresa}"></span></td>
@@ -98,13 +104,44 @@
 	</div>
 	
 	<script type="text/javascript">
-		$(function () {
+	
+		// Asignar evento de borrado
+		function asignaEvento() {
 			$(".btn_borrar").click(function(event) {
 				$("#fila_eliminada").val($(this).val());
 			});
-
+	
 			$("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+		}
+		
+		// Busquedas con Ajax
+		$("#busq_empresas").submit(function(e) {
+			e.preventDefault();	
+			$.ajax({
+				url: $(this).attr("/empresas/search"),
+				type: $(this).attr("get"),
+				data: $(this).serialize(),
+				success : function (data) {
+					if(data == "") {
+						$("#empresas").html("<tr><td><center><span></span> No hay empresas para mostrar</center></td></tr>");
+						$("#empresas > tr > td").attr('colspan', 5);
+						$("#empresas > tr > td > center > span").attr({
+							'class': 'glyphicon glyphicon-search',
+							'aria-hidden': 'true'
+						});
+					} else {
+						$("#empresas").html(data);
+					}
+					
+					asignaEvento();
+				}
+			});
+			
 		});
+		// Fin de Busquedas con Ajax
+
+		$(asignaEvento());
+
 	</script>
 </body>
 </html>

@@ -48,11 +48,14 @@ public class ContactosController {
 	}
 
 	@GetMapping("/search")
-	public String search(Model model, @RequestParam(name = "busq", required = false) String busq,
-			@RequestParam(name = "filtro", required = false) EmpresaModel filtro) {
-
+	public String search(Model model, 
+			@RequestParam(name = "busq", required = false) String busq,
+			@RequestParam(name = "filtro", required = false) EmpresaModel filtro,
+			@RequestParam(name="msj", required = false) String msj) {
+		LOG.info("Eliminacion realizada=" + msj);
 		// Crea una lista para llenar los datos buscados
-
+		boolean busqRealizada = true;
+		
 		List<ContactoModel> listaModel = null;
 
 		LOG.info(filtro);
@@ -72,12 +75,15 @@ public class ContactosController {
 		} else {
 			LOG.info("Busqueda sin filtros");
 			listaModel = contactosService.listContactos();
+			busqRealizada = false;
+			
 		}
 
 		model.addAttribute("contactos", listaModel);
 		model.addAttribute("empresas", empresaService.listarEmpresas());
-
-		return ViewConstants.LISTAR_CONTACTOS;
+		model.addAttribute("msj", msj);
+		
+		return (busqRealizada) ? ViewConstants.LISTAR_CONTACTOS_BUSQ : ViewConstants.LISTAR_CONTACTOS;
 
 	}
 
@@ -173,7 +179,7 @@ public class ContactosController {
 		
 		LOG.info("Contacto removido " + resultado);
 		
-		return "redirect:/contactos";
+		return "redirect:/contactos?msj=1";
 		
 	}
 	

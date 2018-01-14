@@ -27,11 +27,20 @@ public class Beneficio implements Serializable {
 	private String detalleBeneficio;
 
 	@Column(name="img_promo")
-	private String imgPromo;
+	private byte[] imgPromo;
+	
+	@Column(name="tipo_img_promo")
+	private String tipoImgPromo;
+	
+	@Column(name="descripcion_corta")
+	private String descripcionCorta;
 
-	private String label;
-
-	private String ubicacion;
+	@Column(name="imagen")
+	@Lob
+	private byte[] imagen;
+	
+	@Column(name="tipo_imagen")
+	private String tipoImagen;
 
 	//bi-directional many-to-one association to Contacto
 	@ManyToOne
@@ -72,28 +81,20 @@ public class Beneficio implements Serializable {
 		this.detalleBeneficio = detalleBeneficio;
 	}
 
-	public String getImgPromo() {
+	public byte[] getImgPromo() {
 		return this.imgPromo;
 	}
 
-	public void setImgPromo(String imgPromo) {
+	public void setImgPromo(byte[] imgPromo) {
 		this.imgPromo = imgPromo;
 	}
 
-	public String getLabel() {
-		return this.label;
+	public String getDescripcionCorta() {
+		return this.descripcionCorta;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getUbicacion() {
-		return this.ubicacion;
-	}
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setDescripcionCorta(String label) {
+		this.descripcionCorta = label;
 	}
 
 	public Contacto getContacto() {
@@ -124,6 +125,30 @@ public class Beneficio implements Serializable {
 		consideracione.setBeneficio(null);
 
 		return consideracione;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getTipoImagen() {
+		return tipoImagen;
+	}
+
+	public void setTipoImagen(String tipoImagen) {
+		this.tipoImagen = tipoImagen;
+	}
+
+	public String getTipoImgPromo() {
+		return tipoImgPromo;
+	}
+
+	public void setTipoImgPromo(String tipoImgPromo) {
+		this.tipoImgPromo = tipoImgPromo;
 	}
 
 }

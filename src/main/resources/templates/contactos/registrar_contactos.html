@@ -64,7 +64,7 @@
 					<span class="input-group-addon" id="icon-search">
 						<span class="glyphicon glyphicon-briefcase"></span>
 					</span>
-					<select class="selectpicker form-control" id="empresas" data-style="btn-default" data-live-search="true" th:field="*{empresa}" >
+					<select class="selectpicker form-control" id="empresas" data-style="btn-warning" data-live-search="true" th:field="*{empresa}" >
 						<option th:each=" e : ${empresas}" th:value="${e.codEmpresa}" th:text="${e.nombreComercial}"></option>
 					</select>
 				</div>                          

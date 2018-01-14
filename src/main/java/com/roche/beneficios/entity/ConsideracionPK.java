@@ -14,7 +14,7 @@ public class ConsideracionPK implements Serializable {
 
 	@Column(name="nro_consideracion")
 	private int nroConsideracion;
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="nro_beneficio", insertable=false, updatable=false)
 	private int nroBeneficio;
 

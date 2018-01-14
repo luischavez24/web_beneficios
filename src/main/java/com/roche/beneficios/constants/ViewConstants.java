@@ -3,6 +3,8 @@ package com.roche.beneficios.constants;
 public interface ViewConstants {
 
 	public final static String LISTAR_EMPRESAS = "/empresas/listar_empresas";
+	
+	public final static String LISTAR_EMPRESAS_BUSQ = "/empresas/listar_empresas :: empresas";
 
 	public final static String FORM_REGISTRO_EMPRESAS = "/empresas/registrar_empresa";
 
@@ -11,6 +13,8 @@ public interface ViewConstants {
 	public final static String DETALLE_EMPRESA = "/empresas/detalle_empresa";
 
 	public final static String LISTAR_CONTACTOS = "/contactos/listar_contactos";
+	
+	public final static String LISTAR_CONTACTOS_BUSQ = "/contactos/listar_contactos :: contactos";
 
 	public final static String FORM_REGISTRO_CONTACTOS = "/contactos/registrar_contactos";
 

@@ -2,33 +2,35 @@ package com.roche.beneficios.model;
 
 import java.util.List;
 
-import com.roche.beneficios.entity.Contacto;
+import com.roche.beneficios.model.ContactoModel;
 
 public class BeneficioModel {
+	
+	private int nroBeneficio;
 	
 	private String descripcion;
 
 	private String detalleBeneficio;
 
-	private String imgPromo;
 
-	private String label;
+	private String descripcionCorta;
 
-	private String ubicacion;
+	private byte[] imagen;
+	
+	private String tipoImagen;
+	
+	private byte[] imgPromo;
+	
+	private String tipoImgPromo;
 
-	private Contacto contacto;
+	private ContactoModel contacto;
 
 	private List<ConsideracionModel> consideraciones;
 
-	public BeneficioModel( String descripcion, String detalleBeneficio, String imgPromo, String label,
-			String ubicacion, Contacto contacto) {
-		this.descripcion = descripcion;
-		this.detalleBeneficio = detalleBeneficio;
-		this.imgPromo = imgPromo;
-		this.label = label;
-		this.ubicacion = ubicacion;
-		this.contacto = contacto;
+	public BeneficioModel() {
+		
 	}
+
 
 	public String getDescripcion() {
 		return descripcion;
@@ -46,35 +48,19 @@ public class BeneficioModel {
 		this.detalleBeneficio = detalleBeneficio;
 	}
 
-	public String getImgPromo() {
+	public byte[] getImgPromo() {
 		return imgPromo;
 	}
 
-	public void setImgPromo(String imgPromo) {
+	public void setImgPromo(byte[] imgPromo) {
 		this.imgPromo = imgPromo;
 	}
 
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getUbicacion() {
-		return ubicacion;
-	}
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
-	}
-
-	public Contacto getContacto() {
+	public ContactoModel getContacto() {
 		return contacto;
 	}
 
-	public void setContacto(Contacto contacto) {
+	public void setContacto(ContactoModel contacto) {
 		this.contacto = contacto;
 	}
 
@@ -86,4 +72,55 @@ public class BeneficioModel {
 		this.consideraciones = consideraciones;
 	}
 
+
+	public String getDescripcionCorta() {
+		return descripcionCorta;
+	}
+
+
+	public void setDescripcionCorta(String descripcionCorta) {
+		this.descripcionCorta = descripcionCorta;
+	}
+
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+
+	public String getTipoImagen() {
+		return tipoImagen;
+	}
+
+
+	public void setTipoImagen(String tipoImagen) {
+		this.tipoImagen = tipoImagen;
+	}
+
+
+	public String getTipoImgPromo() {
+		return tipoImgPromo;
+	}
+
+
+	public void setTipoImgPromo(String tipoImgPromo) {
+		this.tipoImgPromo = tipoImgPromo;
+	}
+
+
+	public int getNroBeneficio() {
+		return nroBeneficio;
+	}
+
+
+	public void setNroBeneficio(int nroBeneficio) {
+		this.nroBeneficio = nroBeneficio;
+	}
+	
+	
 }

@@ -20,13 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.roche.beneficios.constants.ViewConstants;
 import com.roche.beneficios.exceptions.BusquedaNulaException;
 import com.roche.beneficios.model.EmpresaModel;
 import com.roche.beneficios.services.DistritoService;
 import com.roche.beneficios.services.EmpresaService;
+import com.roche.beneficios.utils.ImageConvertor;
 
 @Controller
 @RequestMapping("/empresas")
@@ -43,12 +42,17 @@ public class EmpresasController {
 	@Qualifier("distritoService")
 	private DistritoService distritoService;
 	
+	@Autowired
+	@Qualifier("imageConvertor")
+	private ImageConvertor imageConvertor;
+	
+	
 	// Mapeo de la página principal del módulo empresas
 	@GetMapping("")
 	public String index () {
 		
 		// Redireccion al controlador de busquedas con los campos vacios
-		return "redirect:/empresas/search?campo&busq";
+		return "redirect:/empresas/search";
 		
 	}
 	
@@ -56,29 +60,46 @@ public class EmpresasController {
 	@GetMapping("/search")
 	public String search(Model model,
 			@RequestParam(name="busq", required = false) String busq, 
-			@RequestParam(name="campo", required=false) String campo) {
+			@RequestParam(name="campo", required=false) String campo,
+			@RequestParam(name="msj", required = false) String msj) {
 		
+		LOG.info("Eliminacion realizada=" + msj);
 		// Crea una lista para llenar los datos buscados
 		List<EmpresaModel> listaModel = null;
 		
-		// Decide por que campo buscar
-		switch(campo) {
-			case "nc":
-				listaModel = empresaService.findByNomComercial(busq);
-				break;
-			case "rs":
-				listaModel = empresaService.findByRSocial(busq);
-				break;
-			case "RUC": default:
-				listaModel = empresaService.findByRuc(busq);	
+		if(busq == null || campo == null) {
+			listaModel = empresaService.listarEmpresas();
+			
+			LOG.info("Enviando lista=" + listaModel);
+			
+			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
+			model.addAttribute("empresas", listaModel);
+			model.addAttribute("msj", msj);
+			return ViewConstants.LISTAR_EMPRESAS;
+			
+			
+		} else {
+			// Decide por que campo buscar
+			switch(campo) {
+				case "nc":
+					listaModel = empresaService.findByNomComercial(busq);
+					break;
+				case "rs":
+					listaModel = empresaService.findByRSocial(busq);
+					break;
+				case "RUC": default:
+					listaModel = empresaService.findByRuc(busq);	
+			}
+			
+			LOG.info("Enviando lista=" + listaModel);
+			
+			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
+			model.addAttribute("empresas", listaModel);
+			model.addAttribute("msj", msj);
+			
+			return ViewConstants.LISTAR_EMPRESAS_BUSQ;
 		}
 		
-		LOG.info("Enviando lista=" + listaModel);
-		
-		// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
-		model.addAttribute("empresas", listaModel);
-		
-		return ViewConstants.LISTAR_EMPRESAS;
 		
 	}
 	
@@ -106,12 +127,8 @@ public class EmpresasController {
 		if(empresa == null) {
 			throw new BusquedaNulaException();
 		}
-		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
-	    byte[] encoded= Base64.encodeBase64(empresa.getImagen());
-	    
-	    String encodedString = new String(encoded);
 
-	    model.addAttribute("imagen_empresa",encodedString);
+	    model.addAttribute("imagen_empresa", imageConvertor.convertToBase64(empresa.getImagen()));
 	    model.addAttribute("tipo_imagen", empresa.getTipoImagen());
 		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
 		model.addAttribute("empresa", empresa);
@@ -150,7 +167,7 @@ public class EmpresasController {
 		
 		LOG.info("Empresa removida");
 		
-		return "redirect:/empresas/search?campo&busq";
+		return "redirect:/empresas/search?msj=1";
 		
 	}
 	
@@ -170,15 +187,11 @@ public class EmpresasController {
 		LOG.info("Cargando distritos");
 		
 		model.addAttribute("distritos", distritoService.listarDistrito());
-		
-		
-		// Conversion de Bytes para mostrar en la vista la imagen de la empresa
-	    byte[] encoded= Base64.encodeBase64(empresa.getImagen());
-	    
-	    String encodedString = new String(encoded);
 
-	    model.addAttribute("imagen_empresa",encodedString);
+	    model.addAttribute("imagen_empresa",imageConvertor.convertToBase64(empresa.getImagen()));
+	    
 	    model.addAttribute("tipo_imagen", empresa.getTipoImagen());
+	    
 		LOG.info("Empresa Selecccionada = " + empresa.getContactos().size());
 		
 		return ViewConstants.FORM_ACTUALIZAR_EMPRESAS;
