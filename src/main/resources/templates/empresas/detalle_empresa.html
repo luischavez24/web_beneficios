@@ -61,7 +61,7 @@
 			 		<div th:if="${not #lists.isEmpty(empresa.contactos)}">
 				 		<ul>
 				 			<li th:each="contacto : ${empresa.contactos}">
-				 				<a th:href="@{'/contactos/detalles?id_contacto=' + ${contacto.idContacto} + '&amp;cod_empresa=' + ${contacto.codEmpresa}}">
+				 				<a th:href="@{'/contactos/detalles/' + ${contacto.codEmpresa} + '/' + ${contacto.idContacto}}">
 					 				<span th:text="${contacto.nomContacto}"></span>&nbsp;
 					 				<span th:text="${contacto.apContacto}"></span>&nbsp;
 					 				<span th:text="${contacto.amContacto}"></span>

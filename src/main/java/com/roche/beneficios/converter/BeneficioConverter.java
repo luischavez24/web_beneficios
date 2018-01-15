@@ -39,6 +39,7 @@ public class BeneficioConverter {
 			consideraciones.add(consideracionConverter.modelToConsideracion(consideracion));
 		});
 		salida.setConsideraciones(consideraciones);
+		salida.setEstado(entrada.getEstado());
 		return salida;
 	}
 	
@@ -58,6 +59,7 @@ public class BeneficioConverter {
 			consideraciones.add(consideracionConverter.consideracionToModel(consideracion));
 		});
 		salida.setConsideraciones(consideraciones);
+		salida.setEstado(entrada.getEstado());
 		return salida;
 	}
 	

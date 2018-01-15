@@ -18,30 +18,33 @@ public class Beneficio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="nro_beneficio")
 	private int nroBeneficio;
-
-	@Lob
+	
+	@Column(name="descripcion_corta")
+	private String descripcionCorta;
+	
+	@Column(name="descripcion")
 	private String descripcion;
-
-	@Lob
+	
 	@Column(name="detalle_beneficio")
 	private String detalleBeneficio;
 
 	@Column(name="img_promo")
+	@Lob
 	private byte[] imgPromo;
 	
 	@Column(name="tipo_img_promo")
 	private String tipoImgPromo;
 	
-	@Column(name="descripcion_corta")
-	private String descripcionCorta;
-
 	@Column(name="imagen")
 	@Lob
 	private byte[] imagen;
 	
 	@Column(name="tipo_imagen")
 	private String tipoImagen;
-
+	
+	@Column(name="estado")
+	private int estado;
+	
 	//bi-directional many-to-one association to Contacto
 	@ManyToOne
 	@JoinColumns({
@@ -54,8 +57,7 @@ public class Beneficio implements Serializable {
 	@OneToMany(mappedBy="beneficio")
 	private List<Consideracion> consideraciones;
 
-	public Beneficio() {
-	}
+	public Beneficio() { }
 
 	public int getNroBeneficio() {
 		return this.nroBeneficio;
@@ -151,4 +153,11 @@ public class Beneficio implements Serializable {
 		this.tipoImgPromo = tipoImgPromo;
 	}
 
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
 }

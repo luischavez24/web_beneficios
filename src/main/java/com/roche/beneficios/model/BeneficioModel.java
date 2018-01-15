@@ -26,7 +26,9 @@ public class BeneficioModel {
 	private ContactoModel contacto;
 
 	private List<ConsideracionModel> consideraciones;
-
+	
+	private int estado;
+	
 	public BeneficioModel() {
 		
 	}
@@ -121,6 +123,13 @@ public class BeneficioModel {
 	public void setNroBeneficio(int nroBeneficio) {
 		this.nroBeneficio = nroBeneficio;
 	}
-	
-	
+
+	public int getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
 }

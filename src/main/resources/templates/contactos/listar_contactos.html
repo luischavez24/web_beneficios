@@ -12,13 +12,18 @@
 			<header>
 				<h1>Buscar contactos</h1>
 			</header>
-			<div th:if="${msj == 1}" class="alert alert-success alert-dismissible" role="alert">
+			<div th:if="${msj == '1'}" class="alert alert-info alert-dismissible" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			  </button>
 			  Se ha eliminado el contacto con exito
 			</div>
-			<br></br>
+			<div th:if="${msj == '2'}" class="alert alert-info alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  Se ha actualizado el contacto con exito
+			</div>
 			<!-- Formulario de búsquedas -->
 			<form action="#" th:action="@{/contactos/search}" method="get" id="busq_contactos">
 				<div class="input-group input-group-responsive">

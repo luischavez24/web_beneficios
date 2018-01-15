@@ -61,9 +61,12 @@ public class EmpresasController {
 	public String search(Model model,
 			@RequestParam(name="busq", required = false) String busq, 
 			@RequestParam(name="campo", required=false) String campo,
-			@RequestParam(name="msj", required = false) String msj) {
+			@RequestParam(name="msj", required = false) String mensaje) {
 		
-		LOG.info("Eliminacion realizada=" + msj);
+		model.addAttribute("msj", mensaje);
+		
+		LOG.info("Eliminacion realizada=" + mensaje);
+		
 		// Crea una lista para llenar los datos buscados
 		List<EmpresaModel> listaModel = null;
 		
@@ -73,8 +76,9 @@ public class EmpresasController {
 			LOG.info("Enviando lista=" + listaModel);
 			
 			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
+			
 			model.addAttribute("empresas", listaModel);
-			model.addAttribute("msj", msj);
+			
 			return ViewConstants.LISTAR_EMPRESAS;
 			
 			
@@ -95,11 +99,9 @@ public class EmpresasController {
 			
 			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
 			model.addAttribute("empresas", listaModel);
-			model.addAttribute("msj", msj);
-			
+
 			return ViewConstants.LISTAR_EMPRESAS_BUSQ;
 		}
-		
 		
 	}
 	
@@ -216,7 +218,7 @@ public class EmpresasController {
 		
 		empresaService.updateEmpresa(empresa);
 		
-		return "redirect:/empresas/search?campo&busq";
+		return "redirect:/empresas/search?msj=2";
 		
 	}
 	

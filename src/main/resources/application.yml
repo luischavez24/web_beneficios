@@ -6,8 +6,6 @@ spring:
   mvc:
     favicon:
       enabled: true
-    
-
   jpa:
     show-sql: true
     hibernate:

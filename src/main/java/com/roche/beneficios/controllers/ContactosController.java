@@ -164,7 +164,7 @@ public class ContactosController {
 		
 		contactosService.updateContacto(contacto);
 		
-		return "redirect:/contactos";
+		return "redirect:/contactos/search?msj=2";
 		
 	}
 	
