@@ -6,7 +6,7 @@
 	<groupId>com.roche</groupId>
 	<artifactId>beneficios</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>beneficios</name>
 	<description>Web de Beneficios para los trabajadores de Roche Perú</description>
