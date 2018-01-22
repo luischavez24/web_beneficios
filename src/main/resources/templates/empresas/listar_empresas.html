@@ -63,17 +63,17 @@
 							<td><span th:text="${empresa.telfEmpresa}"></span></td>
 							<td class="btn-container">
 								<a th:href="@{'/empresas/detalles/' + ${empresa.codEmpresa}}" class="btn btn-info btn-circle">
-									<i class="glyphicon glyphicon-list"></i>
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
 								</a>
 							</td>
 							<td class="btn-container">
 								<a th:href="@{'/empresas/actualizar/' + ${empresa.rucEmpresa}}" class="btn btn-warning btn-circle">
-									<i class="glyphicon glyphicon-pencil"></i>
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								</a>
 							</td>
 							<td class="btn-container">
 								<button class="btn btn-danger btn-circle btn_borrar" th:value="${empresa.rucEmpresa}" data-toggle="modal" data-target="#myModal">
-									<i class="glyphicon glyphicon-trash"></i>
+									<i class="fa fa-trash" aria-hidden="true"></i>
 								</button>
 
 							</td>
