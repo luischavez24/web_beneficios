@@ -25,4 +25,6 @@ public interface ViewConstants {
 	public final static String INTEGRITY_EXCEPTION = "/error/integrityException";
 	
 	public final static String BUSQUEDA_NULA_EXCEPTION = "/error/busquedaNulaException";
+	
+	public final static String LOGIN = "/start/index";
 }

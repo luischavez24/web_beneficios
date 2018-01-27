@@ -50,7 +50,6 @@ public class EmpresasController {
 	// Mapeo de la página principal del módulo empresas
 	@GetMapping("")
 	public String index () {
-		
 		// Redireccion al controlador de busquedas con los campos vacios
 		return "redirect:/empresas/search";
 		

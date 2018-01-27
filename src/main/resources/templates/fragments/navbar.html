@@ -102,7 +102,11 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Cerrar Sesión</a></li>
+					<li>
+					<form class="navbar-form" th:action="@{/logout}" method="POST">
+						<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Cerrar Sesión</button>
+					</form>
+					</li>	
 				</ul>
 			</div>
 		</div>
