@@ -69,7 +69,10 @@
 						<span class="glyphicon glyphicon-floppy-open"></span>
 					</span>
 					<span class="btn btn-danger btn-block btn-file">
-						Buscar <input type="file" id="imagen_empresa" name="imagen_empresa"/>
+						Buscar 
+						<input type="hidden" name="img_ant" th:value="*{imagen}" th:field="*{imagen}"/>
+						<input type="hidden" name="t_img_ant" th:value="*{tipoImagen}" th:field="*{tipoImagen}"/>
+						<input type="file" id="imagen_empresa" name="imagen_empresa"/>
 					</span>
 				</div>     
 			</div>

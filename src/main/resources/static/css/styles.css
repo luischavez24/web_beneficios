@@ -6,7 +6,14 @@
 body{
 	background: url("/images/textured_paper.png") repeat;
 }
-	
+
+.body-login {
+	background-image: url('/images/bg_login.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+}
 .input-group {
 	margin-bottom: 40px;
 }

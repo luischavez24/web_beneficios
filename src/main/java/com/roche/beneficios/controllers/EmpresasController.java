@@ -201,10 +201,11 @@ public class EmpresasController {
 	
 	@PostMapping("/modify")
 	public String modifyEmpresa(@ModelAttribute(name="empresa_mod") EmpresaModel empresa,
-			@RequestParam(name = "imagen_empresa") MultipartFile imagenEmpresa) {
+			@RequestParam(name="imagen_empresa") MultipartFile imagenEmpresa) {
 		
 		try {
-			if(imagenEmpresa.getBytes() != null) {
+			if(imagenEmpresa.getBytes() != null 
+					&& !imagenEmpresa.getContentType().equals("application/octet-stream")) {
 				empresa.setImagen(imagenEmpresa.getBytes());
 				empresa.setTipoImagen(imagenEmpresa.getContentType());
 				LOG.info("Nombre de imagen=" + imagenEmpresa.getOriginalFilename());

@@ -4,38 +4,54 @@
 	<meta charset="UTF-8"/>
 
 </head>
-<body style="background: url('/images/bg_login.jpg') fixed;">
+<body class="body-login">
 	<div class="container-fluid">
 		<section class="row">
 			<section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 centrado-porcentual" id="login">
 				<form th:action="@{/logincheck}" method="POST" class="f-login center-block">
+
+					<figure class="center-block logo-roche">
+						<img th:src="@{/images/roche_logo.png}" alt="logo_roche" class="img-responsive"/>
+					</figure>
+					
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					
+					
+					<div id="caja_alerta_1"></div>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+						<input type="text" name="username" id="user" class="form-control" placeholder="Usuario" required="true"/>
+					</div>
+					
+					<div id="caja_alerta_2"></div>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+						<input type="password" name="password" id="pass" class="form-control" placeholder="Constraseña" required="true"/>
+					</div>
+					
 					<div th:if="${error != null}" class="alert alert-danger alert-dismissible" role="alert">
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
-					  <strong>Usuario y/o contraseña incorrecta</strong>
+					  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+					  &nbsp;Usuario y/o contraseña incorrecta
 					</div>
+					
 					<div th:if="${logout != null}" class="alert alert-info alert-dismissible" role="alert">
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
-					  <strong>Sesiòn finalizada</strong>
+					  <i class="fa fa-info-circle" aria-hidden="true"></i>
+					  &nbsp;Sesión finalizada
 					</div>
-					<figure class="center-block logo-roche">
-						<img th:src="@{/images/roche_logo.png}" alt="logo_roche" class="img-responsive"/>
-					</figure>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<div id="caja_alerta_1"></div>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="username" id="user" class="form-control" placeholder="Usuario" required="true"/>
-					</div>
-					<div id="caja_alerta_2"></div>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" name="password" id="pass" class="form-control" placeholder="Constraseña" required="true"/>
-					</div>
-					<input type="submit" id = "enviar" class="btn btn-primary btn-block" value="Iniciar Sesión"/>
+					<button type="submit" id="enviar" class="btn btn-primary btn-block">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>
+						&nbsp;Iniciar Sesión
+					</button>
 				</form>
 			</section>
 		</section>
