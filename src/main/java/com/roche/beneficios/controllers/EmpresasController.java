@@ -46,7 +46,6 @@ public class EmpresasController {
 	@Qualifier("imageConvertor")
 	private ImageConvertor imageConvertor;
 	
-	
 	// Mapeo de la página principal del módulo empresas
 	@GetMapping("")
 	public String index () {
