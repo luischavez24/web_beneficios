@@ -2,6 +2,7 @@ package com.roche.beneficios.model;
 
 import java.util.List;
 
+import com.roche.beneficios.entity.Categoria;
 import com.roche.beneficios.model.ContactoModel;
 
 public class BeneficioModel {
@@ -12,14 +13,17 @@ public class BeneficioModel {
 
 	private String detalleBeneficio;
 
-
 	private String descripcionCorta;
 
 	private byte[] imagen;
 	
+	private String imagenB64;
+	
 	private String tipoImagen;
 	
 	private byte[] imgPromo;
+	
+	private String imgPromoB64;
 	
 	private String tipoImgPromo;
 
@@ -28,6 +32,8 @@ public class BeneficioModel {
 	private List<ConsideracionModel> consideraciones;
 	
 	private int estado;
+	
+	private Categoria categoria;
 	
 	public BeneficioModel() {
 		
@@ -132,4 +138,37 @@ public class BeneficioModel {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getImagenB64() {
+		return imagenB64;
+	}
+
+	public void setImagenB64(String imagenB64) {
+		this.imagenB64 = imagenB64;
+	}
+
+	public String getImgPromoB64() {
+		return imgPromoB64;
+	}
+
+	public void setImgPromoB64(String imgPromoB64) {
+		this.imgPromoB64 = imgPromoB64;
+	}
+
+	@Override
+	public String toString() {
+		return "BeneficioModel [nroBeneficio=" + nroBeneficio + ", descripcion=" + descripcion + ", detalleBeneficio="
+				+ detalleBeneficio + ", descripcionCorta=" + descripcionCorta + ", estado=" + estado + "]";
+	}
+	
+	
 }

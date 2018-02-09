@@ -58,6 +58,7 @@ public class ContactoConverter {
 		if (contactoModel.getEmpresa() != null) {
 			contactoModel.getEmpresa().setContactos(null);
 		}
+		
 		contactoModel.setBeneficios(contacto.getBeneficios());
 		return contactoModel;
 	}

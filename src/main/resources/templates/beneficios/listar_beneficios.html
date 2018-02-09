@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Buscar Beneficios')">
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<!-- Barra de navegación -->
+	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
+	<div class="container">
+		<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+			<!-- Titulo de la pagina -->
+			<header>
+				<h1>Buscar beneficios</h1>
+			</header>
+			<!-- Contenedor de beneficios -->
+			<br></br>
+			<div class="container">
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" th:each="beneficio : ${lista_beneficios}">
+					<figure>
+						<img class="img img-responsive" th:src="@{'data:' + ${beneficio.tipoImgPromo} + ';base64,' + ${beneficio.imgPromoB64}}" alt="benefico_promo" height="50" />
+						<figcaption class="">
+							<h4><strong><span th:text="${beneficio.descripcion}"></span></strong></h4>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

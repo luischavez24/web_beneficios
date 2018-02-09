@@ -44,6 +44,7 @@ public class Beneficio implements Serializable {
 	
 	@Column(name="estado")
 	private int estado;
+
 	
 	//bi-directional many-to-one association to Contacto
 	@ManyToOne
@@ -52,6 +53,10 @@ public class Beneficio implements Serializable {
 		@JoinColumn(name="id_contacto", referencedColumnName="id_contacto")
 		})
 	private Contacto contacto;
+	
+	@ManyToOne
+	@JoinColumn(name="id_categoria", referencedColumnName="id_categoria")
+	private Categoria categoria;
 
 	//bi-directional many-to-one association to Consideraciones
 	@OneToMany(mappedBy="beneficio")
@@ -160,4 +165,13 @@ public class Beneficio implements Serializable {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 }

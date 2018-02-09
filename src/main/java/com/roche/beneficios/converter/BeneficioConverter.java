@@ -11,6 +11,7 @@ import com.roche.beneficios.entity.Beneficio;
 import com.roche.beneficios.entity.Consideracion;
 import com.roche.beneficios.model.BeneficioModel;
 import com.roche.beneficios.model.ConsideracionModel;
+import com.roche.beneficios.utils.ImageConvertor;
 
 @Component("beneficioConverter")
 public class BeneficioConverter {
@@ -23,11 +24,15 @@ public class BeneficioConverter {
 	@Qualifier("consideracionConverter")
 	private ConsideracionConverter consideracionConverter;
 	
+	@Autowired
+	@Qualifier("imageConvertor")
+	private ImageConvertor imageConvertor;
+	
 	public Beneficio modelToBeneficio(BeneficioModel entrada) {
 		Beneficio salida = new Beneficio();
 		List<Consideracion> consideraciones = new ArrayList<>();
 		salida.setNroBeneficio(entrada.getNroBeneficio());
-		salida.setDescripcion(salida.getDescripcion());
+		salida.setDescripcion(entrada.getDescripcion());
 		salida.setDetalleBeneficio(entrada.getDetalleBeneficio());
 		salida.setImgPromo(entrada.getImgPromo());
 		salida.setTipoImgPromo(entrada.getTipoImgPromo());
@@ -47,12 +52,12 @@ public class BeneficioConverter {
 		BeneficioModel salida = new BeneficioModel();
 		List<ConsideracionModel> consideraciones = new ArrayList<>();
 		salida.setNroBeneficio(entrada.getNroBeneficio());
-		salida.setDescripcion(salida.getDescripcion());
+		salida.setDescripcion(entrada.getDescripcion());
 		salida.setDetalleBeneficio(entrada.getDetalleBeneficio());
-		salida.setImgPromo(entrada.getImgPromo());
+		salida.setImgPromoB64(imageConvertor.convertToBase64(entrada.getImgPromo()));
 		salida.setTipoImgPromo(entrada.getTipoImgPromo());
 		salida.setDescripcionCorta(entrada.getDescripcionCorta());
-		salida.setImagen(entrada.getImagen());
+		salida.setImagenB64(imageConvertor.convertToBase64(entrada.getImagen()));
 		salida.setTipoImagen(entrada.getTipoImagen());
 		salida.setContacto(contactoConverter.contactoToModel(entrada.getContacto()));
 		entrada.getConsideraciones().forEach((consideracion) -> {

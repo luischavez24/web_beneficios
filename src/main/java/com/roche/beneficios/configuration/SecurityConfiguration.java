@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/font-awesome/*","/font-awesome/css/*", "/font-awesome/fonts/*", 
 				"/jquery/*", 
 				"/scripts/*", 
-				"/summernote/*","/summernote/font/*","/summernote/lang/*","/summernote/plugin/*").permitAll()
+				"/summernote/*","/summernote/font/*","/summernote/lang/*","/summernote/plugin/*", "/beneficios" ,"/beneficios/*").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

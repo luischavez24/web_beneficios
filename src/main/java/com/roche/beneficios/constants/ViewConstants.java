@@ -28,5 +28,7 @@ public interface ViewConstants {
 	
 	public final static String FORM_REGISTRO_USUARIOS = "/usuarios/registrar_usuario :: modal";
 	
+	public final static String LISTAR_BENEFICIOS = "/beneficios/listar_beneficios";
+	
 	public final static String LOGIN = "/start/index";
 }
