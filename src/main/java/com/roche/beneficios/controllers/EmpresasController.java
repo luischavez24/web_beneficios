@@ -61,6 +61,7 @@ public class EmpresasController {
 			@RequestParam(name="campo", required=false) String campo,
 			@RequestParam(name="msj", required = false) String mensaje) {
 		
+		model.addAttribute("selectNavItem", "empresas");
 		model.addAttribute("msj", mensaje);
 		
 		LOG.info("Eliminacion realizada=" + mensaje);
@@ -94,7 +95,7 @@ public class EmpresasController {
 			}
 			
 			LOG.info("Enviando lista=" + listaModel);
-			
+		
 			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
 			model.addAttribute("empresas", listaModel);
 
@@ -108,6 +109,8 @@ public class EmpresasController {
 			@RequestParam(name="msj", required=false) String mensaje) {
 		
 		EmpresaModel empresa_reg = new EmpresaModel();
+		
+		model.addAttribute("selectNavItem", "empresas");
 		
 		model.addAttribute("msj", mensaje);
 		

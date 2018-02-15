@@ -62,4 +62,25 @@ public class ContactoConverter {
 		contactoModel.setBeneficios(contacto.getBeneficios());
 		return contactoModel;
 	}
+	
+	public ContactoModel contactoToModelLight(Contacto contacto) {
+
+		if (contacto == null) {
+			return null;
+		}
+
+		ContactoModel contactoModel = new ContactoModel();
+		contactoModel.setIdContacto(contacto.getId().getIdContacto());
+		contactoModel.setCodEmpresa(contacto.getId().getCodEmpresa());
+		contactoModel.setNomContacto(contacto.getNomContacto());
+		contactoModel.setApContacto(contacto.getApContacto());
+		contactoModel.setAmContacto(contacto.getAmContacto());
+		
+		contactoModel.setEmpresa(empresaConverter.empresaToModelLight(contacto.getEmpresa()));
+		if (contactoModel.getEmpresa() != null) {
+			contactoModel.getEmpresa().setContactos(null);
+		}
+		
+		return contactoModel;
+	}
 }

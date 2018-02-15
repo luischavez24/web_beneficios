@@ -2,34 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:include="/fragments/navbar :: headFragment (pageTitle='Login')">
 	<meta charset="UTF-8"/>
-
 </head>
-<body class="body-login">
-	<div class="container-fluid">
-		<section class="row">
-			<section class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 centrado-porcentual" id="login">
-				<form th:action="@{/logincheck}" method="POST" class="f-login center-block">
-
+<body class="body-login h-100">
+	<div class="container h-100">
+		<div class="row h-100 align-items-center justify-content-center">
+			<div class="f-login clear-margin col-xs-10 col-sm-8 col-md-4 col-lg-4" id="login">
+				<form th:action="@{/logincheck}" method="post">
 					<figure class="center-block logo-roche">
-						<img th:src="@{/images/roche_logo.png}" alt="logo_roche" class="img-responsive"/>
+						<img th:src="@{/images/roche_logo.png}" alt="logo_roche" class="img-fluid"/>
 					</figure>
-					
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-					
-					
-					<div id="caja_alerta_1"></div>
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>
+					<div class="input-group mb-4">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</span>
+						</div>
 						<input type="text" name="username" id="user" class="form-control" placeholder="Usuario" required="true"/>
 					</div>
-					
-					<div id="caja_alerta_2"></div>
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
+					<div class="input-group mb-5">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
 						<input type="password" name="password" id="pass" class="form-control" placeholder="Constraseña" required="true"/>
 					</div>
 					
@@ -48,13 +44,14 @@
 					  <i class="fa fa-info-circle" aria-hidden="true"></i>
 					  &nbsp;Sesión finalizada
 					</div>
+					
 					<button type="submit" id="enviar" class="btn btn-primary btn-block">
 						<i class="fa fa-sign-in" aria-hidden="true"></i>
 						&nbsp;Iniciar Sesión
 					</button>
 				</form>
-			</section>
-		</section>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -78,7 +78,8 @@ public class ContactosController {
 			busqRealizada = false;
 			
 		}
-
+		
+		model.addAttribute("selectNavItem", "contactos");
 		model.addAttribute("contactos", listaModel);
 		model.addAttribute("empresas", empresaService.listarEmpresas());
 		model.addAttribute("msj", msj);
@@ -91,9 +92,11 @@ public class ContactosController {
 	public String showFormRegistroContacto(Model model, @RequestParam(name = "msj", required = false) String mensaje) {
 
 		ContactoModel contactoModel = new ContactoModel();
-
+		
+		model.addAttribute("selectNavItem", "contactos");
+		
 		model.addAttribute("msj", mensaje);
-
+		
 		model.addAttribute("contacto_reg", contactoModel);
 
 		model.addAttribute("empresas", empresaService.listarEmpresas());

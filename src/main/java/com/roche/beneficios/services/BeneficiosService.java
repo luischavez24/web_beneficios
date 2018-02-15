@@ -10,9 +10,12 @@ public interface BeneficiosService {
 	
 	public abstract List<BeneficioModel> listarBeneficios();
 	
+	public abstract List<BeneficioModel> listarBeneficios(String descCategoria);
+	
 	public abstract BeneficioModel insertarBeneficio(BeneficioModel beneficio);
 	
 	public abstract BeneficioModel actualizarBeneficio(BeneficioModel beneficio);
 	
 	public abstract int eliminarBeneficio(int nroBeneficio);
+	
 }

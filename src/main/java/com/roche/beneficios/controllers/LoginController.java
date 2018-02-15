@@ -27,11 +27,18 @@ public class LoginController {
 		return ViewConstants.LOGIN;
 	}
 	
-	@GetMapping({"/loginsuccess", "/"})
+	@GetMapping("/loginsuccess")
 	public String loginCheck() {
 		LOG.info("METHOD: loginCheck()");
 		LOG.info("Empresas");
 		
-		return "redirect:/empresas/search";
+		return "redirect:/beneficios/search";
+	}
+	
+	@GetMapping("/")
+	public String landingPage() {
+		LOG.info("Landing Page");
+		
+		return "redirect:/beneficios/search";
 	}
 }

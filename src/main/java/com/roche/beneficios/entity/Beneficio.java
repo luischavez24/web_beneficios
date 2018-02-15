@@ -2,6 +2,9 @@ package com.roche.beneficios.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.Length;
+
 import java.util.List;
 
 
@@ -20,9 +23,11 @@ public class Beneficio implements Serializable {
 	private int nroBeneficio;
 	
 	@Column(name="descripcion_corta")
+	@Length(max=25)
 	private String descripcionCorta;
 	
 	@Column(name="descripcion")
+	@Length(max=120)
 	private String descripcion;
 	
 	@Column(name="detalle_beneficio")
@@ -33,6 +38,7 @@ public class Beneficio implements Serializable {
 	private byte[] imgPromo;
 	
 	@Column(name="tipo_img_promo")
+	@Length(max=25)
 	private String tipoImgPromo;
 	
 	@Column(name="imagen")
@@ -40,6 +46,7 @@ public class Beneficio implements Serializable {
 	private byte[] imagen;
 	
 	@Column(name="tipo_imagen")
+	@Length(max=25)
 	private String tipoImagen;
 	
 	@Column(name="estado")

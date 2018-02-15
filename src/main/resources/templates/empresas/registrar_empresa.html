@@ -6,6 +6,15 @@
 <body>
 	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
 	<div class="container">
+		<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap4/css/select.min.css}"/>
+		<script type="text/javascript" src="#" th:src="@{/bootstrap4/js/select.min.js}"></script>
+		<script type="text/javascript">
+			$('body').ready(function($){
+				$('select').extendSelect({
+					dropdownResize: true
+				});	
+			});
+		</script>
 		<header>
 			<h1>Registro de empresas</h1>
 		</header>

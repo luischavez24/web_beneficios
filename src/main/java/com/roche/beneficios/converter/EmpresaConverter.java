@@ -85,4 +85,17 @@ public class EmpresaConverter {
 		
 		return empresaModel;
 	}
+	
+	public EmpresaModel empresaToModelLight(Empresa empresa) {
+
+		if (empresa == null) {
+			return null;
+		}
+		EmpresaModel empresaModel = new EmpresaModel();
+		empresaModel.setCodEmpresa(empresa.getCodEmpresa());
+		empresaModel.setRsEmpresa(empresa.getRsEmpresa());
+		empresaModel.setNombreComercial(empresa.getNombreComercial());
+		empresaModel.setRucEmpresa(empresa.getRucEmpresa());
+		return empresaModel;
+	}
 }

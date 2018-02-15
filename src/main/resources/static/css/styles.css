@@ -3,19 +3,26 @@
 	src: url('/bootstrap/fonts/OpenSans-Semibold.ttf');
 }
 
-body{
+html, body{
 	background: url("/images/textured_paper.png") repeat;
+	margin:0; 
+	padding:0; 
+	height:100%;
 }
 
 .body-login {
-	background-image: url('/images/bg_login.jpg');
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-attachment: fixed;
-	background-size: cover;
+  background: url("/images/bg_login.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100% ;
 }
-.input-group {
-	margin-bottom: 40px;
+
+.clear-margin {
+  margin: 0;
+  padding:0;
 }
 .container-form {
   background-color: #fff;
@@ -27,18 +34,15 @@ body{
 
 .f-login{
 	background-color: #fff; 
-	padding: 20px;
-	width: 330px;
-	border-radius: 8px;
-	border:1.5px solid #e6e6e6;
+	padding: 25px;
+	margin: 0;
 }
 
 @media (max-width: 320px) and (min-width: 280px) {
 	.f-login{
 		background-color: #fff; 
 		padding: 30px;
-		width: 280px;
-		border-radius: 8px;
+		width: 100%;
 		border:1.5px solid #e6e6e6;
 	}
 }
@@ -152,4 +156,38 @@ body{
 }
 .message {
   text-align: center;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper:after {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.wrapper img {
+  width: auto;
+  height: 100%;
+  max-width: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.wrapper .card {
+  width: auto;
+  height: 100%;
+  max-width: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.box-shadow { 
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); 
 }

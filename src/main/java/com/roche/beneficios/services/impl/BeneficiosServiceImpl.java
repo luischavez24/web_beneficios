@@ -34,7 +34,7 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 		List<BeneficioModel> listaBeneficios = new ArrayList<>();
 		
 		beneficiosRepository.findAll().forEach((bEntity) -> {
-			listaBeneficios.add(beneficioConverter.modelToBeneficio(bEntity));
+			listaBeneficios.add(beneficioConverter.modelToBeneficioLight(bEntity));
 		});
 		
 		return listaBeneficios;
@@ -67,6 +67,16 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 	public BeneficioModel findByNroBeneficio(int nroBeneficio) {
 		Beneficio bEntity = beneficiosRepository.findByNroBeneficio(nroBeneficio);
 		return beneficioConverter.modelToBeneficio(bEntity);
+	}
+
+	@Override
+	public List<BeneficioModel> listarBeneficios(String descCategoria) {
+		List<BeneficioModel> listaBeneficios = new ArrayList<>();
+		
+		beneficiosRepository.findByCategoriaDescCategoriaIgnoreCaseContaining(descCategoria).forEach((bEntity) -> {
+			listaBeneficios.add(beneficioConverter.modelToBeneficioLight(bEntity));
+		});
+		return listaBeneficios;
 	}
 
 }

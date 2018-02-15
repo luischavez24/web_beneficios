@@ -28,10 +28,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/css/*", 
 				"/images/*", 
 				"/bootstrap/*","/bootstrap/css/*", "/bootstrap/fonts/*","/bootstrap/js/*",
+				"/bootstrap4/*","/bootstrap4/css/*","/bootstrap4/js/*",
 				"/font-awesome/*","/font-awesome/css/*", "/font-awesome/fonts/*", 
 				"/jquery/*", 
 				"/scripts/*", 
-				"/summernote/*","/summernote/font/*","/summernote/lang/*","/summernote/plugin/*", "/beneficios" ,"/beneficios/*").permitAll()
+				"/summernote/*","/summernote/font/*","/summernote/lang/*","/summernote/plugin/*", 
+				"/","/beneficios" ,"/beneficios/*", "/beneficios/search/*").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

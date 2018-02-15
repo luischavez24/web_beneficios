@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.roche.beneficios.constants.ViewConstants;
 import com.roche.beneficios.model.BeneficioModel;
 import com.roche.beneficios.services.BeneficiosService;
+import com.roche.beneficios.services.CategoriasService;
 
 @Controller
 @RequestMapping("/beneficios")
@@ -19,17 +20,29 @@ public class BeneficiosController {
 	@Qualifier("beneficiosService")
 	private BeneficiosService beneficiosService;
 	
+	@Autowired
+	@Qualifier("categoriasService")
+	private CategoriasService categoriasService;
+	
 	@GetMapping("")
 	public String index() {
 		return "redirect:/beneficios/search";
 	}
-	@GetMapping("/search")
-	public String search(Model model) {
+	@GetMapping({"/search", "/search/{categoria}"})
+	public String search(Model model, @PathVariable(name="categoria", required = false) String categoria) {
+		List<BeneficioModel> listaBeneficios;
 		
-		List<BeneficioModel> listaBeneficios = beneficiosService.listarBeneficios();
+		if (categoria == null) {
+			categoria = "todos";
+			listaBeneficios = beneficiosService.listarBeneficios();
+		} else {
+			listaBeneficios = beneficiosService.listarBeneficios(categoria);
+		}
 		
-		System.out.println(listaBeneficios);
+		model.addAttribute("selectNavItem", "beneficios");
+		model.addAttribute("ctgActual", categoria);
 		model.addAttribute("lista_beneficios", listaBeneficios);
+		model.addAttribute("categorias", categoriasService.listarCategorias());
 		
 		return ViewConstants.LISTAR_BENEFICIOS;
 	}

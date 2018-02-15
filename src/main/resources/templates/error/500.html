@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8"/>
-	<title>Error interno del servidor</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/bootstrap-flatly.css}"/>
-	<link rel="stylesheet" type="text/css" href="#" th:href="@{/css/styles.css}"/>
-	<script type="text/javascript" src="#" th:src="@{/jquery/jquery.js}"></script>
-	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<head th:include="/fragments/navbar :: headFragment (pageTitle='Error interno del servidor')">
+	<meta charset="UTF-8"/>
 </head>
-<body>
-	<div class="container centrado-porcentual">
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			<figure>
-				<img th:src="@{/images/favicon.png}" alt="logo-beneficios" class="img-responsive"/>
-			</figure>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-			<header>
-				<h1>Error interno del servidor</h1>
-			</header>
-			
-			<br></br>
-			<h3>HTTP Error 500</h3>
-			<br></br>
-			Ha ocurrido una falla en el servidor, por favor contacte con el administrador de la página web
-			para solucionar el problema.
-			<br></br>
-			<a href="#" th:href="@{/adm/}" class="btn btn-primary btn-block" style="margin-top: 30px;">Volver al inicio</a>
+<body class="h-100">
+	<div class="container h-100">
+		<div class="row align-items-center h-100">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<figure>
+					<img th:src="@{/images/favicon.png}" alt="logo-beneficios" class="img-fluid"/>
+				</figure>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+				<header>
+					<h1>Error interno del servidor</h1>
+				</header>
+				
+				<br></br>
+				<h3>HTTP Error 500</h3>
+				<br></br>
+				Ha ocurrido una falla en el servidor, por favor contacte con el administrador de la página web
+				para solucionar el problema.
+				<br></br>
+				<a href="#" th:href="@{/}" class="btn btn-primary btn-block" style="margin-top: 30px;">Volver al inicio</a>
+			</div>
 		</div>
 	</div>
 </body>

@@ -59,11 +59,22 @@ public class BeneficioConverter {
 		salida.setDescripcionCorta(entrada.getDescripcionCorta());
 		salida.setImagenB64(imageConvertor.convertToBase64(entrada.getImagen()));
 		salida.setTipoImagen(entrada.getTipoImagen());
-		salida.setContacto(contactoConverter.contactoToModel(entrada.getContacto()));
+		salida.setContacto(contactoConverter.contactoToModelLight(entrada.getContacto()));
 		entrada.getConsideraciones().forEach((consideracion) -> {
 			consideraciones.add(consideracionConverter.consideracionToModel(consideracion));
 		});
 		salida.setConsideraciones(consideraciones);
+		salida.setEstado(entrada.getEstado());
+		return salida;
+	}
+	
+	public BeneficioModel modelToBeneficioLight(Beneficio entrada) {
+		BeneficioModel salida = new BeneficioModel();
+		salida.setNroBeneficio(entrada.getNroBeneficio());
+		salida.setImgPromoB64(imageConvertor.convertToBase64(entrada.getImgPromo()));
+		salida.setTipoImgPromo(entrada.getTipoImgPromo());
+		salida.setDescripcionCorta(entrada.getDescripcionCorta());
+		salida.setContacto(contactoConverter.contactoToModelLight(entrada.getContacto()));
 		salida.setEstado(entrada.getEstado());
 		return salida;
 	}

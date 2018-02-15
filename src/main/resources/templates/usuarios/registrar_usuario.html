@@ -7,23 +7,27 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title">Registro de Usuarios</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>
 	     <form th:action="@{/usuarios/registro}" th:object="${usuario_reg}" method="post" >
 		     <div class="modal-body">
 				<!-- Username -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<i class="fa fa-id-card-o" aria-hidden="true"></i>
-					</span>	
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="icon-search">
+							<i class="fa fa-id-card-o" aria-hidden="true"></i>
+						</span>	
+					</div>
 					<input class="form-control" type="text" id="username" placeholder="Usuario" th:field="*{username}"/>         
 				</div>
 				<!-- Rol -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<i class="fa fa-briefcase" aria-hidden="true"></i>
-					</span>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="icon-search">
+							<i class="fa fa-briefcase" aria-hidden="true"></i>
+						</span>
+					</div>
 					<select class="form-control" id="rol" th:field="*{role}" >
 						<option value="Administrador" selected="selected">Administrador</option>
 					</select>

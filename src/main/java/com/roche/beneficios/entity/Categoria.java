@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="CATEGORIAS")
+@Table(name="categorias", uniqueConstraints = @UniqueConstraint(
+		columnNames = {"desc_categoria"}))
+
 public class Categoria {
 	
 	@Id
@@ -19,6 +22,9 @@ public class Categoria {
 	@Column(name="desc_categoria")
 	private String descCategoria;
 
+	@Column(name="icono")
+	private String icono;
+	
 	public Categoria() {
 	}
 
@@ -38,4 +44,12 @@ public class Categoria {
 		this.descCategoria = descCategoria;
 	}
 
+	public String getIcono() {
+		return icono;
+	}
+
+	public void setIcono(String icono) {
+		this.icono = icono;
+	}
+	
 }

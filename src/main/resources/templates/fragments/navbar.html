@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:fragment="headFragment (pageTitle)">
+
+<head th:fragment="headFragment-old (pageTitle)">
 	<meta charset="UTF-8" />
 	<title th:text="${pageTitle}">Template title</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
@@ -16,14 +17,30 @@
 	<script type="text/javascript" src="#" th:src="@{/bootstrap/js/bootstrap-select.min.js}"></script>
 
 </head>
+
+<head th:fragment="headFragment (pageTitle)">
+	<meta charset="UTF-8" />
+	<title th:text="${pageTitle}">Template title</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+	<!-- Bootstrap Core CSS -->
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap4/css/bootstrap-cosmo.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap4/css/select.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="#" th:href="@{/css/styles.css}"/>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" th:href="@{/font-awesome/css/font-awesome.min.css}"/>
+	<!-- Bootstap Core JS-->
+	<script type="text/javascript" src="#" th:src="@{/jquery/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/bootstrap4/js/bootstrap.bundle.min.js}"></script>
+</head>
+
 <body>
 	<!-- Contenido de la Barra de navegacion del sitio -->
-	<div class="row" layout:fragment="barra-navegacion">
+	<div class="row" layout:fragment="barra-navegacion-old">
 		<!-- Barra de navegación -->
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/beneficios/" style="padding:10px; display:flex; align-items:center">
+					<a class="navbar-brand" style="padding:10px; display:flex; align-items:center">
 						<img th:src="@{/images/favicon.png}" alt="logo" width="50" height="40"/>
 						Beneficios Roche
 					</a>
@@ -152,5 +169,135 @@
 		</script>
 	</div>
 	<!-- Fin del Contenido-->
+
+	<div class="row" layout:fragment="barra-navegacion">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		  <a class="navbar-brand" href="#">
+			<img th:src="@{/images/favicon.png}" alt="logo" width="50" height="40"/>
+			Beneficios Roche
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	  		<ul sec:authorize="isAnonymous()" class="navbar-nav mr-auto">
+	  			<li class="nav-item">
+	  				<a th:href="@{/beneficios}" class="nav-link" th:classappend="${selectNavItem == 'beneficios'} ? active : dump">
+	  					<i class="fa fa-gift" aria-hidden="true"></i> 
+	  					Tus Beneficios
+	  				</a>
+	  			</li>
+	  			<li class="nav-item" th:classappend="${selectNavItem == 'quienes-somos'} ? active : dump">
+	  				<a href="#" class="nav-link">
+	  					<i class="fa fa-users" aria-hidden="true"></i>
+	  					¿Quienes somos?
+	  				</a>
+	  			</li>
+	  			<li class="nav-item" th:classappend="${selectNavItem == 'mision-vision'} ? active : dump">
+	  				<a href="#" class="nav-link">
+	  					<i class="fa fa-eye" aria-hidden="true"></i>
+	  					Misión y Visión
+	  				</a>
+	  			</li>
+	  		</ul>
+			<ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
+				<!--Beneficios-->
+				<li class="nav-item dropdown" th:classappend="${selectNavItem == 'beneficios'} ? active : dump">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-gift" aria-hidden="true"></i> &nbsp; Beneficios
+						<span class="caret"></span>
+					</a>
+					<div class="nav-item dropdown-menu">
+						<a class="dropdown-item" th:href="@{/beneficios}">
+							<i  class="fa fa-search" aria-hidden="true"></i>
+							&nbsp; Buscar beneficios
+						</a>
+				
+						<a class="dropdown-item" th:href="@{/beneficios/new}">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+							&nbsp; Registar beneficio
+						</a>
+					</div>
+				</li>
+				<!--Contactos-->
+				<li class="nav-item dropdown" th:classappend="${selectNavItem == 'contactos'} ? active : dump">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-address-book" aria-hidden="true"></i>
+						&nbsp; Contactos
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" th:href="@{/contactos}">
+							<i class="fa fa-search" aria-hidden="true"></i>
+							&nbsp; Buscar contactos
+						</a>
+						<a class="dropdown-item" href="#" th:href="@{/contactos/new}">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+							&nbsp; Registar contacto
+						</a>
+					</div>
+				</li>
+				<!--Empresas-->
+				<li class="nav-item dropdown" th:classappend="${selectNavItem == 'empresas'} ? active : dump">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-building" aria-hidden="true"></i>
+						&nbsp; Empresas
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/empresas/}">
+							<i class="fa fa-search" aria-hidden="true"></i>
+							&nbsp; Buscar empresas
+						</a>
+						<a class="dropdown-item" th:href="@{/empresas/new}">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+							&nbsp; Registar empresa
+						</a>
+					</div>
+				</li>
+				<!--Usuarios-->
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-user" aria-hidden="true"></i>
+						&nbsp; Usuarios
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">
+							<i class="fa fa-search" aria-hidden="true"></i>
+							&nbsp; Buscar Usuarios
+						</a>
+						<a class="dropdown-item" href="#" id="r_usuario">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+							&nbsp; Registar Usuarios
+						</a>
+					</div>
+				</li>
+			</ul>
+			<form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST">
+				<button class="btn btn-primary btn-block" type="submit">
+					<i class="fa fa-sign-out" aria-hidden="true"></i>
+					&nbsp; Cerrar Sesión
+				</button>				
+			</form>
+		  </div>
+		</nav>
+
+		<div sec:authorize="isAuthenticated()">
+			<div id="modal_l"></div>
+			<script type="text/javascript">
+				$("#r_usuario").click(function(event) {
+					$.ajax({
+						url: '/usuarios/new',
+						type: 'get',
+						success: function (data) {
+							$("#modal_l").html(data);
+							$("#my_modal").modal("show");
+						}
+					});
+				});
+			</script>
+		</div>
+	</div>
 </body>
 </html>
