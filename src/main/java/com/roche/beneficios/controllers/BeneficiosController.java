@@ -2,6 +2,8 @@ package com.roche.beneficios.controllers;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import com.roche.beneficios.services.CategoriasService;
 @Controller
 @RequestMapping("/beneficios")
 public class BeneficiosController {
+	private static final Log LOG = LogFactory.getLog(BeneficiosController.class);
 	@Autowired
 	@Qualifier("beneficiosService")
 	private BeneficiosService beneficiosService;
@@ -45,6 +48,16 @@ public class BeneficiosController {
 		model.addAttribute("categorias", categoriasService.listarCategorias());
 		
 		return ViewConstants.LISTAR_BENEFICIOS;
+	}
+	
+	@GetMapping("/details")
+	public String details(Model model,
+			@RequestParam(name="nroBeneficio") int nroBeneficio) {
+		
+		BeneficioModel beneficio = beneficiosService.findByNroBeneficio(nroBeneficio);
+		LOG.info("Enviando beneficio=" + beneficio);
+		model.addAttribute("beneficio", beneficio);
+		return ViewConstants.DETALLE_BENEFICIOS;
 	}
 	
 }

@@ -59,7 +59,7 @@ public class BeneficioConverter {
 		salida.setDescripcionCorta(entrada.getDescripcionCorta());
 		salida.setImagenB64(imageConvertor.convertToBase64(entrada.getImagen()));
 		salida.setTipoImagen(entrada.getTipoImagen());
-		salida.setContacto(contactoConverter.contactoToModelLight(entrada.getContacto()));
+		salida.setContacto(contactoConverter.contactoToModel(entrada.getContacto()));
 		entrada.getConsideraciones().forEach((consideracion) -> {
 			consideraciones.add(consideracionConverter.consideracionToModel(consideracion));
 		});

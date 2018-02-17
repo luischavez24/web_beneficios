@@ -11,10 +11,11 @@ import javax.persistence.*;
 public class ConsideracionPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
+	
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="nro_consideracion")
 	private int nroConsideracion;
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	@Column(name="nro_beneficio", insertable=false, updatable=false)
 	private int nroBeneficio;
 

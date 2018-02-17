@@ -167,7 +167,8 @@ public class BeneficioModel {
 	@Override
 	public String toString() {
 		return "BeneficioModel [nroBeneficio=" + nroBeneficio + ", descripcion=" + descripcion + ", detalleBeneficio="
-				+ detalleBeneficio + ", descripcionCorta=" + descripcionCorta + ", estado=" + estado + "]";
+				+ detalleBeneficio + ", descripcionCorta=" + descripcionCorta + ", estado=" + estado 
+				+ ", consideraciones=" + consideraciones + ", contacto=" + contacto +  "]";
 	}
 	
 	

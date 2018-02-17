@@ -6,14 +6,14 @@ public class ConsideracionModel {
 	
 	private int nroConsideracion;
 	
-	private String consideración;
+	private String consideracion;
 
 	public ConsideracionModel() {
 		
 	}
 	
-	public ConsideracionModel(String consideración) {
-		this.consideración = consideración;
+	public ConsideracionModel(String consideracion) {
+		this.consideracion = consideracion;
 	}
 
 	public int getNroBeneficio() {
@@ -32,12 +32,17 @@ public class ConsideracionModel {
 		this.nroConsideracion = nroConsideracion;
 	}
 
-	public String getConsideración() {
-		return consideración;
+	public String getConsideracion() {
+		return consideracion;
 	}
 
-	public void setConsideración(String consideración) {
-		this.consideración = consideración;
+	public void setConsideracion(String consideracion) {
+		this.consideracion = consideracion;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return consideracion;
+	}
 }

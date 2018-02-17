@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<div th:fragment="details" class="container border-primary bg-light box-shadow h-100 mb-4">
+		<div class="row h-100">
+			<!-- Titulo del beneficio -->
+			<div class="col-xs-6 col-sm-9 col-md-10 col-lg-10 mt-3">
+				<h2 class="text-primary font-weight-bold" th:text="${beneficio.contacto.empresa.nombreComercial}"></h2>
+			</div>
+			<!-- Boton Cerrar -->
+			<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 mt-3">
+				<button id='cerrar' class='btn btn-outline-danger btn-block'>Cerrar</button>
+			</div>
+			<!-- Imagen -->
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 mt-3">
+				<img class="img-fluid rounded" th:src="@{'data:' + ${beneficio.tipoImagen} + ';base64,' + ${beneficio.imagenB64}}" alt="benefico_promo"/>
+			</div>
+			<!-- Descripcion -->
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5  mt-3">
+				<header>
+					<h5><span class="text-primary font-weight-bold">Descripción</span></h5>
+				</header>
+				<span th:text="${beneficio.descripcion}"></span>
+			</div>
+			<!-- Detalle -->
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+				<header>
+					<h5><span class="text-primary font-weight-bold">Detalle</span></h5>
+				</header>
+				<div th:utext="${beneficio.detalleBeneficio}"></div>
+			</div>
+			<!-- Contacto -->
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+				<header>
+					<h5><span class="text-primary font-weight-bold">Contacto</span></h5>
+				</header>
+				<section>
+					<span th:text="@{${beneficio.contacto.nomContacto} + ' ' + ${beneficio.contacto.apContacto}}"></span>
+					<br></br>
+					<strong>Teléfono: </strong><span th:text="${beneficio.contacto.telfContacto}"></span>
+				</section>
+			</div>
+			<!-- Consideraciones -->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-3">
+				<header>
+					<h5><span class="text-primary font-weight-bold">Consideraciones</span></h5>
+				</header>
+				<span th:if="${#lists.isEmpty(beneficio.consideraciones)}">No hay consideraciones</span>
+				<ul th:if="${not #lists.isEmpty(beneficio.consideraciones)}">
+					<li th:each="consideracion : ${beneficio.consideraciones}">
+						<span th:text="${consideracion.consideracion}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

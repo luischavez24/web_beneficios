@@ -113,7 +113,7 @@ public class ContactoModel {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %s", nomContacto, apContacto, amContacto);
+		return String.format("%s %s %s %s", nomContacto, apContacto, amContacto, telfContacto);
 	}
 
 }

@@ -16,8 +16,9 @@ public class Consideracion implements Serializable {
 
 	@EmbeddedId
 	private ConsideracionPK id;
-
-	private String consideración;
+	
+	@Column(name="consideracion")
+	private String consideracion;
 
 	//bi-directional many-to-one association to Beneficio
 	@ManyToOne
@@ -35,12 +36,12 @@ public class Consideracion implements Serializable {
 		this.id = id;
 	}
 
-	public String getConsideración() {
-		return this.consideración;
+	public String getConsideracion() {
+		return this.consideracion;
 	}
 
-	public void setConsideración(String consideración) {
-		this.consideración = consideración;
+	public void setConsideracion(String consideracion) {
+		this.consideracion = consideracion;
 	}
 
 	public Beneficio getBeneficio() {

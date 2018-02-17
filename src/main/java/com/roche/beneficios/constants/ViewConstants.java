@@ -30,5 +30,7 @@ public interface ViewConstants {
 	
 	public final static String LISTAR_BENEFICIOS = "/beneficios/listar_beneficios";
 	
+	public final static String DETALLE_BENEFICIOS = "/beneficios/detalle_beneficio :: details";
+	
 	public final static String LOGIN = "/start/index";
 }

@@ -14,7 +14,7 @@ public class ConsideracionConverter {
 		pk.setNroBeneficio(entrada.getNroBeneficio());
 		pk.setNroConsideracion(entrada.getNroConsideracion());
 		salida.setId(pk);
-		salida.setConsideración(entrada.getConsideración());
+		salida.setConsideracion(entrada.getConsideracion());
 		return salida;
 	}
 	
@@ -22,7 +22,7 @@ public class ConsideracionConverter {
 		ConsideracionModel salida = new ConsideracionModel();
 		salida.setNroBeneficio(entrada.getId().getNroConsideracion());
 		salida.setNroConsideracion(entrada.getId().getNroConsideracion());
-		salida.setConsideración(entrada.getConsideración());
+		salida.setConsideracion(entrada.getConsideracion());
 		return salida;
 	}
 }
