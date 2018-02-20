@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.roche.beneficios.constants.ViewConstants;
 import com.roche.beneficios.model.BeneficioModel;
+import com.roche.beneficios.model.CarouselBeneficiosModel;
 import com.roche.beneficios.services.BeneficiosService;
+import com.roche.beneficios.services.CarouselBeneficiosService;
 import com.roche.beneficios.services.CategoriasService;
 
 @Controller
@@ -26,6 +28,10 @@ public class BeneficiosController {
 	@Autowired
 	@Qualifier("categoriasService")
 	private CategoriasService categoriasService;
+	
+	@Autowired
+	@Qualifier("carouselBeneficiosService")
+	private CarouselBeneficiosService carouselBeneficiosService;
 	
 	@GetMapping("")
 	public String index() {
@@ -46,7 +52,9 @@ public class BeneficiosController {
 		model.addAttribute("ctgActual", categoria);
 		model.addAttribute("lista_beneficios", listaBeneficios);
 		model.addAttribute("categorias", categoriasService.listarCategorias());
-		
+		List<CarouselBeneficiosModel> carouselBeneficios =  carouselBeneficiosService.listarItems();
+		LOG.info("Carousel=" + carouselBeneficios);
+		model.addAttribute("carousel_beneficios", carouselBeneficios);
 		return ViewConstants.LISTAR_BENEFICIOS;
 	}
 	

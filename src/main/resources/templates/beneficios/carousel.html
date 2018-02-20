@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html 
+   lang="en" 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+   <meta charset="utf-8"/>
+</head>
+<body>
+   <div th:fragment="carousel">
+      <div id="carouselBeneficios" class="carousel slide" data-ride="carousel">
+         <ol class="carousel-indicators">
+            <li 
+               th:each="item : ${carousel_beneficios}" 
+               data-target="#carouselBeneficios" 
+               th:attr="data-slide-to=${item.idx - 1}" 
+               th:class="${item.idx ==  1} ? active"
+            ></li>
+         </ol>
+         <div class="carousel-inner">
+            <div 
+               th:each="item : ${carousel_beneficios}" 
+               class="carousel-item"
+               th:classappend="${item.idx ==  1} ? active"
+            >
+               <img class="d-block h-100 w-100" th:src="@{'data:' + ${item.tipoImagen} + ';base64,' + ${item.imagenB64}}" alt="slide"/>
+            </div>
+         </div>
+         <a class="carousel-control-prev" href="#carouselBeneficios" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+         </a>
+         <a class="carousel-control-next" href="#carouselBeneficios" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+         </a>
+      </div>
+   </div>
+</body>
+</html>
+
+
+
+

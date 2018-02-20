@@ -96,6 +96,7 @@ public class EmpresaConverter {
 		empresaModel.setRsEmpresa(empresa.getRsEmpresa());
 		empresaModel.setNombreComercial(empresa.getNombreComercial());
 		empresaModel.setRucEmpresa(empresa.getRucEmpresa());
+		empresaModel.setTelfEmpresa(empresa.getTelfEmpresa());
 		return empresaModel;
 	}
 }

@@ -54,27 +54,27 @@ public class EmpresaServiceImpl implements EmpresaService{
 	@Override
 	public List<EmpresaModel> findByRuc(String ruc) {
 		List<EmpresaModel> lista = new ArrayList<>();
-		empresaRepository.findByRucEmpresaIgnoreCaseContaining(ruc).forEach(
-				(empresa) -> lista.add(empresaConverter.empresaToModel(empresa))
-				);
+		empresaRepository.findByRucEmpresaIgnoreCaseContaining(ruc).forEach((empresa) -> {
+			lista.add(empresaConverter.empresaToModelLight(empresa));
+		});
 		return lista;
 	}
 
 	@Override
 	public List<EmpresaModel> findByNomComercial(String nomComercial) {
 		List<EmpresaModel> lista = new ArrayList<>();
-		empresaRepository.findByNombreComercialIgnoreCaseContaining(nomComercial).forEach(
-				(empresa) -> lista.add(empresaConverter.empresaToModel(empresa))
-				);
+		empresaRepository.findByNombreComercialIgnoreCaseContaining(nomComercial).forEach((empresa) -> { 
+			lista.add(empresaConverter.empresaToModelLight(empresa));
+		});
 		return lista;
 	}
 
 	@Override
 	public List<EmpresaModel> findByRSocial(String rSocial) {
 		List<EmpresaModel> lista = new ArrayList<>();
-		empresaRepository.findByRsEmpresaIgnoreCaseContaining(rSocial).forEach(
-				(empresa) -> lista.add(empresaConverter.empresaToModel(empresa))
-				);
+		empresaRepository.findByRsEmpresaIgnoreCaseContaining(rSocial).forEach((empresa) -> {
+			lista.add(empresaConverter.empresaToModelLight(empresa));
+		});
 		return lista;
 	}
 

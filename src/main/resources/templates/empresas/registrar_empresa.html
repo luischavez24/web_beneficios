@@ -1,131 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:include="/fragments/navbar :: headFragment (pageTitle='Registro de Empresa')">
-	<meta charset="UTF-8"/>
+<html 
+   lang="en" 
+   xmlns:th="http://www.thymeleaf.org" 
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:include="/fragments/head :: headFragment (pageTitle='Registro de Empresa')">
+   <meta charset="UTF-8"/>
 </head>
 <body>
-	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
-	<div class="container">
-		<link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap4/css/select.min.css}"/>
-		<script type="text/javascript" src="#" th:src="@{/bootstrap4/js/select.min.js}"></script>
-		<script type="text/javascript">
-			$('body').ready(function($){
-				$('select').extendSelect({
-					dropdownResize: true
-				});	
-			});
-		</script>
-		<header>
-			<h1>Registro de empresas</h1>
-		</header>
-		<div th:if="${msj != null}" class="alert alert-info alert-dismissible" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		  <strong>Felicitaciones!</strong> Ha registrado una empresa con exito
-		</div>
-		<br></br>
-		<!-- Formulario de registro de la empresa -->
-		<form class="form-horizontal" th:action="@{/empresas/register}" th:object="${empresa_reg}" method="post" enctype="multipart/form-data">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 container-form">
-				<!-- Razon Social -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<i class="fa fa-id-card-o" aria-hidden="true"></i>
-					</span>	
-					<input class="form-control" type="text" id="rs_empresa" placeholder="Razón Social" th:field="*{rsEmpresa}"/>            
-				</div>
-				<!-- Nombre Comercial -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<i class="fa fa-briefcase" aria-hidden="true"></i>
-					</span>
-					<input class="form-control" type="text" id="nm_comercial" placeholder="Nombre Comercial" th:field="*{nombreComercial}"/>
-				</div>
-				<!-- RUC  -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-heart-empty"></span>
-					</span>
-					<input class="form-control" type="text" id="ruc_empresa" placeholder="RUC" th:field="*{rucEmpresa}"/>
-				</div>
-				<!-- Teléfono -->                
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-phone-alt"></span>
-					</span>
-					<input class="form-control" type="text" id="telfEmpresa" placeholder="Teléfono" th:field="*{telfEmpresa}" />
-				</div>
-				<!-- Direccion -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-home"></span>
-					</span>
-					<input class="form-control" type="text" id="direccion" placeholder="Direccion" th:field="*{direccion}"/>
-				</div>
+   <div layout:include="/fragments/navbar :: barra-navegacion"></div>
+   <div class="container">
+      <link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/select.min.css}"/>
+      <script type="text/javascript" src="#" th:src="@{/bootstrap/js/select.min.js}"></script>
+      <script type="text/javascript">
+         $('body').ready(function($){
+            $('select').extendSelect({
+               dropdownResize: true
+            });   
+         });
+      </script>
+      <header class="mt-4">
+         <h1>Registro de empresas</h1>
+      </header>
+      <div 
+         th:if="${msj != null}" 
+         th:include="/fragments/alert :: alerta(mensaje='Felicitaciones! Ha registrado una empresa con éxito', tipo='info')"
+      ></div>
+      <!-- Formulario de registro de la empresa -->
+      <form class="form-horizontal mt-4" th:action="@{/empresas/register}" th:object="${empresa_reg}" method="post" enctype="multipart/form-data">
+         <div class="container-form form-row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+               <!-- Razon Social -->
+               <div class="input-group mb-5">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="icon-search">
+                        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                     </span>  
+                  </div>
+                  <input class="form-control" type="text" id="rs_empresa" placeholder="Razón Social" th:field="*{rsEmpresa}"/>            
+               </div>
+               <!-- Nombre Comercial -->
+               <div class="input-group mb-5">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="icon-search">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                     </span>
+                  </div>
+                  <input class="form-control" type="text" id="nm_comercial" placeholder="Nombre Comercial" th:field="*{nombreComercial}"/>
+               </div>
+               <!-- RUC  -->
+               <div class="input-group mb-5">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="icon-search">
+                        <span class="fa fa-key"></span>
+                     </span>
+                  </div>
+                  <input class="form-control" type="text" id="ruc_empresa" placeholder="RUC" th:field="*{rucEmpresa}"/>
+               </div>
+               <!-- Teléfono -->                
+               <div class="input-group mb-5">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="icon-search">
+                        <span class="fa fa-phone"></span>
+                     </span>
+                  </div>
+                  <input class="form-control" type="text" id="telfEmpresa" placeholder="Teléfono" th:field="*{telfEmpresa}" />
+               </div>
+               <!-- Direccion -->
+               <div class="input-group mb-5">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="icon-search">
+                        <span class="fa fa-home"></span>
+                     </span>
+                  </div>
+                  <input class="form-control" type="text" id="direccion" placeholder="Direccion" th:field="*{direccion}"/>
+                  <div class="input-group-append">
+                  	 <select class="form-control" id="dist" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{distrito}" >
+		                 <option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.nomDistrito}"></option>
+		             </select>
+                  </div>
+               </div>
+           
+               <!-- Imagen -->
+               <div class="input-group mb-5">
+                  <span class="btn btn-danger btn-block btn-file">
+                  	   <span class="fa fa-floppy-o"></span>
+					   Buscar <input type="file" id="imagen_empresa" name="imagen_empresa" required="true"/>
+				  </span>
+               </div>  
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+               <img class="img-responsive imagen mx-auto d-block" th:src="@{/images/build.png}" alt="imagen empresa" id="img_defecto"/>
+               <output id="list"></output>   
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <input class="btn btn-primary btn-block" type="submit" name="registar" value="Registrar Empresa" />
+            </div>
+         </div>
+      </form>
+      
 
-				<!-- Distritos -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-home"></span>
-					</span>
-					<select class="selectpicker form-control" id="dist" data-style="btn-info" data-live-search="true" th:field="*{distrito}" >
-						<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.nomDistrito}"></option>
-					</select>
-				</div>
-                 
-				<input class="btn btn-primary btn-block" type="submit" name="registar" value="Registrar Empresa" />
-			</div>
-			<br></br>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<img class="img-responsive imagen" th:src="@{/images/build.png}" alt="imagen empresa" id="img_defecto"/>
-				<output id="list"></output>
-				<!-- Imagen -->
-				<div class="input-group">
-					<span class="input-group-addon" id="icon-search">
-						<span class="glyphicon glyphicon-floppy-open"></span>
-					</span>
-					<span class="btn btn-danger btn-block btn-file">
-						Buscar <input type="file" id="imagen_empresa" name="imagen_empresa" required="true"/>
-					</span>
-				</div>     
-			</div>
-			
-		</form>
-		
-
-	</div>
-	<script>
-		function archivo(evt) {
-	      	var files = evt.target.files; // FileList object
-		       
-		     //Obtenemos la imagen del campo "file". 
-			for (var i = 0, f; f = files[i]; i++) {         
-				//Solo admitimos imágenes.
-				if (!f.type.match('image.*')) {
-					continue;
-				}
-
-				var reader = new FileReader();
-
-				reader.onload = (function(theFile) {
-					return function(e) {
-						// Creamos la imagen.
-						document.getElementById("list").innerHTML = ['<img class="img-responsive imagen" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-						imagen = document.getElementById('img_defecto');
-						if(imagen){
-							padre = imagen.parentNode;
-							padre.removeChild(imagen);
-						}
-					};
-				})(f);
-
-				reader.readAsDataURL(f);
-			}
-		}
-	             
-	    document.getElementById('imagen_empresa').addEventListener('change', archivo, false);
-	   
-	</script>
+   </div>
+   <script th:src="@{/scripts/registar_empresas.js}"></script>
 </body>
 </html>

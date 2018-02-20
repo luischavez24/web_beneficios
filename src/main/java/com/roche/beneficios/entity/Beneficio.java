@@ -2,9 +2,6 @@ package com.roche.beneficios.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import org.hibernate.validator.constraints.Length;
-
 import java.util.List;
 
 
@@ -22,12 +19,10 @@ public class Beneficio implements Serializable {
 	@Column(name="nro_beneficio")
 	private int nroBeneficio;
 	
-	@Column(name="descripcion_corta")
-	@Length(max=25)
+	@Column(name="descripcion_corta", length=25)
 	private String descripcionCorta;
 	
-	@Column(name="descripcion")
-	@Length(max=120)
+	@Column(name="descripcion", length = 120)
 	private String descripcion;
 	
 	@Column(name="detalle_beneficio")
@@ -37,16 +32,14 @@ public class Beneficio implements Serializable {
 	@Lob
 	private byte[] imgPromo;
 	
-	@Column(name="tipo_img_promo")
-	@Length(max=25)
+	@Column(name="tipo_img_promo", length = 25)
 	private String tipoImgPromo;
 	
 	@Column(name="imagen")
 	@Lob
 	private byte[] imagen;
 	
-	@Column(name="tipo_imagen")
-	@Length(max=25)
+	@Column(name="tipo_imagen", length = 25)
 	private String tipoImagen;
 	
 	@Column(name="estado")
@@ -68,7 +61,10 @@ public class Beneficio implements Serializable {
 	//bi-directional many-to-one association to Consideraciones
 	@OneToMany(mappedBy="beneficio")
 	private List<Consideracion> consideraciones;
-
+	
+	@OneToOne(mappedBy="beneficio")
+	private CarouselBeneficios carouselBeneficios;
+	
 	public Beneficio() { }
 
 	public int getNroBeneficio() {
@@ -180,5 +176,12 @@ public class Beneficio implements Serializable {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
+
+	public CarouselBeneficios getCarouselBeneficios() {
+		return carouselBeneficios;
+	}
+
+	public void setCarouselBeneficios(CarouselBeneficios carouselBeneficios) {
+		this.carouselBeneficios = carouselBeneficios;
+	}
 }

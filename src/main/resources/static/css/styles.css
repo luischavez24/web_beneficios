@@ -191,3 +191,9 @@ html, body{
 .box-shadow { 
 	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); 
 }
+
+.content-border{
+  background: url('/images/memphis-colorful.png') repeat;
+	padding: 2% 3%;
+	border: 1px #2780E3 solid;
+}

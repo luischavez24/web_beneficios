@@ -1,93 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:include="/fragments/navbar :: headFragment (pageTitle='Buscar Beneficios')">
-	<meta charset="UTF-8" />
+<head th:include="/fragments/head :: headFragment (pageTitle='Buscar Beneficios')">
+   <meta charset="UTF-8" />
 </head>
 <body>
-	<!-- Barra de navegación -->
-	<div layout:include="/fragments/navbar :: barra-navegacion"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
-				<!-- Titulo de la pagina -->
-				<header class="mt-4 mb-3">
-					<h1>Buscar beneficios</h1>
-				</header>
-				<!-- Nav de categorias de beneficios -->
-				<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-				  <a href="#" class="navbar-brand">Categorías</a>
-				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				    <span class="navbar-toggler-icon"></span>
-				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNav">
-				    <ul class="navbar-nav">
-				      <li class="nav-item" th:classappend="${ctgActual == 'todos'} ? active : dump">
-						  <a class="nav-link" href="#" th:href="@{/beneficios/search/}" aria-selected="true">
-						  	<i class="fa fa-globe"></i>
-						  	<span>Todos</span>
-						  </a>
-				      </li>
-				      <li th:each="ctg : ${categorias}" 
-				      	  class="nav-item" 
-				      	  th:classappend="${ctgActual == #strings.toLowerCase(ctg.descCategoria)} ? active : dump" >
-						  <a class="nav-link" href="#" 
-						     th:href="@{'/beneficios/search/' + ${#strings.toLowerCase(ctg.descCategoria)}}" 
-						     aria-selected="false">
-						    <i th:class="@{'fa fa-' + ${ctg.icono}}"></i>
-						  	<span th:text="${ctg.descCategoria}"></span>
-						  </a>
-				      </li>
-				    </ul>
-				  </div>
-				</nav>
-			</div>
-		</div>
-		<div id="detalle" class="row h-100 align-items-center justify-content-center d-none">
-			<div id="load" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12 d-none text-center">
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>
-			</div>
-			<div id="detalle_content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
-			</div>
-		</div>
-		<div class="row" id="list_beneficio">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
-				<h3><span class="mt-4 mb-3" th:text="${#strings.capitalize(ctgActual)}"></span></h3>
-				<hr></hr>
-			</div>
-			<!-- Mensaje si no hay beneficios -->
-			<div  th:if="${#lists.isEmpty(lista_beneficios)}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-3">
-				<div class="jumbotron text-center">
-					<h1 class="display-4">
-						Lo sentimos, no hay beneficios en la categoria 
-						<i class="fa fa-frown-o"></i>
-					</h1>
-					<p class="lead">Pero puedes seguir explorando en las demás categorias</p>
-					<hr class="my-4"></hr>
-					<p class="lead">
-						<a class="btn btn-outline-danger btn-lg" th:href="@{/beneficios/search}" role="button">Volver al inicio</a>
-					</p>
-				</div>
-			</div>
-			
-			<!-- Contenedor de beneficios -->
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="beneficio : ${lista_beneficios}">
-				<div class="card border-primary box-shadow h-100">
-				  <div class="wrapper">
-					<img class="card-img-top img-fluid" th:src="@{'data:' + ${beneficio.tipoImgPromo} + ';base64,' + ${beneficio.imgPromoB64}}" alt="benefico_promo"/>
-				  </div>
-				  <div class="card-body">
-				    <h5 class="card-title text-primary">
-				    	<span class="font-weight-bold" th:text="${beneficio.contacto.empresa.nombreComercial}"></span>
-				    </h5>
-				    <span class="text-muted" th:text="${beneficio.descripcionCorta}"></span>
-			      </div>
-			      <div class="card-footer">
- 					<button th:value="${beneficio.nroBeneficio}" class="btn btn-outline-primary btn-block btn-details">Ver Beneficio</button>
-			      </div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script th:src="@{/scripts/beneficios.js}"></script>
+   <!-- Barra de navegación -->
+   <div layout:include="/fragments/navbar :: barra-navegacion"></div>
+   <div class="container">
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
+            <!-- Titulo de la pagina -->
+            <header class="mt-4 mb-3">
+               <h1>Buscar beneficios</h1>
+            </header>
+            
+            <!-- Carousel -->
+            <div th:if="${ctgActual == 'todos'}" id="cont-carousel" class="mb-3" th:include = "/beneficios/carousel :: carousel"></div>
+
+            <!-- Nav de categorias de beneficios -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+              <a href="#" class="navbar-brand">Categorías</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item" th:classappend="${ctgActual == 'todos'} ? active : dump">
+                    <a class="nav-link" href="#" th:href="@{/beneficios/search/}" aria-selected="true">
+                     <i class="fa fa-globe"></i>
+                     <span>Todos</span>
+                    </a>
+                  </li>
+                  <li th:each="ctg : ${categorias}" 
+                       class="nav-item" 
+                       th:classappend="${ctgActual == #strings.toLowerCase(ctg.descCategoria)} ? active : dump" >
+                    <a class="nav-link" href="#" 
+                       th:href="@{'/beneficios/search/' + ${#strings.toLowerCase(ctg.descCategoria)}}" 
+                       aria-selected="false">
+                      <i th:class="@{'fa fa-' + ${ctg.icono}}"></i>
+                     <span th:text="${ctg.descCategoria}"></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+         </div>
+      </div>
+      <!-- Detalle -->
+      <div id="detalle" class="row h-100 align-items-center justify-content-center d-none">
+         <div id="load" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12 d-none text-center">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>
+         </div>
+         <div id="detalle_content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12 p-3">
+         </div>
+      </div>
+      <!-- Listar beneficios -->
+      <div class="row" id="list_beneficio">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
+            <h3><span class="mt-4 mb-3" th:text="${#strings.capitalize(ctgActual)}"></span></h3>
+            <hr></hr>
+         </div>
+         <!-- Mensaje si no hay beneficios -->
+         <div  th:if="${#lists.isEmpty(lista_beneficios)}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-3">
+            <div class="jumbotron text-center">
+               <h1 class="display-4">
+                  Lo sentimos, no hay beneficios en la categoria 
+                  <i class="fa fa-frown-o"></i>
+               </h1>
+               <p class="lead">Pero puedes seguir explorando en las demás categorias</p>
+               <hr class="my-4"></hr>
+               <p class="lead">
+                  <a class="btn btn-outline-danger btn-lg" th:href="@{/beneficios/search}" role="button">Volver al inicio</a>
+               </p>
+            </div>
+         </div>
+         
+         <!-- Contenedor de beneficios -->
+         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="beneficio : ${lista_beneficios}">
+            <div class="card border-primary box-shadow h-100">
+              <div class="wrapper">
+               <img class="card-img-top img-fluid" th:src="@{'data:' + ${beneficio.tipoImgPromo} + ';base64,' + ${beneficio.imgPromoB64}}" alt="benefico_promo"/>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-primary">
+                  <span class="font-weight-bold" th:text="${beneficio.contacto.empresa.nombreComercial}"></span>
+                </h5>
+                <span class="text-muted" th:text="${beneficio.descripcionCorta}"></span>
+               </div>
+               <div class="card-footer">
+               <button th:value="${beneficio.nroBeneficio}" class="btn btn-outline-primary btn-block btn-details">Ver Beneficio</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script th:src="@{/scripts/beneficios.js}"></script>
 </body>
 </html>
