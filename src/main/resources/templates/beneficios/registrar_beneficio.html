@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" 
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+   <meta charset="utf-8"/>
+</head>
+<body>
+   <!-- Barra de navegación -->
+   <div layout:include="/fragments/navbar :: barra-navegacion"></div>
+   <div class="container">
+      <link rel="stylesheet" type="text/css" href="#" th:href="@{/bootstrap/css/select.min.css}"/>
+      <script type="text/javascript" src="#" th:src="@{/bootstrap/js/select.min.js}"></script>
+      <script type="text/javascript">
+         $('body').ready(function($){
+            $('select').extendSelect({
+               dropdownResize: true
+            });   
+         });
+      </script>
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
+            <!-- Titulo de la pagina -->
+            <header class="mt-4 mb-3">
+               <h1>Registrar beneficio</h1>
+            </header>
+         </div>
+      </div>
+      <div class="row h-100">
+         <form th:action="@{/beneficios/register}" th:object="${beneficio}" method="POST">
+            <div class="form-row" >
+               <!-- Titulo del beneficio -->
+               <div class="col-xs-6 col-sm-9 col-md-10 col-lg-10 mt-3">
+                  <select class="form-control" id="dist" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{contacto}" title="Selecccione el contacto" >
+                     <option th:each="c : ${contactos}" th:value="@{${c.id.idContacto} + ',' + ${c.id.codEmpresa}}" th:text="${c}"></option>
+                  </select>
+               </div>
+               <!-- Boton Cerrar -->
+               <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 mt-3">
+                  <button id='cerrar' class='btn btn-outline-danger btn-block'>Cerrar</button>
+               </div>
+               <!-- Imagen -->
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 mt-3">
+                  <img class="img-responsive imagen mx-auto d-block" th:src="@{/images/build.png}" alt="imagen empresa" id="img_defecto"/>
+                  <output id="list"></output>   
+                  <span class="btn btn-danger btn-block btn-file">
+                     <span class="fa fa-floppy-o"></span>
+                     Buscar 
+                     <input type="file" id="imagen_empresa" name="imagen_empresa" required="true"/>
+                  </span>
+               </div>
+               <!-- Descripcion -->
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5  mt-3">
+                  <header>
+                     <h5><span class="text-primary font-weight-bold">Descripción</span></h5>
+                  </header>
+                  <span th:text="${beneficio.descripcion}"></span>
+               </div>
+               <!-- Detalle -->
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                  <header>
+                     <h5><span class="text-primary font-weight-bold">Detalle</span></h5>
+                  </header>
+                  <div th:utext="${beneficio.detalleBeneficio}"></div>
+               </div>
+               <!-- Contacto -->
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                  <header>
+                     <h5><span class="text-primary font-weight-bold">Contacto</span></h5>
+                  </header>
+                  <section>
+                     <span th:text="@{${beneficio.contacto.nomContacto} + ' ' + ${beneficio.contacto.apContacto}}"></span>
+                     <br></br>
+                     <strong>Teléfono: </strong><span th:text="${beneficio.contacto.telfContacto}"></span>
+                  </section>
+               </div>
+               <!-- Consideraciones -->
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-3">
+                  <header>
+                     <h5><span class="text-primary font-weight-bold">Consideraciones</span></h5>
+                  </header>
+                  <span th:if="${#lists.isEmpty(beneficio.consideraciones)}">No hay consideraciones</span>
+                  <ul th:if="${not #lists.isEmpty(beneficio.consideraciones)}">
+                     <li th:each="consideracion : ${beneficio.consideraciones}">
+                        <span th:text="${consideracion.consideracion}"></span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</body>
+</html>

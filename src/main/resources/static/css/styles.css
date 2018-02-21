@@ -4,7 +4,7 @@
 }
 
 html, body{
-	background: url("/images/textured_paper.png") repeat;
+	background: url("/images/round.png") repeat;
 	margin:0; 
 	padding:0; 
 	height:100%;
@@ -193,7 +193,7 @@ html, body{
 }
 
 .content-border{
-  background: url('/images/memphis-colorful.png') repeat;
+  background: url('/images/spiration-light.png') repeat;
 	padding: 2% 3%;
 	border: 1px #2780E3 solid;
 }
