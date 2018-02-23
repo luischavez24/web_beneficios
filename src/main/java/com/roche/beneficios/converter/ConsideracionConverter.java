@@ -1,5 +1,8 @@
 package com.roche.beneficios.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.roche.beneficios.entity.Consideracion;
@@ -20,9 +23,24 @@ public class ConsideracionConverter {
 	
 	public ConsideracionModel consideracionToModel(Consideracion entrada) {
 		ConsideracionModel salida = new ConsideracionModel();
-		salida.setNroBeneficio(entrada.getId().getNroConsideracion());
+		salida.setNroBeneficio(entrada.getId().getNroBeneficio());
 		salida.setNroConsideracion(entrada.getId().getNroConsideracion());
 		salida.setConsideracion(entrada.getConsideracion());
 		return salida;
+	}
+	
+	public List<ConsideracionModel> stringToListModel(int nroBeneficio, String[] consideraciones) {
+		List<ConsideracionModel> consModel = new ArrayList<>();
+		
+		for(int i = 0; i < consideraciones.length; i++){
+			String cons = consideraciones[i];
+			ConsideracionModel modelo = new ConsideracionModel();
+			modelo.setNroBeneficio(nroBeneficio);
+			modelo.setNroConsideracion(i + 1);
+			modelo.setConsideracion(cons);
+			consModel.add(modelo);
+		};
+		
+		return consModel;
 	}
 }

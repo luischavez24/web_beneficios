@@ -88,7 +88,26 @@
                 <span class="text-muted" th:text="${beneficio.descripcionCorta}"></span>
                </div>
                <div class="card-footer">
-               <button th:value="${beneficio.nroBeneficio}" class="btn btn-outline-primary btn-block btn-details">Ver Beneficio</button>
+                 <button sec:authorize="isAnonymous()" th:value="${beneficio.nroBeneficio}" class="btn btn-outline-primary btn-block btn-details">Ver Beneficio</button>
+                 <div sec:authorize="isAuthenticated()" class="dropdown">
+                  <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="dropdown-item btn-details" th:value="${beneficio.nroBeneficio}" >
+                      <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      Ver Beneficio
+                    </button>
+                    <a class="dropdown-item" th:href="@{/beneficios/actualizar/__${beneficio.nroBeneficio}__}">
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      Editar
+                    </a>
+                    <a class="dropdown-item" th:href="@{/beneficios/delete}">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                      Eliminar
+                    </a>
+                  </div>
+                </div>
                </div>
             </div>
          </div>

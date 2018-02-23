@@ -2,6 +2,10 @@ package com.roche.beneficios.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.util.List;
 
 
@@ -55,11 +59,12 @@ public class Beneficio implements Serializable {
 	private Contacto contacto;
 	
 	@ManyToOne
-	@JoinColumn(name="id_categoria", referencedColumnName="id_categoria")
+	@JoinColumn(name="id_categoria", referencedColumnName="id_categoria", insertable=true, updatable=true)
 	private Categoria categoria;
 
 	//bi-directional many-to-one association to Consideraciones
 	@OneToMany(mappedBy="beneficio")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private List<Consideracion> consideraciones;
 	
 	@OneToOne(mappedBy="beneficio")

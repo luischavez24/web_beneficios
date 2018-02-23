@@ -32,5 +32,9 @@ public interface ViewConstants {
 	
 	public final static String DETALLE_BENEFICIOS = "/beneficios/detalle_beneficio :: details";
 	
+	public final static String FORM_REGISTRO_BENEFICIOS = "/beneficios/registrar_beneficio";
+	
+	public final static String FORM_ACTUALIZAR_BENEFICIOS = "/beneficios/actualizar_beneficio";
+	
 	public final static String LOGIN = "/start/index";
 }

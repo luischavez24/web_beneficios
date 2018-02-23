@@ -44,6 +44,9 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 	public BeneficioModel insertarBeneficio(BeneficioModel beneficio) {
 		Beneficio bEntity = beneficioConverter.modelToBeneficio(beneficio);
 		Beneficio bEntitySave = beneficiosRepository.save(bEntity);
+		bEntity.getConsideraciones().forEach((cons) -> {
+			cons.getId().setNroBeneficio(bEntitySave.getNroBeneficio());
+		});
 		consideracionRepository.save(bEntity.getConsideraciones());
 		
 		return beneficioConverter.modelToBeneficio(bEntitySave);
@@ -53,6 +56,12 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 	public BeneficioModel actualizarBeneficio(BeneficioModel beneficio) {
 		Beneficio bEntity = beneficioConverter.modelToBeneficio(beneficio);
 		Beneficio bEntitySave = beneficiosRepository.save(bEntity);
+		bEntity.getConsideraciones().forEach((cons) -> {
+			cons.getId().setNroBeneficio(bEntitySave.getNroBeneficio());
+		});
+		
+		System.out.println(bEntity.getConsideraciones());
+		
 		consideracionRepository.save(bEntity.getConsideraciones());
 		return beneficioConverter.modelToBeneficio(bEntitySave);
 	}
@@ -66,7 +75,7 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 	@Override
 	public BeneficioModel findByNroBeneficio(int nroBeneficio) {
 		Beneficio bEntity = beneficiosRepository.findByNroBeneficio(nroBeneficio);
-		return beneficioConverter.modelToBeneficio(bEntity);
+		return beneficioConverter.modelToBeneficioHeavy(bEntity);
 	}
 
 	@Override

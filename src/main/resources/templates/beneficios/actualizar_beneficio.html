@@ -2,7 +2,7 @@
 <html lang="en" 
      xmlns:th="http://www.thymeleaf.org"
      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:include="/fragments/head :: headFragment (pageTitle='Registro de Beneficios')">
+<head th:include="/fragments/head :: headFragment (pageTitle='Actualización de Beneficios')">
    <meta charset="utf-8"/>
 </head>
 <body>
@@ -22,7 +22,7 @@
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
             <!-- Titulo de la pagina -->
             <header class="mt-4 mb-3">
-               <h1>Registrar beneficio</h1>
+               <h1>Actualizar beneficio</h1>
             </header>
          </div>
          <div 
@@ -30,14 +30,15 @@
             th:include="/fragments/alert :: alerta(mensaje='Felicitaciones! Ha registrado una beneficio con éxito', tipo='info')"
          ></div>
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-12">
-            <form class="form" th:action="@{/beneficios/register}" th:object="${beneficio}" method="post" enctype="multipart/form-data">
+            <form class="form" th:action="@{/beneficios/modify}" th:object="${beneficio}" method="post" enctype="multipart/form-data">
                <div class="form-row" >
+                  <input type="hidden" th:field="*{nroBeneficio}" th:value="*{nroBeneficio}"/>
                   <!-- Descripcion Corta del beneficio -->
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Descricion Corta</span></h5>
                      </header>
-                     <input class="form-control" type="text" th:field="*{descripcionCorta}" placeholder="Descricion Corta" />
+                     <input class="form-control" type="text" th:field="*{descripcionCorta}" th:value="*{descripcionCorta}" placeholder="Descricion Corta" />
                   </div>
                   
                   <!-- Imagen -->
@@ -45,12 +46,14 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Imagen</span></h5>
                      </header>
-                     <img class="img-responsive imagen mx-auto d-block" th:src="@{/images/build.png}" alt="imagen beneficio" id="img_defecto"/>
+                     <img class="img-responsive imagen mx-auto d-block" th:src="@{'data:' + ${beneficio.tipoImagen} + ';base64,' + ${beneficio.imagenB64}}" alt="imagen beneficio" id="img_defecto"/>
                      <output id="list"></output>   
                      <span class="btn btn-info btn-block btn-file">
                         <span class="fa fa-upload"></span>
                         Buscar 
-                        <input type="file" id="imagen_beneficio" name="imagen_beneficio" required="true"/>
+                        <input type="file" id="imagen_beneficio" name="imagen_beneficio"/>
+                        <input type="hidden" th:field="*{imagen}" th:value="*{imagen}"/>
+                        <input type="hidden" th:field="*{tipoImagen}" th:value="*{tipoImagen}"/>
                      </span>
                   </div>
                   
@@ -59,12 +62,14 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Miniatura</span></h5>
                      </header>
-                     <img class="img-responsive imagen mx-auto d-block" th:src="@{/images/build.png}" alt="imagen beneficio" id="img_defecto2"/>
+                     <img class="img-responsive imagen mx-auto d-block" th:src="@{'data:' + ${beneficio.tipoImgPromo} + ';base64,' + ${beneficio.imgPromoB64}}" alt="imagen beneficio" id="img_defecto2"/>
                      <output id="list2"></output>   
                      <span class="btn btn-info btn-block btn-file">
                         <span class="fa fa-upload"></span>
                         Buscar 
-                        <input type="file" id="imagen_demo" name="imagen_demo" required="true"/>
+                        <input type="file" id="imagen_demo" name="imagen_demo"/>
+                        <input type="hidden" th:field="*{imgPromo}" th:value="*{imgPromo}"/>
+                        <input type="hidden" th:field="*{tipoImgPromo}" th:value="*{tipoImgPromo}"/>
                      </span>
                   </div>
 
@@ -73,7 +78,7 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Descripción</span></h5>
                      </header>
-                     <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+                     <textarea id="descripcion" th:field="*{descripcion}" th:value="*{descripcion}"></textarea>
                   </div>
 
                   <!-- Detalle -->
@@ -81,7 +86,7 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Detalle</span></h5>
                      </header>
-                     <textarea id="detalle-beneficio" th:field="*{detalleBeneficio}"></textarea>
+                     <textarea id="detalle-beneficio" th:field="*{detalleBeneficio}" th:value="*{detalleBeneficio}"></textarea>
                   </div>
 
                   <!-- Contacto -->
@@ -89,8 +94,8 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Contacto</span></h5>
                      </header>
-                     <select class="form-control" id="contacto" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{contacto}" title="Selecccione el contacto">
-                        <option th:each="c : ${contactos}" th:value="@{__${c.idContacto}__,__${c.codEmpresa}__}" th:text="@{__${c}__-__${c.empresa.nombreComercial}__}"></option>
+                     <select class="form-control" id="contacto" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{contacto}" th:value="*{contacto}" title="Selecccione el contacto">
+                        <option th:each="c : ${contactos}" th:value="@{__${c.idContacto}__,__${c.codEmpresa}__}" th:text="@{__${c.nomContacto}__ __${c.apContacto}__ __${c.amContacto}__ - __${c.empresa.nombreComercial}__}"></option>
                      </select>
                   </div>
                   
@@ -99,7 +104,7 @@
                      <header>
                         <h5><span class="text-primary font-weight-bold mb-2">Categorías</span></h5>
                      </header>
-                     <select class="form-control" id="categoria" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{categoria}" title="Selecccione el categoria">
+                     <select class="form-control" id="categoria" data-btn-class="btn-secondary btn-block" data-live-search="true" th:field="*{categoria}" th:value="*{categoria}" title="Selecccione el categoria">
                         <option th:each="ctg : ${categorias}" th:value="${ctg.idCategoria}" th:text="${ctg.descCategoria}"></option>
                      </select>
                   </div>
@@ -109,22 +114,49 @@
                      <header>
                         <h5>
                            <span class="text-primary font-weight-bold mb-2 mr-3">Consideraciones</span>
-                           <button type="button" id="add-cons" class="btn btn-success mr-3">
+                           <button type="button" id="add-cons" class="btn btn-success">
                               <i class="fa fa-plus-circle"></i>
                            </button>
                         </h5>
                      </header>
                      <section>
                         <ul class="list-group" id="cons-list">
-
+                           <li th:each="cons, rowStat: ${beneficio.consideraciones}" class="list-group-item">
+                              <div class="input-group">
+                                 <input 
+                                    class="nro-beneficio"
+                                    type="hidden"  
+                                    th:field="*{consideraciones[__${rowStat.index}__].nroBeneficio}" 
+                                    th:value="${beneficio.nroBeneficio}"
+                                 />
+                                  <input 
+                                    class="nro-consideracion"
+                                    type="hidden"  
+                                    th:field="*{consideraciones[__${rowStat.index}__].nroConsideracion}" 
+                                    th:value="${rowStat.index}"
+                                 />
+                                 <input
+                                    class="form-control consideracion" 
+                                    type="text" 
+                                    name="consideraciones"  
+                                    th:field="*{consideraciones[__${rowStat.index}__].consideracion}" 
+                                    th:value="${cons.consideracion}"
+                                 />
+                                 <div class="input-group-append">
+                                    <button type="button" class="btn btn-danger remove-cons">
+                                       <i class="fa fa-minus-circle"></i>
+                                    </button>                                    
+                                 </div>
+                              </div>
+                           </li>
                         </ul>
                      </section>
                   </div>
                   <!-- Enviar formulario -->
                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3 mb-3">
-                     <button class="btn btn-success btn-block" type="submit">
+                     <button class="btn btn-warning btn-block" type="submit">
                         <i class="fa fa-floppy-o"></i>
-                        Registrar Beneficio
+                        Actualizar Beneficio
                      </button>
                   </div>
 
@@ -153,7 +185,7 @@
             tabsize: 2,
             height: 200
          });
-         
+
          $("#add-cons").click((e) => {
             elements = $("#cons-list").find('li.list-group-item').length;
             
@@ -216,6 +248,7 @@
                listItem.remove();
             });         
          }
+
 
          document.getElementById('imagen_beneficio').addEventListener('change', (e) => archivo(e,'list','img_defecto'), false);
          document.getElementById('imagen_demo').addEventListener('change', (e) => archivo(e, 'list2','img_defecto2'), false);

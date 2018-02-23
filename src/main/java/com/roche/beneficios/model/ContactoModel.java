@@ -111,9 +111,17 @@ public class ContactoModel {
 		this.correoElec = correoElec;
 	}
 
+	public boolean equals(Object other) {
+		if(other instanceof ContactoModel) {
+			return ((ContactoModel) other).codEmpresa == this.codEmpresa &&
+				   ((ContactoModel) other).idContacto == this.idContacto;
+		} else {
+			return false;
+		}
+	}
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %s", nomContacto, apContacto, amContacto, telfContacto);
+		return String.format("%s %s %s", nomContacto, apContacto, amContacto);
 	}
 
 }

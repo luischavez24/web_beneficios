@@ -22,4 +22,10 @@ public class CategoriasServiceImpl implements CategoriasService{
 		return categoriasRepository.findAll();
 	}
 
+	@Override
+	public Categoria findCategoria(int idCategoria) {
+		
+		return categoriasRepository.findOne(idCategoria);
+	}
+
 }

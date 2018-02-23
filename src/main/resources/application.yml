@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://mysql:3306/web_beneficios
+    url: jdbc:mysql://localhost:3306/web_beneficios
     username: root
-    password: Prueba$1
+    password: 
   mvc:
     favicon:
       enabled: true
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
       naming:

@@ -33,8 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/scripts/*", 
 				"/summernote/*","/summernote/font/*","/summernote/lang/*","/summernote/plugin/*", 
 				"/",
-				"/beneficios" ,"/beneficios/*",
-				"/beneficios/search/*", 
+				"/beneficios" ,
+				"/beneficios/search", "/beneficios/search/*", 
 				"/beneficios/details", "/beneficios/details/*").permitAll()
 		.anyRequest().authenticated()
 		.and()

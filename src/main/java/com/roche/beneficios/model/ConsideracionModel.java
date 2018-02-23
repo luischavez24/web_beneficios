@@ -43,6 +43,6 @@ public class ConsideracionModel {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return consideracion;
+		return String.format("{id: {nroBeneficio: %d, nroConsideracion: %d}, consideracion: %s}", nroBeneficio, nroConsideracion,consideracion);
 	}
 }

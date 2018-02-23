@@ -216,7 +216,7 @@ public class EmpresasController {
 			e.printStackTrace();
 		}
 		
-		LOG.info("Actualizando objeto" + empresa);
+		LOG.info("Actualizando objeto=" + empresa);
 		
 		empresaService.updateEmpresa(empresa);
 		

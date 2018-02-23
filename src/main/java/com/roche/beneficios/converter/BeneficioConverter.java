@@ -45,6 +45,7 @@ public class BeneficioConverter {
 		});
 		salida.setConsideraciones(consideraciones);
 		salida.setEstado(entrada.getEstado());
+		salida.setCategoria(entrada.getCategoria());
 		return salida;
 	}
 	
@@ -65,6 +66,16 @@ public class BeneficioConverter {
 		});
 		salida.setConsideraciones(consideraciones);
 		salida.setEstado(entrada.getEstado());
+		salida.setCategoria(entrada.getCategoria());
+		
+		return salida;
+	}
+	
+	public BeneficioModel modelToBeneficioHeavy(Beneficio entrada) {
+		BeneficioModel salida = modelToBeneficio(entrada);
+		salida.setImagen(entrada.getImagen());
+		salida.setImgPromo(entrada.getImgPromo());
+		
 		return salida;
 	}
 	
