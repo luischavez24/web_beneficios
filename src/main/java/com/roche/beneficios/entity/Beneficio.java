@@ -47,7 +47,7 @@ public class Beneficio implements Serializable {
 	private String tipoImagen;
 	
 	@Column(name="estado")
-	private int estado;
+	private boolean estado;
 
 	
 	//bi-directional many-to-one association to Contacto
@@ -166,11 +166,11 @@ public class Beneficio implements Serializable {
 		this.tipoImgPromo = tipoImgPromo;
 	}
 
-	public int getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

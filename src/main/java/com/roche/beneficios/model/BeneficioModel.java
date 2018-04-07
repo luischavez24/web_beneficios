@@ -31,7 +31,7 @@ public class BeneficioModel {
 
 	private List<ConsideracionModel> consideraciones;
 	
-	private int estado;
+	private boolean estado;
 	
 	private Categoria categoria;
 	
@@ -130,12 +130,12 @@ public class BeneficioModel {
 		this.nroBeneficio = nroBeneficio;
 	}
 
-	public int getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(int estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

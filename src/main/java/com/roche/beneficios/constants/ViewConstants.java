@@ -12,6 +12,8 @@ public interface ViewConstants {
 
 	public final static String DETALLE_EMPRESA = "/empresas/detalle_empresa";
 
+	public final static String ELIMINAR_EMPRESA = "/empresas/eliminar_empresa :: content";
+	
 	public final static String LISTAR_CONTACTOS = "/contactos/listar_contactos";
 	
 	public final static String LISTAR_CONTACTOS_BUSQ = "/contactos/listar_contactos :: contactos";
@@ -21,6 +23,8 @@ public interface ViewConstants {
 	public final static String FORM_ACTUALIZAR_CONTACTOS = "/contactos/actualizar_contactos";
 	
 	public final static String DETALLE_CONTACTO = "/contactos/detalle_contacto";
+	
+	public final static String ELIMINAR_CONTACTO = "/contactos/eliminar_contactos :: content";
 
 	public final static String INTEGRITY_EXCEPTION = "/error/integrityException";
 	

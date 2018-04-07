@@ -114,6 +114,7 @@ public class ContactosController {
 		ContactoModel contacto = contactosService.findContacto(idContacto, codEmpresa);
 		
 		if(contacto == null) {
+			model.addAttribute("direccion_retorno","/contactos");
 			throw new BusquedaNulaException();
 		}
 		
@@ -169,6 +170,26 @@ public class ContactosController {
 		
 		return "redirect:/contactos/search?msj=2";
 		
+	}
+	
+	@GetMapping("/del")
+	public String deleteContacto(Model model, 
+			@RequestParam int idContacto,
+			@RequestParam int codEmpresa)			
+			throws BusquedaNulaException{
+		
+		ContactoModel currentContacto = contactosService.findContacto(idContacto, codEmpresa);
+		
+		if(currentContacto == null) {
+			LOG.error("No se encontro al contacto");
+			throw new BusquedaNulaException();
+		}
+		
+		LOG.info("Abriendo modal para el contacto = " + currentContacto);
+		
+		model.addAttribute("currentContacto", currentContacto);
+		
+		return ViewConstants.ELIMINAR_CONTACTO;
 	}
 	
 	@PostMapping("/delete")

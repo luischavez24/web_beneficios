@@ -4,16 +4,25 @@ $(document).ready(function(){
    
    // Funcion para borrar elemento
    function asignaEvento() {
-      
-      $(".btn_borrar").click(function(event) {
-          var pk = $(this).val().split(",");
-         $("#fila_eliminada_1").val(pk[0]);
-         $("#fila_eliminada_2").val(pk[1]);
-      });
+      $(".btn-borrar").submit(function(e) {
+         e.preventDefault();
+         console.log("Cargando modal de confirmacion ...");
+         $.ajax({
+            url: '/contactos/del',
+            type: 'get',
+            data: $(this).serialize(),
+            success: function (data) {
+               console.log("Exito! el modal esta a punto de cargar");
+               
+               $("#eliminarContactos").html(data);
+               $("#eliminarContactosModal").modal("show");
 
-      $("#btn_cancelar").click(function () {
-         $("#fila_eliminada_1").val("");
-         $("#fila_eliminada_2").val("");
+               $("#btn_cancelar").click(function () {
+                  $("#fila_eliminada_1").val("");
+                  $("#fila_eliminada_2").val("");
+               });
+            }
+         });
       });
    }
 

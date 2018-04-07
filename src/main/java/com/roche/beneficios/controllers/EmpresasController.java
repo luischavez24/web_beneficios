@@ -46,7 +46,7 @@ public class EmpresasController {
 	@Qualifier("imageConvertor")
 	private ImageConvertor imageConvertor;
 	
-	// Mapeo de la página principal del módulo empresas
+	// Mapeo de la página principal del módulo contactos
 	@GetMapping("")
 	public String index () {
 		// Redireccion al controlador de busquedas con los campos vacios
@@ -98,7 +98,7 @@ public class EmpresasController {
 		
 			// Establece como atributo en el modelo de la pagina a la lista de empresas obtenida
 			model.addAttribute("empresas", listaModel);
-
+			
 			return ViewConstants.LISTAR_EMPRESAS_BUSQ;
 		}
 		
@@ -159,6 +159,23 @@ public class EmpresasController {
 		
 		return "redirect:/empresas/new?msj";
 		
+	}
+	
+	@GetMapping("/delete/{ruc}")
+	public String deleteModalEmpresa(Model model, @PathVariable String ruc) 
+			throws BusquedaNulaException{
+		
+		EmpresaModel currentEmpresa = empresaService.findOneByRuc(ruc);
+		
+		if(currentEmpresa == null) {
+			LOG.error("No se encontro la empresa con ruc = " + ruc);
+			throw new BusquedaNulaException();
+		}
+		
+		LOG.info("Abriendo modal para empresa = " + currentEmpresa);
+		
+		model.addAttribute("currentEmpresa", currentEmpresa);
+		return ViewConstants.ELIMINAR_EMPRESA;
 	}
 	
 	@PostMapping("/delete")

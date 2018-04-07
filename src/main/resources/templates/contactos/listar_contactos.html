@@ -78,51 +78,31 @@
 							<td><span th:text="${contacto.telfContacto}"></span></td>
 							<td><span th:text="${contacto.empresa.nombreComercial}"></span></td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/detalles/' + ${contacto.codEmpresa} + '/' + ${contacto.idContacto}}" class="btn btn-info btn-circle">
+								<a th:href="@{/contactos/detalles/__${contacto.codEmpresa}__/__${contacto.idContacto}__}" class="btn btn-info btn-circle">
 									<i class="fa fa-info-circle fa-lg"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<a th:href="@{'/contactos/actualizar/' + ${contacto.codEmpresa} + '/' + ${contacto.idContacto}}" class="btn btn-warning btn-circle">
+								<a th:href="@{/contactos/actualizar/__${contacto.codEmpresa}__/__${contacto.idContacto}__}" class="btn btn-warning btn-circle">
 									<i class="fa fa-pencil-square-o fa-lg"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<button class="btn btn-danger btn-circle btn_borrar" data-toggle="modal" data-target="#myModal" th:value="@{${contacto.idContacto} + ',' + ${contacto.codEmpresa}}">
-									<i class="fa fa-trash fa-lg"></i>
-								</button>
+								<form th:action="@{/contactos/del}" class="btn-borrar" method="get">
+									<input type="hidden" name="idContacto" th:value="${contacto.idContacto}" />
+									<input type="hidden" name="codEmpresa" th:value="${contacto.codEmpresa}" />
+									<button type="submit" class="btn btn-danger btn-circle btn_borrar">
+										<i class="fa fa-trash fa-lg"></i>
+									</button>
+								</form>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-
-				<!-- Ventana de confirmacion de eliminacion -->
-				<div id="myModal" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-						<!-- Contenido -->
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">Confirmar Eliminacion</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<div class="modal-body">
-								<p>¿Esta seguro/a que desea eliminar el contacto?</p>
-							</div>
-							<div class="modal-footer">
-								<form class="form-inline" th:action="@{/contactos/delete}" method="post">
-									<input type="hidden" id="fila_eliminada_1" name="id_contacto"/>
-									<input type="hidden" id="fila_eliminada_2" name="cod_empresa"/>
-									<button type="submit" class="btn btn-success" id="btn_confirmar">Confirmar</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_cancelar">Cancelar</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-
+	<div id="eliminarContactos"></div>
 	<script th:src="@{/scripts/contactos.js}"></script>
 </body>
 </html>

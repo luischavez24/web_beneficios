@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8"/>
+   <title>Plantilla eliminacion</title>
+</head>
+<body>
+   <!-- Ventana de confirmacion de eliminacion -->
+   <div th:fragment="content" id="eliminarEmpresaModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Contenido -->
+          <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title">Confirmar Eliminacion</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>
+                  ¿Esta seguro/a que desea eliminar la empresa <span th:text="${currentEmpresa.nombreComercial}"></span>?
+               </p>
+            </div>
+            <div class="modal-footer">
+               <form class="form-inline" th:action="@{/empresas/delete}" method="post">
+                  <input type="hidden" id="fila_eliminada" name="ruc" th:value="${currentEmpresa.rucEmpresa}" />
+                  <button type="submit" class="btn btn-success mr-2" id="btn_confirmar">Confirmar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_cancelar">Cancelar</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div> 
+</body>
+</html>

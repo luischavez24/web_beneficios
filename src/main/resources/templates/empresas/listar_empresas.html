@@ -77,50 +77,27 @@
 							<td><span th:text="${empresa.rsEmpresa}"></span></td>
 							<td><span th:text="${empresa.telfEmpresa}"></span></td>
 							<td class="btn-container">
-								<a th:href="@{'/empresas/detalles/' + ${empresa.codEmpresa}}" class="btn btn-info btn-circle">
+								<a th:href="@{/empresas/detalles/__${empresa.codEmpresa}___}" class="btn btn-info btn-circle">
 									<i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<a th:href="@{'/empresas/actualizar/' + ${empresa.rucEmpresa}}" class="btn btn-warning btn-circle">
+								<a th:href="@{/empresas/actualizar/__${empresa.rucEmpresa}__}" class="btn btn-warning btn-circle">
 									<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
 								</a>
 							</td>
 							<td class="btn-container">
-								<button class="btn btn-danger btn-circle btn_borrar" th:value="${empresa.rucEmpresa}" data-toggle="modal" data-target="#myModal">
+								<button class="btn btn-danger btn-circle btn_borrar" th:value="${empresa.rucEmpresa}">
 									<i class="fa fa-trash fa-lg" aria-hidden="true"></i>
 								</button>
-
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				
-				<!-- Ventana de confirmacion de eliminacion -->
-				<div id="myModal" class="modal fade" role="dialog">
-				  	<div class="modal-dialog">
-				    	<!-- Contenido -->
-					    <div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">Confirmar Eliminacion</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<div class="modal-body">
-								<p>¿Esta seguro/a que desea eliminar la empresa?</p>
-							</div>
-							<div class="modal-footer">
-								<form class="form-inline" th:action="@{/empresas/delete}" method="post">
-									<input type="hidden" id="fila_eliminada" name="ruc"/>
-									<button type="submit" class="btn btn-success mr-2" id="btn_confirmar">Confirmar</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_cancelar">Cancelar</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
+   <div id="eliminarEmpresa"></div>
 	<script th:src="@{/scripts/empresas.js}"></script>
 </body>
 </html>

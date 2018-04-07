@@ -193,7 +193,11 @@ html, body{
 }
 
 .content-border{
-  background: url('/images/spiration-light.png') repeat;
+  background-color: #fff;
 	padding: 2% 3%;
 	border: 1px #2780E3 solid;
+}
+
+.form label {
+  font-weight: bold;
 }

@@ -1,12 +1,25 @@
 // empresas.js
 $(document).ready(function(){
+
+
    // Asignar evento de borrado
    function asignaEvento() {
-      $(".btn_borrar").click(function(event) {
-         $("#fila_eliminada").val($(this).val());
-      });
+      $(".btn_borrar").click(function(e) {
+         e.preventDefault();
+         console.log("Cargando modal de confirmacion ...");
+         //$("#fila_eliminada").val($(this).val());
+         $.ajax({
+            url: `/empresas/delete/${$(this).val()}`,
+            type: 'get',
+            success: function (data) {
+               console.log("Exito! el modal esta a punto de cargar");
+               $("#eliminarEmpresa").html(data);
+               $("#eliminarEmpresaModal").modal("show");
+               $("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+            }
+         });
 
-      $("#btn_cancelar").click(function () { $("#fila_eliminada").val("");});
+      });
    }
    
    // Busquedas con Ajax
@@ -33,5 +46,6 @@ $(document).ready(function(){
       });
    });
    // Fin de Busquedas con Ajax
+
    asignaEvento();
 });
